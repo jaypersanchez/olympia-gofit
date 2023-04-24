@@ -24,7 +24,6 @@ import {
 
 import SplashScreen from "./src/screens/onboarding/SplashScreen";
 import { Routes } from "./Routes";
-import AboutYourself from "./src/screens/accountSetup/AboutYourself";
 
 export default function App() {
   const [isSplashScreenVisible, setIsSplashScreenVisible] = useState(true);
@@ -66,8 +65,7 @@ export default function App() {
   } else {
     return (
       <NavigationContainer>
-        {/* <Routes /> */}
-        <AboutYourself />
+        <Routes />
       </NavigationContainer>
     );
   }
