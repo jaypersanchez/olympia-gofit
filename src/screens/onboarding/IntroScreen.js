@@ -4,7 +4,6 @@ import React, { useEffect, useReducer } from "react";
 import Stepper from "./components/Stepper";
 import Button from "../../components/customs/Button";
 import TextItem from "../../components/customs/TextItem";
-import { color } from "../../components/styles/global";
 
 const IntroScreen = ({ navigation }) => {
   const data = [
@@ -69,7 +68,7 @@ const IntroScreen = ({ navigation }) => {
         style={{ width: "100%", height: 552 }}
       />
       <View style={styles.box}>
-        <TextItem type="h2" style={{ ...styles.title, ...color.secondary }}>
+        <TextItem type="h2" style={styles.title}>
           {data[step?.active]?.title}
         </TextItem>
         <Stepper length={data.length} step={step?.active} />
