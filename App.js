@@ -1,90 +1,74 @@
-import React, { useContext, createContext, useState, useEffect,useMemo } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, SafeAreaView } from 'react-native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { NavigationContainer } from '@react-navigation/native'
-import { SelectList } from 'react-native-dropdown-select-list'
-import SplashScreen from './components/SplashScreen'
-import Welcome from './components/Welcome'
-import CarouselOne from './components/carouselone'
-import CarouselTwo from './components/carouseltwo'
-import CarouselThree from './components/carouselthree'
-import AccountSetup from './components/accountsetup/Setup'
+import { useEffect, useState } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import {
+  useFonts,
+  Urbanist_100Thin,
+  Urbanist_200ExtraLight,
+  Urbanist_300Light,
+  Urbanist_400Regular,
+  Urbanist_500Medium,
+  Urbanist_600SemiBold,
+  Urbanist_700Bold,
+  Urbanist_800ExtraBold,
+  Urbanist_900Black,
+  Urbanist_100Thin_Italic,
+  Urbanist_200ExtraLight_Italic,
+  Urbanist_300Light_Italic,
+  Urbanist_400Regular_Italic,
+  Urbanist_500Medium_Italic,
+  Urbanist_600SemiBold_Italic,
+  Urbanist_700Bold_Italic,
+  Urbanist_800ExtraBold_Italic,
+  Urbanist_900Black_Italic,
+} from "@expo-google-fonts/urbanist";
 
-
-const MyContext = createContext();
+import SplashScreen from "./src/screens/onboarding/SplashScreen";
+import { Routes } from "./Routes";
+import AboutYourself from "./src/screens/accountSetup/AboutYourself";
 
 export default function App() {
-  const [showSplash, setShowSplash] = useState(true);
-  const contextValue = useContext(MyContext);
-  const [showWelcome, setShowWelcome] = useState(true);
-  const [showCarousel, setShowCarousel] = useState(false);
-  const [showCarouselTwo, setShowCarouselTwo] = useState(false);
-  const [showCarouselThree, setShowCarouselThree] = useState(false);
-  const [accountSetup, setShowAccountSetup] = useState(false);
+  const [isSplashScreenVisible, setIsSplashScreenVisible] = useState(true);
+  const [fontsLoaded] = useFonts({
+    Urbanist_100Thin,
+    Urbanist_200ExtraLight,
+    Urbanist_300Light,
+    Urbanist_400Regular,
+    Urbanist_500Medium,
+    Urbanist_600SemiBold,
+    Urbanist_700Bold,
+    Urbanist_800ExtraBold,
+    Urbanist_900Black,
+    Urbanist_100Thin_Italic,
+    Urbanist_200ExtraLight_Italic,
+    Urbanist_300Light_Italic,
+    Urbanist_400Regular_Italic,
+    Urbanist_500Medium_Italic,
+    Urbanist_600SemiBold_Italic,
+    Urbanist_700Bold_Italic,
+    Urbanist_800ExtraBold_Italic,
+    Urbanist_900Black_Italic,
+  });
 
   useEffect(() => {
+    // if (fontsLoaded) {
+    //   setIsSplashScreenVisible(false);
+    // } else {
+    //   setIsSplashScreenVisible(true);
+    // }
+
     setTimeout(() => {
-      setShowSplash(false);
-    }, 3500); // 3500ms = 3.5s
+      setIsSplashScreenVisible(false);
+    }, 2000);
   }, []);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setShowWelcome(false);
-      setShowCarousel(true);
-    }, 5000); // 5000ms = 5s
-  }, []);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setShowCarousel(false);
-      setShowCarouselTwo(true);
-    }, 15000); // 15000ms = 5s
-  }, []);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setShowCarouselTwo(false);
-      setShowCarouselThree(true)
-    }, 20000); // 20000ms = 5s
-  }, []);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setShowCarouselThree(false);
-      setShowAccountSetup(true)
-    }, 25000); // 25000ms = 5s
-  }, []);
-
-  return (
-    <MyContext.Provider value={contextValue}>
-      {showSplash && <SplashScreen />}
-      {showWelcome && (
-        <Welcome />
-      )}
-      {showCarousel && (
-        <CarouselOne />
-      )}
-      {showCarouselTwo && (
-        <CarouselTwo />
-      )}
-      {showCarouselThree && (
-        <CarouselThree />
-      )}
-      {setShowAccountSetup && (
-        <AccountSetup />
-      )}
-      
-    </MyContext.Provider>
-  );
+  if (isSplashScreenVisible) {
+    return <SplashScreen />;
+  } else {
+    return (
+      <NavigationContainer>
+        {/* <Routes /> */}
+        <AboutYourself />
+      </NavigationContainer>
+    );
+  }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
