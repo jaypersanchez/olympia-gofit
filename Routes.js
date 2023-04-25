@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import WelcomeScreen from "./src/screens/onboarding/WelcomeScreen";
 import IntroScreen from "./src/screens/onboarding/IntroScreen";
+
 import AboutYourself from "./src/screens/accountSetup/AboutYourself";
 import YourAge from "./src/screens/accountSetup/YourAge";
 import YourHeight from "./src/screens/accountSetup/YourHeight";
@@ -11,6 +12,10 @@ import YourWeight from "./src/screens/accountSetup/YourWeight";
 import YourGoal from "./src/screens/accountSetup/YourGoal";
 import ActivityLevel from "./src/screens/accountSetup/ActivityLevel";
 import YourProfile from "./src/screens/accountSetup/YourProfile";
+
+import EntryScreen from "./src/screens/Entry/EntryScreen";
+import SignUpScreen from "./src/screens/Entry/signUp/SignUpScreen";
+import SignInScreen from "./src/screens/Entry/signIn/SignInScreen";
 
 const Page = createNativeStackNavigator();
 
@@ -43,6 +48,19 @@ const AccountSetup = () => {
   );
 };
 
+const Auth = () => {
+  return (
+    <Page.Navigator
+      screenOptions={{ headerShown: false }}
+      initialRouteName="Entry"
+    >
+      <Page.Screen name="Entry" component={EntryScreen} />
+      <Page.Screen name="Signin" component={SignInScreen} />
+      <Page.Screen name="Siginup" component={SignUpScreen} />
+    </Page.Navigator>
+  );
+};
+
 export const Routes = () => {
   return (
     <Page.Navigator
@@ -51,6 +69,7 @@ export const Routes = () => {
     >
       <Page.Screen name="Onboarding" component={Onboarding} />
       <Page.Screen name="AccountSetup" component={AccountSetup} />
+      <Page.Screen name="Auth" component={Auth} />
     </Page.Navigator>
   );
 };

@@ -49,15 +49,15 @@ export default function App() {
   });
 
   useEffect(() => {
-    // if (fontsLoaded) {
-    //   setIsSplashScreenVisible(false);
-    // } else {
-    //   setIsSplashScreenVisible(true);
-    // }
-
-    setTimeout(() => {
+    if (fontsLoaded) {
       setIsSplashScreenVisible(false);
-    }, 2000);
+    } else {
+      setIsSplashScreenVisible(true);
+    }
+
+    // setTimeout(() => {
+    //   setIsSplashScreenVisible(false);
+    // }, 2000);
   }, []);
 
   if (isSplashScreenVisible) {
