@@ -1,49 +1,48 @@
 import { SafeAreaView } from "react-native-safe-area-context";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React, { useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
 import TextItem from "../../components/customs/TextItem";
 import Button from "../../components/customs/Button";
-import GenderButton from "./components/GenderButton";
 
-const AboutYourself = ({ navigation }) => {
-  const [gender, setGender] = useState(null);
-
+const ActivityLevel = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ display: "flex", gap: 19 }}>
         <TextItem type="h3" style={{ textAlign: "center" }}>
-          Tell Us About Yourself
+          Physical Activity Level?
         </TextItem>
         <TextItem
           type="body_xl"
           style={{ textAlign: "center", fontSize: 21, lineHeight: 25.2 }}
         >
-          To give you a better experience and results we need to know your
-          gender.
+          Choose your regular activity level. This will help us to personalize
+          plans for you.
         </TextItem>
       </View>
       <View style={{ display: "flex", gap: 36 }}>
-        <GenderButton
-          label="Male"
-          active={gender === "Male"}
-          onPress={() => setGender("Male")}
+        <Text>Activity Level</Text>
+      </View>
+      <View
+        style={{ flexDirection: "row", columnGap: 12, paddingHorizontal: 6 }}
+      >
+        <Button
+          label="Skip"
+          style={{ width: "50%" }}
+          btnColor="#F0ECFF"
+          btnTextColor="#6842FF"
+          onPress={() => navigation.goBack()}
         />
-        <GenderButton
-          label="Female"
-          active={gender === "Female"}
-          onPress={() => setGender("Female")}
+        <Button
+          label="Start"
+          style={{ width: "50%" }}
+          onPress={() => console.log("start")}
         />
       </View>
-      <Button
-        label="Continue"
-        style={{ width: "100%" }}
-        onPress={() => navigation.navigate("Age")}
-      />
     </SafeAreaView>
   );
 };
 
-export default AboutYourself;
+export default ActivityLevel;
 
 const styles = StyleSheet.create({
   container: {
@@ -52,5 +51,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "space-between",
+    backgroundColor: "#ffffff",
   },
 });

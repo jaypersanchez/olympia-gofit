@@ -3,20 +3,33 @@ import React from "react";
 import { TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
-const Button = ({ onPress, label, style }) => {
+const Button = ({ onPress, label, style, btnColor, btnTextColor }) => {
+  const buttonColor = {
+    backgroundColor: btnColor ? btnColor : "yellow",
+  };
+
+  const buttonTextColor = {
+    color: btnTextColor ? btnTextColor : "#ffffff",
+  };
+
   return (
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={0.75}
-      style={{ ...styles.container, ...style }}
+      style={{ ...style }}
     >
       <LinearGradient
-        colors={["#6842FF", "#896BFF"]}
+        colors={[
+          btnColor ? btnColor : "#6842FF",
+          btnColor ? btnColor : "#896BFF",
+        ]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        style={styles.button}
+        style={{ ...styles.button, ...buttonColor }}
       >
-        <Text style={styles.textButton}>{label}</Text>
+        <Text style={{ ...styles.textButton, ...buttonTextColor }}>
+          {label}
+        </Text>
       </LinearGradient>
     </TouchableOpacity>
   );
@@ -25,12 +38,8 @@ const Button = ({ onPress, label, style }) => {
 export default Button;
 
 const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-  },
   button: {
     alignItems: "center",
-    backgroundColor: "#6842FF",
     padding: 10,
     borderRadius: 100,
     paddingVertical: 18,
@@ -39,9 +48,8 @@ const styles = StyleSheet.create({
     boxShadow: "4px 8px 24px rgba(104, 66, 255, 0.25)",
   },
   textButton: {
-    color: "#ffffff",
     fontFamily: "Urbanist_700Bold",
-    fontSize: 18,
-    lineHeight: 25.2,
+    fontSize: 16,
+    lineHeight: 22.4,
   },
 });

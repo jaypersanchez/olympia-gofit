@@ -1,9 +1,10 @@
-import { Image, StyleSheet, View } from "react-native";
+import { Image, ImageBackground, StyleSheet, View } from "react-native";
 import React, { useEffect, useReducer } from "react";
 
 import Stepper from "./components/Stepper";
 import Button from "../../components/customs/Button";
 import TextItem from "../../components/customs/TextItem";
+import { LinearGradient } from "expo-linear-gradient";
 
 const IntroScreen = ({ navigation }) => {
   const data = [
@@ -63,16 +64,23 @@ const IntroScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Image
-        source={data[step?.active]?.img}
-        style={{ width: "100%", height: 552 }}
+      <LinearGradient
+        colors={["transparent", "#fff"]}
+        start={{ x: 0.45, y: 0.45 }}
+        end={{ x: 0.45, y: 0.01 }}
+        style={styles.gradient}
       />
+      <Image source={data[step?.active]?.img} style={styles.image} />
       <View style={styles.box}>
         <TextItem type="h2" style={styles.title}>
           {data[step?.active]?.title}
         </TextItem>
         <Stepper length={data.length} step={step?.active} />
-        <Button label="Next" onPress={handleNextButton} />
+        <Button
+          label="Next"
+          style={{ width: "100%" }}
+          onPress={handleNextButton}
+        />
       </View>
     </View>
   );
@@ -94,9 +102,47 @@ const styles = StyleSheet.create({
     width: "100%",
     gap: 48,
     flexDirection: "column",
+    justifyContent: "flex-end",
+    zIndex: 30,
   },
   title: {
     color: "#212121",
     textAlign: "center",
+  },
+  mask: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+  },
+  image: {
+    width: "100%",
+    height: 552,
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    justifyContent: "center",
+    alignItems: "center",
+    height: 552,
+    zIndex: 5,
+  },
+  gradient: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    justifyContent: "center",
+    alignItems: "center",
+    height: 552,
+    zIndex: 10,
+    transform: [
+      {
+        rotate: "180deg",
+      },
+    ],
   },
 });

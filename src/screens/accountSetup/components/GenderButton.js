@@ -16,13 +16,15 @@ const GenderButton = ({ label, onPress, active }) => {
           colors={["#6842FF", "#896BFF"]}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
-          style={styles.box}
+          style={styles.linearContainer}
         >
-          {label === "Male" && <MaleIcons />}
-          {label === "Female" && <FemaleIcons />}
-          <TextItem type="h4" style={styles.label}>
-            {label}
-          </TextItem>
+          <View style={styles.box}>
+            {label === "Male" && <MaleIcons />}
+            {label === "Female" && <FemaleIcons />}
+            <TextItem type="h4" style={styles.label}>
+              {label}
+            </TextItem>
+          </View>
         </LinearGradient>
       ) : (
         <View style={styles.box}>
@@ -55,6 +57,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     gap: 19,
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+  },
+  linearContainer: {
     width: 200,
     height: 200,
     borderRadius: 100,
