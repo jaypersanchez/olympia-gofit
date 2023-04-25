@@ -61,7 +61,7 @@ export default function App() {
   }, []);
 
   if (isSplashScreenVisible) {
-    return <SplashScreen />;
+    // return <SplashScreen />;
   } else {
     return (
       <NavigationContainer>
