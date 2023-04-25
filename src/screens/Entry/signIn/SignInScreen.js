@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { View, StyleSheet, SafeAreaView, TextInput } from "react-native";
+import {
+  View,
+  StyleSheet,
+  SafeAreaView,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 import Checkbox from "expo-checkbox";
 import Button from "../../../components/customs/Button";
 import TextItem from "../../../components/customs/TextItem";
@@ -35,7 +41,7 @@ const TextField = ({ style, icon, placeholder, type }) => {
           },
         ]}
         placeholder={placeholder}
-        keyboardType="text"
+        // keyboardType="text"
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         secureTextEntry={type === "password" ?? true}
@@ -62,7 +68,7 @@ const IconBox = ({ icon }) => {
   );
 };
 
-const SignInScreen = () => {
+const SignInScreen = ({ navigation }) => {
   const [isChecked, setChecked] = useState(false);
 
   return (
@@ -138,9 +144,11 @@ const SignInScreen = () => {
         <TextItem type="body_m" font="semibold" style={{ color: "#9E9E9E" }}>
           Don't have an account?
         </TextItem>
-        <TextItem type="body_m" font="semibold" style={{ color: "#6842FF" }}>
-          Sign up
-        </TextItem>
+        <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
+          <TextItem type="body_m" font="semibold" style={{ color: "#6842FF" }}>
+            Sign up
+          </TextItem>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

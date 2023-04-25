@@ -49,16 +49,16 @@ export default function App() {
   });
 
   useEffect(() => {
-    if (fontsLoaded) {
-      setIsSplashScreenVisible(false);
-    } else {
-      setIsSplashScreenVisible(true);
-    }
-
-    // setTimeout(() => {
-    //   setIsSplashScreenVisible(false);
-    // }, 2000);
-  }, []);
+    setTimeout(() => {
+      if (fontsLoaded) {
+        console.log("loaded");
+        setIsSplashScreenVisible(false);
+      } else {
+        console.log("loaded failed");
+        setIsSplashScreenVisible(true);
+      }
+    }, 2000);
+  }, [fontsLoaded]);
 
   if (isSplashScreenVisible) {
     return <SplashScreen />;

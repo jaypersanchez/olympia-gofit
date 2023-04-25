@@ -4,7 +4,7 @@ import React from "react";
 import TextItem from "../../components/customs/TextItem";
 import Button from "../../components/customs/Button";
 
-const YourProfile = ({}) => {
+const YourProfile = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ display: "flex", gap: 19 }}>
@@ -26,16 +26,16 @@ const YourProfile = ({}) => {
         style={{ flexDirection: "row", columnGap: 12, paddingHorizontal: 6 }}
       >
         <Button
-          label="Back"
+          label="Skip"
           style={{ width: "50%" }}
           btnColor="#F0ECFF"
           btnTextColor="#6842FF"
-          onPress={() => console.log("conti")}
+          onPress={() => navigation.goBack()}
         />
         <Button
-          label="Continue"
+          label="Start"
           style={{ width: "50%" }}
-          onPress={() => console.log("conti")}
+          onPress={() => navigation.navigate("Auth")}
         />
       </View>
     </SafeAreaView>

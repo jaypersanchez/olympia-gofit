@@ -56,7 +56,7 @@ const Auth = () => {
     >
       <Page.Screen name="Entry" component={EntryScreen} />
       <Page.Screen name="Signin" component={SignInScreen} />
-      <Page.Screen name="Siginup" component={SignUpScreen} />
+      <Page.Screen name="Signup" component={SignUpScreen} />
     </Page.Navigator>
   );
 };

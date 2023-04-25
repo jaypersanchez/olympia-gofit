@@ -26,16 +26,16 @@ const ActivityLevel = ({ navigation }) => {
         style={{ flexDirection: "row", columnGap: 12, paddingHorizontal: 6 }}
       >
         <Button
-          label="Skip"
+          label="Back"
           style={{ width: "50%" }}
           btnColor="#F0ECFF"
           btnTextColor="#6842FF"
           onPress={() => navigation.goBack()}
         />
         <Button
-          label="Start"
+          label="Continue"
           style={{ width: "50%" }}
-          onPress={() => console.log("start")}
+          onPress={() => navigation.navigate("Profile")}
         />
       </View>
     </SafeAreaView>

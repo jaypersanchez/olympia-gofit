@@ -13,7 +13,7 @@ import AppleIcon from "../../../assets/appleIcon.svg";
 import FacebookIcon from "../../../assets/facebookIcon.svg";
 import Divider from "../../components/customs/Divider";
 
-const EntryScreen = () => {
+const EntryScreen = ({ navigation }) => {
   const SignInButton = ({ title, onPress, color, icon }) => {
     return (
       <View>
@@ -70,15 +70,18 @@ const EntryScreen = () => {
       <Button
         style={{ width: "90%", marginBottom: 50 }}
         label="Sign in with Password"
+        onPress={() => navigation.navigate("Signin")}
       />
 
       <View style={{ flexDirection: "row" }}>
         <TextItem type="body_m" style={{ color: "#9E9E9E" }}>
           Don't have an account?{" "}
         </TextItem>
-        <TextItem type="body_m" font="semibold" style={{ color: "#6842FF" }}>
-          Sign up
-        </TextItem>
+        <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
+          <TextItem type="body_m" font="semibold" style={{ color: "#6842FF" }}>
+            Sign up
+          </TextItem>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
