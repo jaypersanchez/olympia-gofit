@@ -23,7 +23,6 @@ import {
 } from "@expo-google-fonts/urbanist";
 
 import SplashScreen from "./src/screens/onboarding/SplashScreen";
-import SignInScreen from "./src/screens/signIn/SignInScreen";
 import { Routes } from "./Routes";
 
 export default function App() {
@@ -60,7 +59,6 @@ export default function App() {
       setIsSplashScreenVisible(false);
     }, 2000);
   }, []);
-  return <SignInScreen />;
 
   if (isSplashScreenVisible) {
     // return <SplashScreen />;

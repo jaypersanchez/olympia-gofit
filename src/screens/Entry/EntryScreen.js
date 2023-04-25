@@ -13,7 +13,7 @@ import AppleIcon from "../../../assets/appleIcon.svg";
 import FacebookIcon from "../../../assets/facebookIcon.svg";
 import Divider from "../../components/customs/Divider";
 
-const SignInScreen = () => {
+const EntryScreen = () => {
   const SignInButton = ({ title, onPress, color, icon }) => {
     return (
       <View>
@@ -106,4 +106,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignInScreen;
+export default EntryScreen;

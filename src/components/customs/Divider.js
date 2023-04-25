@@ -25,10 +25,9 @@ const styles = StyleSheet.create({
   },
   dividerText: {
     position: "absolute",
-    left: "45%",
     top: -12,
     backgroundColor: "white",
-    width: 40,
     textAlign: "center",
+    color: "#616161",
   },
 });
