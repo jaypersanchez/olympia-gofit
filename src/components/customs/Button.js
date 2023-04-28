@@ -42,9 +42,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
     borderRadius: 100,
-    paddingVertical: 16,
-    paddingHorizontal: 16,
-    height: 58,
+    paddingVertical: 20,
+    paddingHorizontal: 20,
     boxShadow: "4px 8px 24px rgba(104, 66, 255, 0.25)",
   },
   textButton: {

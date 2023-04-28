@@ -12,7 +12,7 @@ import TextItem from "../../../components/customs/TextItem";
 import EyeCloseIcon from "../../../../assets/EyeCloseIcon.svg";
 import MessageIcon from "../../../../assets/MessageIcon.svg";
 import LockIcon from "../../../../assets/LockIcon.svg";
-import Divider from "../../../components/customs/Divider";
+import Divider from "../../../components/customs/Divider_v1";
 import FacebookIcon from "../../../../assets/facebookIcon.svg";
 import GoogleIcon from "../../../../assets/googleIcon.svg";
 import AppleIcon from "../../../../assets/appleIcon.svg";

@@ -14,13 +14,13 @@ import { LinearGradient } from "expo-linear-gradient";
 
 const WelcomeScreen = ({ navigation }) => {
   const handleScreenTouch = () => {
-    navigation?.navigate("Onboarding", { screen: "Intro" });
+    navigation?.navigate("Auth", { screen: "Entry" });
   };
 
   useFocusEffect(
     useCallback(() => {
       const nextScreen = setTimeout(() => {
-        navigation?.navigate("Onboarding", { screen: "Intro" });
+        navigation?.navigate("Auth", { screen: "Entry" });
       }, 4000);
 
       return () => clearTimeout(nextScreen);

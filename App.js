@@ -24,6 +24,7 @@ import {
 
 import SplashScreen from "./src/screens/onboarding/SplashScreen";
 import { Routes } from "./Routes";
+import { SafeAreaView } from "react-native";
 
 export default function App() {
   const [isSplashScreenVisible, setIsSplashScreenVisible] = useState(true);
