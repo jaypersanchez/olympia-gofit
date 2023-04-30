@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import LeftCheckBox from './components/LeftCheckBox';
 
-const GetStarted = () => {
+const GetStarted = ({ navigation }) => {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxPress = (value) => {
@@ -10,6 +10,7 @@ const GetStarted = () => {
   };
 
   const handleButtonPress = () => {
+    navigation.navigate('DailyWorkout');
     console.log('Generate workout plan button pressed');
   };
 
