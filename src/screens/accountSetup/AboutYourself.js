@@ -5,9 +5,10 @@ import TextItem from "../../components/customs/TextItem";
 import Button from "../../components/customs/Button";
 import GenderButton from "./components/GenderButton";
 
-const AboutYourself = ({ navigation }) => {
+const AboutYourself = ({ navigation, route }) => {
   const [gender, setGender] = useState(null);
-
+  // const { activeStep } = route.params;
+  console.log("route", route);
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ display: "flex", gap: 19 }}>

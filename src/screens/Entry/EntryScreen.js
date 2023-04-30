@@ -52,36 +52,59 @@ const EntryScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TextItem
-        type="h1"
-        font="bold"
-        style={{ marginBottom: 50, marginTop: 159 }}
+      <View
+        style={{
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "flex-end",
+          height: "100%",
+        }}
       >
-        Let's you in
-      </TextItem>
-      <View style={{ gap: 5 }}>
-        <SignInButton icon={<FacebookIcon />} title="Continue with Facebook" />
-        <SignInButton icon={<GoogleIcon />} title="Continue with Google" />
-        <SignInButton icon={<AppleIcon />} title="Continue with Apple" />
-      </View>
-
-      <Divider label="or" />
-
-      <Button
-        style={{ width: "90%", marginBottom: 50 }}
-        label="Sign in with Password"
-        onPress={() => navigation.navigate("Signin")}
-      />
-
-      <View style={{ flexDirection: "row" }}>
-        <TextItem type="body_m" style={{ color: "#9E9E9E" }}>
-          Don't have an account?{" "}
+        <TextItem type="h1" font="bold">
+          FitSpace
         </TextItem>
-        <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
-          <TextItem type="body_m" font="semibold" style={{ color: "#6842FF" }}>
-            Sign up
+
+        <View
+          style={{
+            gap: 40,
+            alignItems: "center",
+            justifyContent: "space-between",
+            alignSelf: "stretch",
+            paddingVertical: 70,
+          }}
+        >
+          <View style={{ gap: 16 }}>
+            <SignInButton
+              icon={<FacebookIcon />}
+              title="Continue with Facebook"
+            />
+            <SignInButton icon={<GoogleIcon />} title="Continue with Google" />
+            <SignInButton icon={<AppleIcon />} title="Continue with Apple" />
+          </View>
+
+          <Divider label="or" color="#E0E0E0" />
+
+          <Button
+            style={{ width: "100%" }}
+            label="Login with Password"
+            onPress={() => navigation.navigate("Signin")}
+          />
+        </View>
+
+        <View style={{ flexDirection: "row" }}>
+          <TextItem type="body_m" font="semibold" style={{ color: "#9E9E9E" }}>
+            {"Don't have an account? "}
           </TextItem>
-        </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
+            <TextItem
+              type="body_m"
+              font="semibold"
+              style={{ color: "#6842FF" }}
+            >
+              Sign up
+            </TextItem>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -89,9 +112,13 @@ const EntryScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
+    paddingHorizontal: 24,
+    paddingBottom: 48,
+    paddingTop: 24,
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#ffffff",
   },
   buttonContainer: {
     borderRadius: 16,
@@ -100,7 +127,7 @@ const styles = StyleSheet.create({
     width: 350,
     alignItems: "center",
     borderWidth: 1,
-    borderColor: "#EEEEEE",
+    borderColor: "#E0E0E0",
   },
   buttonText: {
     fontSize: 16,

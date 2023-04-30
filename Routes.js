@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useNavigation } from "@react-navigation/native";
 
 import WelcomeScreen from "./src/screens/onboarding/WelcomeScreen";
-import IntroScreen from "./src/screens/onboarding/IntroScreen";
+// import IntroScreen from "./src/screens/onboarding/IntroScreen";
 
 import AboutYourself from "./src/screens/accountSetup/AboutYourself";
 import YourAge from "./src/screens/accountSetup/YourAge";
@@ -14,8 +14,11 @@ import ActivityLevel from "./src/screens/accountSetup/ActivityLevel";
 import YourProfile from "./src/screens/accountSetup/YourProfile";
 
 import EntryScreen from "./src/screens/Entry/EntryScreen";
-import SignUpScreen from "./src/screens/Entry/signUp/SignUpScreen";
+import SignUpScreen from "./src/screens/Entry/signUp/SignUpScreen_v1";
 import SignInScreen from "./src/screens/Entry/signIn/SignInScreen";
+import SignUp from "./src/screens/Entry/signUp/SignUp";
+import { Text, TouchableOpacity } from "react-native";
+import { BackIcon } from "./src/components/Icons";
 
 const Page = createNativeStackNavigator();
 
@@ -26,7 +29,7 @@ const Onboarding = () => {
       initialRouteName="Welome"
     >
       <Page.Screen name="Welcome" component={WelcomeScreen} />
-      <Page.Screen name="Intro" component={IntroScreen} />
+      {/* <Page.Screen name="Intro" component={IntroScreen} /> */}
     </Page.Navigator>
   );
 };
@@ -35,28 +38,51 @@ const AccountSetup = () => {
   return (
     <Page.Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName="About You"
+      initialRouteName="AboutYou"
     >
-      <Page.Screen name="About You" component={AboutYourself} />
+      <Page.Screen name="AboutYou" component={AboutYourself} />
       <Page.Screen name="Age" component={YourAge} />
       <Page.Screen name="Weight" component={YourWeight} />
       <Page.Screen name="Height" component={YourHeight} />
       <Page.Screen name="Goal" component={YourGoal} />
-      <Page.Screen name="Actvity Level" component={ActivityLevel} />
+      <Page.Screen name="ActvityLevel" component={ActivityLevel} />
       <Page.Screen name="Profile" component={YourProfile} />
     </Page.Navigator>
   );
 };
 
 const Auth = () => {
+  const navigation = useNavigation();
   return (
     <Page.Navigator
-      screenOptions={{ headerShown: false }}
+      screenOptions={{
+        headerShown: false,
+      }}
       initialRouteName="Entry"
     >
       <Page.Screen name="Entry" component={EntryScreen} />
       <Page.Screen name="Signin" component={SignInScreen} />
-      <Page.Screen name="Signup" component={SignUpScreen} />
+      <Page.Screen
+        name="Signup"
+        component={SignUp}
+        options={{
+          headerShown: true,
+          headerTitle: () => null,
+          headerShadowVisible: false, // applied here
+          headerLeft: () => {
+            return (
+              <TouchableOpacity
+                onPress={() =>
+                  navigation?.navigate("Auth", { screen: "Entry" })
+                }
+                style={{ marginLeft: 2 }}
+              >
+                <BackIcon color="#212121" size={28} />
+              </TouchableOpacity>
+            );
+          },
+        }}
+      />
     </Page.Navigator>
   );
 };
