@@ -32,6 +32,11 @@ import YourProgram from './src/screens/accountSetup/YourProgram';
 import GetStarted from './src/screens/accountSetup/GetStarted';
 import YourPaymentPlan from './src/screens/accountSetup/YourPaymentPlan';
 import DailyWorkout from './src/screens/home/dailyWorkout/DailyWorkout';
+import AboutYourself from './src/screens/accountSetup/AboutYourself';
+import YourAge from './src/screens/accountSetup/YourAge';
+import YourWeight from './src/screens/accountSetup/YourWeight';
+import YourHeight from './src/screens/accountSetup/YourHeight';
+import YourExperience from './src/screens/accountSetup/YourExperience';
 
 export default function App() {
   const [isSplashScreenVisible, setIsSplashScreenVisible] = useState(true);
@@ -67,7 +72,7 @@ export default function App() {
       }
     }, 2000);
   }, [fontsLoaded]);
-  // return <DailyWorkout />;
+  return <DailyWorkout />;
   if (isSplashScreenVisible) {
     return <SplashScreen />;
   } else {

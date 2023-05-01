@@ -8,7 +8,7 @@ const ExerciseList = ({ days }) => {
     return (
       <TouchableOpacity activeOpacity={0.75} style={styles.itemContainer}>
         <View style={styles.imageContainer}>
-          <WeightLifting width={360} />
+          <WeightLifting width={374} />
           <View style={styles.textContainer}>
             <Text style={styles.day}>Day {item.day}</Text>
             <FlatList
@@ -36,13 +36,15 @@ const ExerciseList = ({ days }) => {
       renderItem={renderItem}
       contentContainerStyle={styles.listContainer}
       showsVerticalScrollIndicator={false}
+      horizontal={false}
     />
   );
 };
 
 const styles = StyleSheet.create({
   itemContainer: {
-    marginBottom: 5,
+    marginTop: 5,
+    paddingRight: 10,
   },
   imageContainer: {
     position: 'relative',
@@ -70,7 +72,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   listContainer: {
-    paddingHorizontal: 8,
     paddingBottom: 10,
   },
   WhiteBookmarkContainer: {

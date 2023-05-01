@@ -1,106 +1,52 @@
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image, StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import TextItem from '../../components/customs/TextItem';
 import Button from '../../components/customs/Button';
 import { ArrowUpIcons } from '../../components/Icons';
+import ProgressBarStepper from '../../components/customs/ProgressBarStepper';
+import NumberInput from './components/NumberInput';
 
 const YourWeight = ({ navigation }) => {
+  const [weight, setWeight] = useState(70);
+  const option = {
+    opt1: 'KG',
+    opt2: 'LBS',
+  };
+  const handleWeightChange = (newValue, unit) => {
+    setWeight(newValue);
+    console.log(`New weight value: ${newValue}${unit}`);
+  };
   return (
     <SafeAreaView style={styles.container}>
+      <View
+        style={{
+          width: '100%',
+        }}
+      >
+        <ProgressBarStepper
+          steps={10} // Total number of steps
+          activeSteps={3} // Current active step
+        />
+      </View>
       <View style={{ display: 'flex', gap: 19 }}>
         <TextItem type="h3" style={{ textAlign: 'center' }}>
           What is Your Weight?
         </TextItem>
-        <TextItem
-          type="body_xl"
-          style={{ textAlign: 'center', fontSize: 21, lineHeight: 25.2 }}
-        >
+        <TextItem type="body_xl" style={{ textAlign: 'center', fontSize: 21 }}>
           Weight in kg. Don't worry, you can always change it later.
         </TextItem>
-      </View>
-      <View style={{ alignItems: 'center' }}>
-        <View
-          style={{
-            gap: 20,
-            paddingVertical: 12,
-            flexDirection: 'row',
-            alignItems: 'center',
-          }}
-        >
-          <View style={{ alignItems: 'center' }}>
-            <Text
-              textAlign="center"
-              style={{
-                fontSize: 32,
-                color: '#9E9E9E',
-                fontFamily: 'Urbanist_700Bold',
-              }}
-            >
-              63
-            </Text>
-          </View>
-          <View style={{ alignItems: 'center' }}>
-            <Text
-              textAlign="center"
-              style={{
-                fontSize: 50,
-                color: '#616161',
-                fontFamily: 'Urbanist_700Bold',
-              }}
-            >
-              64
-            </Text>
-          </View>
-          <View style={{ alignItems: 'center' }}>
-            <Text
-              textAlign="center"
-              style={{
-                fontSize: 70,
-                color: '#6842FF',
-                fontFamily: 'Urbanist_700Bold',
-              }}
-            >
-              65
-            </Text>
-          </View>
-          <View style={{ alignItems: 'center' }}>
-            <Text
-              textAlign="center"
-              style={{
-                fontSize: 50,
-                color: '#616161',
-                fontFamily: 'Urbanist_700Bold',
-              }}
-            >
-              66
-            </Text>
-          </View>
-          <View style={{ alignItems: 'center' }}>
-            <Text
-              textAlign="center"
-              style={{
-                fontSize: 32,
-                color: '#9E9E9E',
-                fontFamily: 'Urbanist_700Bold',
-              }}
-            >
-              67
-            </Text>
-          </View>
-        </View>
-        <View
-          style={{
-            height: 60,
-            width: 60,
-            justifyContent: 'center',
-          }}
-        >
-          <ArrowUpIcons />
+        <View style={{ alignItems: 'center', marginTop: 32 }}>
+          <NumberInput
+            initialValue={weight}
+            onValueChange={handleWeightChange}
+            opt1={option.opt1}
+            opt2={option.opt2}
+          />
         </View>
       </View>
       <View
-        style={{ flexDirection: 'row', columnGap: 12, paddingHorizontal: 6 }}
+        style={{ flexDirection: 'row', columnGap: 12, paddingHorizontal: 24 }}
       >
         <Button
           label="Back"
@@ -123,8 +69,7 @@ export default YourWeight;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 24,
-    paddingVertical: 48,
+    paddingVertical: 20,
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-between',

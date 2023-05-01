@@ -59,7 +59,7 @@ const YourPaymentPlan = ({ navigation }) => {
           style={{ width: '100%' }}
           btnColor="#6842FF"
           btnTextColor="#F0ECFF"
-          // onPress={() => navigation.goBack()}
+          onPress={() => navigation.navigate('DailyWorkout')}
         />
       </View>
     </SafeAreaProvider>

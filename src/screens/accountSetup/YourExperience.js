@@ -4,21 +4,31 @@ import React, { useState } from 'react';
 import TextItem from '../../components/customs/TextItem';
 import Button from '../../components/customs/Button';
 import ActiveInactiveButton from './components/ActiveInactiveButton';
+import ProgressBarStepper from '../../components/customs/ProgressBarStepper';
 const YourExperience = ({ navigation, route }) => {
   // const { activeStep } = route.params;
   console.log('route', route);
   return (
     <SafeAreaView style={styles.container}>
+      <View
+        style={{
+          width: '100%',
+        }}
+      >
+        <ProgressBarStepper
+          steps={10} // Total number of steps
+          activeSteps={5} // Current active step
+        />
+      </View>
       <View style={{ display: 'flex', gap: 19 }}>
         <TextItem type="h3" style={{ textAlign: 'center' }}>
-          Phisical Activity Level
+          Physical Activity Level
         </TextItem>
         <TextItem
           type="body_xl"
           style={{ textAlign: 'center', fontSize: 21, lineHeight: 25.2 }}
         >
-          Choose your regular activity level. This will help us to personalize
-          plans for you.
+          How experienced are you with weight training?
         </TextItem>
       </View>
       <View style={{ display: 'flex', gap: 16, width: '100%' }}>
@@ -28,7 +38,7 @@ const YourExperience = ({ navigation, route }) => {
         />
       </View>
       <View
-        style={{ flexDirection: 'row', columnGap: 12, paddingHorizontal: 6 }}
+        style={{ flexDirection: 'row', columnGap: 12, paddingHorizontal: 24 }}
       >
         <Button
           label="Back"
@@ -51,8 +61,7 @@ export default YourExperience;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 24,
-    paddingVertical: 48,
+    paddingVertical: 20,
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-between',

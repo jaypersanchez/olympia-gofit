@@ -146,5 +146,6 @@ const styles = StyleSheet.create({
   },
   banner: {
     marginTop: 20,
+    paddingHorizontal: 10,
   },
 });

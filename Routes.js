@@ -23,6 +23,7 @@ import { BackIcon } from './src/components/Icons';
 import YourLocation from './src/screens/accountSetup/YourLocation';
 import YourProgram from './src/screens/accountSetup/YourProgram';
 import GetStarted from './src/screens/accountSetup/GetStarted';
+import YourPaymentPlan from './src/screens/accountSetup/YourPaymentPlan';
 import DailyWorkout from './src/screens/home/dailyWorkout/DailyWorkout';
 
 const Page = createNativeStackNavigator();
@@ -49,15 +50,17 @@ const AccountSetup = () => {
       <Page.Screen name="Age" component={YourAge} />
       <Page.Screen name="Weight" component={YourWeight} />
       <Page.Screen name="Height" component={YourHeight} />
-      <Page.Screen name="ActvityLevel" component={ActivityLevel} />
-      <Page.Screen name="Profile" component={YourProfile} />
       <Page.Screen name="Experience" component={YourExperience} />
       <Page.Screen name="WeightTraining" component={YourWeightTraining} />
       <Page.Screen name="Goal" component={YourGoal} />
       <Page.Screen name="Location" component={YourLocation} />
       <Page.Screen name="Program" component={YourProgram} />
       <Page.Screen name="GetStarted" component={GetStarted} />
+      <Page.Screen name="PaymentPlan" component={YourPaymentPlan} />
       <Page.Screen name="DailyWorkout" component={DailyWorkout} />
+
+      <Page.Screen name="ActvityLevel" component={ActivityLevel} />
+      <Page.Screen name="Profile" component={YourProfile} />
     </Page.Navigator>
   );
 };

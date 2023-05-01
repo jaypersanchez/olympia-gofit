@@ -4,12 +4,23 @@ import React, { useState } from 'react';
 import TextItem from '../../components/customs/TextItem';
 import Button from '../../components/customs/Button';
 import ActiveInactiveButton from './components/ActiveInactiveButton';
+import ProgressBarStepper from '../../components/customs/ProgressBarStepper';
 const YourLocation = ({ navigation, route }) => {
   // const { activeStep } = route.params;
   console.log('route', route);
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ display: 'flex', gap: 19 }}>
+      <View
+        style={{
+          width: '100%',
+        }}
+      >
+        <ProgressBarStepper
+          steps={10} // Total number of steps
+          activeSteps={8} // Current active step
+        />
+      </View>
+      <View style={{ display: 'flex', gap: 19, paddingHorizontal: 24 }}>
         <TextItem type="h3" style={{ textAlign: 'center' }}>
           Where do you currently workout?
         </TextItem>
@@ -21,7 +32,15 @@ const YourLocation = ({ navigation, route }) => {
           fitness plan.
         </TextItem>
       </View>
-      <View style={{ display: 'flex', gap: 16, width: '100%' }}>
+
+      <View
+        style={{
+          display: 'flex',
+          gap: 16,
+          width: '100%',
+          paddingHorizontal: 24,
+        }}
+      >
         <ActiveInactiveButton
           labels={[
             'Small  Gym',
@@ -33,7 +52,7 @@ const YourLocation = ({ navigation, route }) => {
         />
       </View>
       <View
-        style={{ flexDirection: 'row', columnGap: 12, paddingHorizontal: 6 }}
+        style={{ flexDirection: 'row', columnGap: 12, paddingHorizontal: 24 }}
       >
         <Button
           label="Back"
@@ -56,8 +75,7 @@ export default YourLocation;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 24,
-    paddingVertical: 48,
+    paddingVertical: 20,
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-between',

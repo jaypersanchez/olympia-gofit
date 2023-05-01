@@ -4,7 +4,7 @@ import WeightLifting from '../../../../../assets/WeightLifting.svg';
 const Banner = ({ currentWeek, currentDay, exercises }) => {
   return (
     <View style={styles.container}>
-      <WeightLifting />
+      <WeightLifting width={374} />
       <View style={styles.textContainer}>
         <Text style={styles.nextWorkoutText}>
           Next Workout: Week {currentWeek} Day {currentDay}
@@ -21,10 +21,7 @@ const Banner = ({ currentWeek, currentDay, exercises }) => {
 export default Banner;
 
 const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    marginBottom: 10,
-  },
+  container: {},
   textContainer: {
     position: 'absolute',
     bottom: 0,
