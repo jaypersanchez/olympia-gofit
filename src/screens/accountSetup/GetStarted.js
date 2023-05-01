@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  SafeAreaView,
+} from 'react-native';
 import LeftCheckBox from './components/LeftCheckBox';
+import ProgressBarStepper from '../../components/customs/ProgressBarStepper';
 
-const GetStarted = () => {
+const GetStarted = ({ navigation }) => {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxPress = (value) => {
@@ -10,43 +17,64 @@ const GetStarted = () => {
   };
 
   const handleButtonPress = () => {
+    navigation.navigate('PaymentPlan');
     console.log('Generate workout plan button pressed');
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>Great!</Text>
-        <Text style={styles.title}>Let's Workout!</Text>
-      </View>
-      <View style={styles.checkboxContainer}>
-        <LeftCheckBox
-          label="I agree to the terms and conditions"
-          isChecked={isChecked}
-          onPress={handleCheckboxPress}
+    <SafeAreaView style={styles.mainContainer}>
+      <View
+        style={{
+          width: '100%',
+          marginTop: 20,
+        }}
+      >
+        <ProgressBarStepper
+          steps={10} // Total number of steps
+          activeSteps={10} // Current active step
         />
       </View>
-      <TouchableOpacity
-        style={styles.buttonContainer}
-        disabled={!isChecked}
-        onPress={handleButtonPress}
-      >
-        <Text
-          style={[styles.buttonText, !isChecked && styles.buttonTextDisabled]}
+      <View style={styles.container}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Great!</Text>
+          <Text style={styles.title}>Let's Workout!</Text>
+        </View>
+        <View style={styles.checkboxContainer}>
+          <LeftCheckBox
+            label="I agree to the terms and conditions"
+            isChecked={isChecked}
+            onPress={handleCheckboxPress}
+          />
+        </View>
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          disabled={!isChecked}
+          onPress={handleButtonPress}
         >
-          Generate workout plan
-        </Text>
-      </TouchableOpacity>
-    </View>
+          <Text
+            style={[styles.buttonText, !isChecked && styles.buttonTextDisabled]}
+          >
+            Generate workout plan
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    paddingVertical: 20,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
   container: {
     flex: 1,
+    display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
   },
   titleContainer: {
     marginBottom: 32,

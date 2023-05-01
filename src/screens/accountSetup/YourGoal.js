@@ -1,9 +1,10 @@
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react';
 import TextItem from '../../components/customs/TextItem';
 import Button from '../../components/customs/Button';
 import CheckboxButton from './components/CheckboxButton';
+import ProgressBarStepper from '../../components/customs/ProgressBarStepper';
 const data = [
   { label: 'Build Strength' },
   { label: 'Size' },
@@ -16,8 +17,19 @@ const YourGoal = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={{ display: 'flex', gap: 19 }}>
+    <SafeAreaProvider style={styles.container}>
+      <View
+        style={{
+          width: '100%',
+          marginTop: 20,
+        }}
+      >
+        <ProgressBarStepper
+          steps={10} // Total number of steps
+          activeSteps={7} // Current active step
+        />
+      </View>
+      <View style={{ display: 'flex', gap: 19, paddingHorizontal: 24 }}>
         <TextItem type="h3" style={{ textAlign: 'center' }}>
           What is Your Goal?
         </TextItem>
@@ -29,26 +41,33 @@ const YourGoal = ({ navigation }) => {
           later.
         </TextItem>
       </View>
-      <View style={{ display: 'flex', gap: 36, width: '100%' }}>
+      <View
+        style={{
+          display: 'flex',
+          gap: 36,
+          width: '100%',
+          paddingHorizontal: 24,
+        }}
+      >
         <CheckboxButton data={data} onSelectionChange={handleSelectionChange} />
       </View>
       <View
-        style={{ flexDirection: 'row', columnGap: 12, paddingHorizontal: 6 }}
+        style={{ flexDirection: 'row', columnGap: 12, paddingHorizontal: 24 }}
       >
         <Button
           label="Back"
           style={{ width: '50%' }}
           btnColor="#F0ECFF"
           btnTextColor="#6842FF"
-          // onPress={() => navigation.goBack()}
+          onPress={() => navigation.goBack()}
         />
         <Button
           label="Continue"
           style={{ width: '50%' }}
-          // onPress={() => navigation.navigate('Actvity Level')}
+          onPress={() => navigation.navigate('Location')}
         />
       </View>
-    </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 
@@ -56,8 +75,7 @@ export default YourGoal;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 24,
-    paddingVertical: 48,
+    paddingVertical: 20,
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-between',

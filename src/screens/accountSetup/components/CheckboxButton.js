@@ -70,11 +70,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: 16,
+    paddingVertical: 20,
+    paddingHorizontal: 20,
     borderWidth: 1,
     borderColor: '#A6A6A6',
-    borderRadius: 4,
+    borderRadius: 16,
     marginBottom: 8,
   },
   active: {
@@ -112,7 +112,8 @@ const styles = StyleSheet.create({
   },
   label: {
     fontFamily: 'Urbanist_700Bold',
-    fontSize: 16,
+    fontWeight: '600',
+    fontSize: 18,
     lineHeight: 22.4,
   },
 });
