@@ -35,12 +35,12 @@ const YourProgram = ({ navigation, route }) => {
           style={{ width: '50%' }}
           btnColor="#F0ECFF"
           btnTextColor="#6842FF"
-          // onPress={() => navigation.goBack()}
+          onPress={() => navigation.goBack()}
         />
         <Button
           label="Continue"
           style={{ width: '50%' }}
-          // onPress={() => navigation.navigate('Age')}
+          onPress={() => navigation.navigate('GetStarted')}
         />
       </View>
     </SafeAreaView>

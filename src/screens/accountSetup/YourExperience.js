@@ -23,7 +23,7 @@ const YourExperience = ({ navigation, route }) => {
       </View>
       <View style={{ display: 'flex', gap: 16, width: '100%' }}>
         <ActiveInactiveButton
-          labels={['Beginner', 'Intermediate', 'Advanced']}
+          labels={['Advanced', 'Intermediate', 'Beginner']}
           onLabelSelect={(label) => console.log(`Selected label: ${label}`)}
         />
       </View>
@@ -35,12 +35,12 @@ const YourExperience = ({ navigation, route }) => {
           style={{ width: '50%' }}
           btnColor="#F0ECFF"
           btnTextColor="#6842FF"
-          // onPress={() => navigation.goBack()}
+          onPress={() => navigation.goBack()}
         />
         <Button
           label="Continue"
           style={{ width: '50%' }}
-          // onPress={() => navigation.navigate('Age')}
+          onPress={() => navigation.navigate('WeightTraining')}
         />
       </View>
     </SafeAreaView>

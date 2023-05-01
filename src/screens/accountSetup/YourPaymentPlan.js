@@ -3,61 +3,75 @@ import { StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react';
 import TextItem from '../../components/customs/TextItem';
 import Button from '../../components/customs/Button';
-import CheckboxButton from './components/CheckboxButton';
+import MultipleCheckBox from './components/MultipleCheckBox';
 const data = [
-  { label: 'Build Strength' },
-  { label: 'Size' },
-  { label: 'Get Ripped' },
-  { label: 'Overall Fitness' },
+  {
+    label: '7 Days Trial',
+    description: 'Pay once, cancel any time',
+    amount: 'Free',
+  },
+  {
+    label: 'Monthly',
+    description: 'Pay once, cancel any time',
+    amount: '$19.99/m',
+  },
+  {
+    label: 'Yearly',
+    description: 'Pay once, cancel any time',
+    amount: '$99.99/m',
+  },
 ];
-const YourGoal = ({ navigation }) => {
+const YourPaymentPlan = ({ navigation }) => {
   const handleSelectionChange = (selectedItems) => {
     console.log('Selected items:', selectedItems);
   };
 
   return (
     <SafeAreaProvider style={styles.container}>
-      <View style={{ display: 'flex', gap: 19 }}>
+      <View
+        style={{
+          flexDirection: 'column',
+          alignItems: 'center',
+          marginTop: 184,
+        }}
+      >
         <TextItem type="h3" style={{ textAlign: 'center' }}>
-          What is Your Goal?
+          Choose your payment plan
         </TextItem>
         <TextItem
           type="body_xl"
           style={{ textAlign: 'center', fontSize: 21, lineHeight: 25.2 }}
         >
-          You can choose more than one. Don't worry, you can always change it
-          later.
+          Enjoy workout access without ads and restrictions.
         </TextItem>
       </View>
       <View style={{ display: 'flex', gap: 36, width: '100%' }}>
-        <CheckboxButton data={data} onSelectionChange={handleSelectionChange} />
+        <MultipleCheckBox
+          data={data}
+          onSelectionChange={handleSelectionChange}
+        />
       </View>
       <View
-        style={{ flexDirection: 'row', columnGap: 12, paddingHorizontal: 6 }}
+        style={{ flexDirection: 'row', columnGap: 12, paddingHorizontal: 2 }}
       >
         <Button
-          label="Back"
-          style={{ width: '50%' }}
-          btnColor="#F0ECFF"
-          btnTextColor="#6842FF"
-          onPress={() => navigation.goBack()}
-        />
-        <Button
-          label="Continue"
-          style={{ width: '50%' }}
-          onPress={() => navigation.navigate('Location')}
+          label="Continue and Pay"
+          style={{ width: '100%' }}
+          btnColor="#6842FF"
+          btnTextColor="#F0ECFF"
+          // onPress={() => navigation.goBack()}
         />
       </View>
     </SafeAreaProvider>
   );
 };
 
-export default YourGoal;
+export default YourPaymentPlan;
 
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 24,
-    paddingVertical: 48,
+    paddingVertical: 58,
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-between',
