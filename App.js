@@ -72,7 +72,7 @@ export default function App() {
       }
     }, 2000);
   }, [fontsLoaded]);
-  return <DailyWorkout />;
+  // return <DailyWorkout />;
   if (isSplashScreenVisible) {
     return <SplashScreen />;
   } else {
