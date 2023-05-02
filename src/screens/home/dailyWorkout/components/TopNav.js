@@ -4,6 +4,7 @@ import GofitLogo from '../../../../../assets/GofitLogo.svg';
 import GofitText from '../../../../../assets/GofitText.svg';
 import Notification from '../../../../../assets/Notification.svg';
 import Group from '../../../../../assets/Group.svg';
+import Search from '../../../../../assets/Search.svg';
 const TopNav = () => {
   return (
     <View
@@ -18,16 +19,16 @@ const TopNav = () => {
     >
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <GofitLogo style={{ width: 50, height: 50 }} />
-        <GofitText
+        {/* <GofitText
           name="menu-outline"
           width={74}
           height={74}
           style={{ marginLeft: 15 }}
-        />
+        /> */}
       </View>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <TouchableOpacity style={{ marginRight: 15 }}>
-          <Notification name="search-outline" />
+          <Search name="search-outline" />
         </TouchableOpacity>
         <TouchableOpacity>
           <Group name="notifications-outline" />

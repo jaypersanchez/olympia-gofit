@@ -1,28 +1,68 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import HomeNavIcon from '../../../../../assets/HomeNavIcon.svg';
-import DiscoverNavIcon from '../../../../../assets/DiscoverNavIcon.svg';
-import InsightNavIcon from '../../../../../assets/InsightNavIcon.svg';
-import ProfileNavIcon from '../../../../../assets/ProfileNavIcon.svg';
-import HomeDefaultIcon from '../../../../../assets/HomeDefaultIcon.svg';
-import InsightDefaultIcon from '../../../../../assets/InsightDefaultIcon.svg';
-import ProfileDefaultIcon from '../../../../../assets/ProfileDefaultIcon.svg';
-import DiscoverDefaultIcon from '../../../../../assets/DiscoverDefaultIcon.svg';
+import ChartNavIcon from '../../../../../assets/ChartNavIcon.svg';
+import WalkNavIcon from '../../../../../assets/WalkNavIcon.svg';
+import DumbellNavIcon from '../../../../../assets/DumbellNavIcon.svg';
 
 const BottomNav = () => {
+  const [activeTab, setActiveTab] = useState('home');
+
+  const handleTabPress = (tab) => {
+    setActiveTab(tab);
+  };
+
+  const getButtonTextColor = (tab) => {
+    return activeTab === tab ? '#6842FF' : '#A8A8A8';
+  };
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.button}>
-        <HomeNavIcon></HomeNavIcon>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => handleTabPress('home')}
+      >
+        <HomeNavIcon
+          width={24}
+          height={24}
+          fill={activeTab === 'home' ? '#6842FF' : '#A8A8A8'}
+        />
+        <Text style={{ color: getButtonTextColor('home') }}>Home</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
-        <DiscoverDefaultIcon></DiscoverDefaultIcon>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => handleTabPress('workout')}
+      >
+        <DumbellNavIcon
+          width={24}
+          height={24}
+          fill={activeTab === 'workout' ? '#6842FF' : '#A8A8A8'}
+        />
+        <Text style={{ color: getButtonTextColor('workout') }}>Workout</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
-        <InsightDefaultIcon></InsightDefaultIcon>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => handleTabPress('stepCounter')}
+      >
+        <WalkNavIcon
+          width={24}
+          height={24}
+          fill={activeTab === 'stepCounter' ? '#6842FF' : '#A8A8A8'}
+        />
+        <Text style={{ color: getButtonTextColor('stepCounter') }}>
+          Step Counter
+        </Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
-        <ProfileDefaultIcon></ProfileDefaultIcon>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => handleTabPress('stats')}
+      >
+        <ChartNavIcon
+          width={24}
+          height={24}
+          fill={activeTab === 'stats' ? '#6842FF' : '#A8A8A8'}
+        />
+        <Text style={{ color: getButtonTextColor('stats') }}>Stats</Text>
       </TouchableOpacity>
     </View>
   );
@@ -46,5 +86,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
 export default BottomNav;
