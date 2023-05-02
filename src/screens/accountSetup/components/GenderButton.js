@@ -1,8 +1,8 @@
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import React from 'react';
-import TextItem from '../../../components/customs/TextItem';
-import { FemaleIcons, MaleIcons } from '../../../components/Icons';
-import { LinearGradient } from 'expo-linear-gradient';
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+import React from "react";
+import TextItem from "../../../components/customs/TextItem";
+import { FemaleIcons, MaleIcons } from "../../../components/Icons";
+import { LinearGradient } from "expo-linear-gradient";
 
 const GenderButton = ({ label, onPress, active }) => {
   return (
@@ -13,18 +13,14 @@ const GenderButton = ({ label, onPress, active }) => {
     >
       {active ? (
         <LinearGradient
-          colors={['#6842FF', '#896BFF']}
+          colors={["#6842FF", "#896BFF"]}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
           style={styles.linearContainer}
         >
           <View style={styles.box}>
-            {label === 'Male' && (
-              <MaleIcons style={styles.icon} width={24} height={24} />
-            )}
-            {label === 'Female' && (
-              <FemaleIcons style={styles.icon} width={24} height={24} />
-            )}
+            {label === "Male" && <MaleIcons size={32} />}
+            {label === "Female" && <FemaleIcons size={32} />}
             <TextItem type="h4" style={styles.label}>
               {label}
             </TextItem>
@@ -32,12 +28,8 @@ const GenderButton = ({ label, onPress, active }) => {
         </LinearGradient>
       ) : (
         <View style={styles.box}>
-          {label === 'Male' && (
-            <MaleIcons style={styles.icon} width={24} height={24} />
-          )}
-          {label === 'Female' && (
-            <FemaleIcons style={styles.icon} width={24} height={24} />
-          )}
+          {label === "Male" && <MaleIcons size={32} />}
+          {label === "Female" && <FemaleIcons size={32} />}
           <TextItem type="h4" style={styles.label}>
             {label}
           </TextItem>
@@ -53,35 +45,32 @@ const styles = StyleSheet.create({
   container: {
     width: 200,
     height: 80,
-    backgroundColor: '#BDBDBD',
+    backgroundColor: "#BDBDBD",
     borderRadius: 16,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
     paddingHorizontal: 16,
     marginVertical: 8,
   },
   label: {
-    textAlign: 'center',
-    color: '#ffffff',
-    marginLeft: 16,
+    textAlign: "center",
+    color: "#ffffff",
   },
   box: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 12,
   },
   linearContainer: {
     width: 200,
     height: 80,
     borderRadius: 16,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     paddingHorizontal: 16,
     marginVertical: 8,
-  },
-  icon: {
-    marginRight: 16,
   },
 });

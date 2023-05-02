@@ -1,6 +1,6 @@
 import { Animated, Easing, Image, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
-import { LinearGradient } from "expo-linear-gradient";
+import Logo from "../../../assets/image/FitSpace-black.png";
 
 const SplashScreen = () => {
   const rotateAnim = useRef(new Animated.Value(0)).current;
@@ -32,23 +32,17 @@ const SplashScreen = () => {
   };
 
   return (
-    <LinearGradient
-      colors={["#6842FF", "#896BFF"]}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
-      style={styles.container}
-    >
-      <Image
-        source={require("../../../assets/image/Gofit-icon.png")}
-        style={{ width: 200, height: 100 }}
-      />
+    <View style={styles.container}>
+      <View style={styles.logoContainer}>
+        <Image source={Logo} style={styles.logo} />
+      </View>
       <View style={styles.spinnerContianer}>
         <Animated.Image
           source={require("../../../assets/image/spinner.png")}
           style={[rotateAnimStyle, styles.spinner]}
         />
       </View>
-    </LinearGradient>
+    </View>
   );
 };
 
@@ -75,4 +69,6 @@ const styles = StyleSheet.create({
     bottom: 115,
     alignItems: "center",
   },
+  logoContainer: { width: "100%", height: 175 },
+  logo: { width: "65%", height: "65%", alignSelf: "center", flex: 1 },
 });

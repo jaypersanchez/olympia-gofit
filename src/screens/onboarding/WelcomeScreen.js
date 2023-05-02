@@ -1,16 +1,16 @@
 import {
-  Alert,
-  BackHandler,
   ImageBackground,
   StyleSheet,
   Text,
   TouchableHighlight,
-  TouchableWithoutFeedback,
   View,
+  Image,
 } from "react-native";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
+
+import Logo from "../../../assets/image/FitSpace-white.png";
 
 const WelcomeScreen = ({ navigation }) => {
   const handleScreenTouch = () => {
@@ -35,7 +35,10 @@ const WelcomeScreen = ({ navigation }) => {
       >
         <View style={styles.textContianer}>
           <Text style={styles.headerTitle}>Welcome to 👋</Text>
-          <Text style={styles.title}>Gofit</Text>
+          <View style={styles.logoContainer}>
+            <Image source={Logo} style={styles.logo} />
+          </View>
+
           <Text style={styles.subtitle}>
             The best fitness app in this century to accompany your sports.
           </Text>
@@ -84,22 +87,25 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     color: "#FFFFFF",
-    fontSize: 48,
-    lineHeight: 52.8,
+    fontSize: 32,
+    lineHeight: 35.2,
     marginBottom: 12,
     fontFamily: "Urbanist_700Bold",
-  },
-  title: {
-    color: "#FFFFFF",
-    fontSize: 96,
-    lineHeight: 105.6,
-    marginBottom: 24,
-    fontFamily: "Urbanist_900Black",
   },
   subtitle: {
     color: "#FFFFFF",
     fontSize: 18,
     lineHeight: 25.2,
     fontFamily: "Urbanist_600SemiBold",
+  },
+  logoContainer: {
+    height: 175,
+    position: "relative",
+  },
+  logo: {
+    height: "100%",
+    width: "100%",
+    position: "absolute",
+    right: 45,
   },
 });

@@ -1,11 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import TopNav from './components/TopNav';
-import Welcome from './components/Welcome';
-import Banner from './components/Banner';
-import ExerciseList from './components/ExerciseList';
-import BottomNav from './components/BottomNav';
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import TopNav from "./components/TopNav";
+import Welcome from "./components/Welcome";
+import Banner from "./components/Banner";
+import ExerciseList from "./components/ExerciseList";
+import BottomNav from "./components/BottomNav";
 
 const weeks = {
   week: 1,
@@ -15,7 +15,7 @@ const weeks = {
       exercises: [
         {
           id: 1,
-          name: 'Bench Press',
+          name: "Bench Press",
           sets: 3,
           reps: 8,
           rest: 60,
@@ -28,7 +28,7 @@ const weeks = {
       exercises: [
         {
           id: 2,
-          name: 'Dead Lift',
+          name: "Dead Lift",
           sets: 3,
           reps: 8,
           rest: 60,
@@ -41,7 +41,7 @@ const weeks = {
       exercises: [
         {
           id: 3,
-          name: 'Overhead Press',
+          name: "Overhead Press",
           sets: 3,
           reps: 8,
           rest: 60,
@@ -54,7 +54,7 @@ const weeks = {
       exercises: [
         {
           id: 4,
-          name: 'Bent-over Row',
+          name: "Bent-over Row",
           sets: 3,
           reps: 8,
           rest: 60,
@@ -67,7 +67,7 @@ const weeks = {
       exercises: [
         {
           id: 5,
-          name: 'Back Squat',
+          name: "Back Squat",
           sets: 3,
           reps: 8,
           rest: 60,
@@ -80,7 +80,7 @@ const weeks = {
       exercises: [
         {
           id: 6,
-          name: 'Pull-Up',
+          name: "Pull-Up",
           sets: 3,
           reps: 8,
           rest: 60,
@@ -103,18 +103,20 @@ const getCurrentDay = (weeks) => {
 const { currentWeek, currentDay, exercises } = getCurrentDay(weeks);
 
 const DailyWorkout = ({ navigation }) => {
-  const name = 'King';
+  const name = "King";
   return (
     <SafeAreaProvider style={styles.container}>
-      <TopNav></TopNav>
+      <TopNav />
       <View style={styles.bottomContainer}>
         <Welcome name={name} />
-        <Banner
-          currentWeek={currentWeek}
-          currentDay={currentDay}
-          exercises={exercises}
-          style={styles.banner}
-        />
+        <View style={styles.banner}>
+          <Banner
+            currentWeek={currentWeek}
+            currentDay={currentDay}
+            exercises={exercises}
+          />
+        </View>
+
         <ExerciseList days={weeks.days} />
         {/* Add other components that you want to align at the bottom here */}
       </View>
@@ -127,25 +129,14 @@ export default DailyWorkout;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 10,
+    paddingHorizontal: 12,
     paddingVertical: 48,
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor: '#ffffff',
-  },
-  bottomContainer: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-  },
-  bottomContainer: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#ffffff",
   },
   banner: {
-    marginTop: 20,
-    paddingHorizontal: 10,
+    paddingBottom: 8,
   },
 });

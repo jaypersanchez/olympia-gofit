@@ -12,7 +12,7 @@ import TextItem from "../../../components/customs/TextItem";
 import EyeCloseIcon from "../../../../assets/EyeCloseIcon.svg";
 import MessageIcon from "../../../../assets/MessageIcon.svg";
 import LockIcon from "../../../../assets/LockIcon.svg";
-import Divider from "../../../components/customs/Divider_v1";
+import Divider from "../../../components/customs/Divider";
 import FacebookIcon from "../../../../assets/facebookIcon.svg";
 import GoogleIcon from "../../../../assets/googleIcon.svg";
 import AppleIcon from "../../../../assets/appleIcon.svg";
@@ -72,7 +72,7 @@ const SignInScreen = ({ navigation }) => {
   const [isChecked, setChecked] = useState(false);
 
   return (
-    <SafeAreaView style={{ paddingTop: 100 }}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.upperContainer}>
         <TextItem
           type="h1"
@@ -99,7 +99,6 @@ const SignInScreen = ({ navigation }) => {
           style={{
             flexDirection: "row",
             gap: 10,
-            marginBottom: 20,
             justifyContent: "center",
             alignItems: "center",
           }}
@@ -119,13 +118,15 @@ const SignInScreen = ({ navigation }) => {
             Remember me
           </TextItem>
         </View>
-        <Button style={{ width: "90%", marginBottom: 30 }} label="Sign in" />
+        <Button style={{ width: "100%" }} label="Sign in" />
 
         <TextItem type="body_m" font="semibold" style={{ color: "#6842FF" }}>
           Forgot the password?
         </TextItem>
 
-        <Divider label="or continue with" />
+        <View style={{ width: "100%" }}>
+          <Divider label="or continue with" color="#E0E0E0" />
+        </View>
 
         <View style={{ flexDirection: "row", gap: 15 }}>
           <IconBox icon={<FacebookIcon />} />
@@ -155,13 +156,20 @@ const SignInScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 24,
+    flex: 1,
+    paddingTop: 100,
+    backgroundColor: "#fff",
+  },
   bottomContainer: {
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 10,
+    gap: 20,
+    marginBottom: 20,
   },
   upperContainer: {
-    margin: "5%",
+    marginVertical: "5%",
   },
   input: {
     height: 60,

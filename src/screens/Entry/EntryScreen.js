@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   SafeAreaView,
+  Image,
 } from "react-native";
 import Button from "../../components/customs/Button";
 import TextItem from "../../components/customs/TextItem";
@@ -12,6 +13,7 @@ import GoogleIcon from "../../../assets/googleIcon.svg";
 import AppleIcon from "../../../assets/appleIcon.svg";
 import FacebookIcon from "../../../assets/facebookIcon.svg";
 import Divider from "../../components/customs/Divider";
+import Logo from "../../../assets/image/FitSpace-black.png";
 
 const EntryScreen = ({ navigation }) => {
   const SignInButton = ({ title, onPress, color, icon }) => {
@@ -52,25 +54,24 @@ const EntryScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.logoContainer}>
+        <Image source={Logo} style={styles.logo} />
+      </View>
       <View
         style={{
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "flex-end",
-          height: "100%",
+          flex: 1,
         }}
       >
-        <TextItem type="h1" font="bold">
-          FitSpace
-        </TextItem>
-
         <View
           style={{
             gap: 40,
             alignItems: "center",
             justifyContent: "space-between",
             alignSelf: "stretch",
-            paddingVertical: 70,
+            paddingBottom: 70,
           }}
         >
           <View style={{ gap: 16 }}>
@@ -113,8 +114,7 @@ const EntryScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 24,
-    paddingBottom: 48,
-    paddingTop: 24,
+    paddingVertical: 48,
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
@@ -133,6 +133,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "black",
     fontWeight: 600,
+  },
+  logoContainer: {
+    width: "100%",
+    height: 175,
+  },
+  logo: {
+    height: "65%",
+    width: "65%",
+    alignSelf: "center",
+    flex: 1,
   },
 });
 

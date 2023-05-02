@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { useEffect, useState } from "react";
+import { NavigationContainer } from "@react-navigation/native";
 import {
   useFonts,
   Urbanist_100Thin,
@@ -20,24 +20,24 @@ import {
   Urbanist_700Bold_Italic,
   Urbanist_800ExtraBold_Italic,
   Urbanist_900Black_Italic,
-} from '@expo-google-fonts/urbanist';
+} from "@expo-google-fonts/urbanist";
 
-import SplashScreen from './src/screens/onboarding/SplashScreen';
-import { Routes } from './Routes';
-import { SafeAreaView } from 'react-native';
-import YourWeightTraining from './src/screens/accountSetup/YourWeightTraining';
-import YourGoal from './src/screens/accountSetup/YourGoal';
-import YourLocation from './src/screens/accountSetup/YourLocation';
-import YourProgram from './src/screens/accountSetup/YourProgram';
-import GetStarted from './src/screens/accountSetup/GetStarted';
-import YourPaymentPlan from './src/screens/accountSetup/YourPaymentPlan';
-import DailyWorkout from './src/screens/home/dailyWorkout/DailyWorkout';
-import AboutYourself from './src/screens/accountSetup/AboutYourself';
-import YourAge from './src/screens/accountSetup/YourAge';
-import YourWeight from './src/screens/accountSetup/YourWeight';
-import YourHeight from './src/screens/accountSetup/YourHeight';
-import YourExperience from './src/screens/accountSetup/YourExperience';
-import ActivityLevel from './src/screens/accountSetup/ActivityLevel';
+import SplashScreen from "./src/screens/onboarding/SplashScreen";
+import { Routes } from "./Routes";
+import { SafeAreaView } from "react-native";
+import YourWeightTraining from "./src/screens/accountSetup/YourWeightTraining";
+import YourGoal from "./src/screens/accountSetup/YourGoal";
+import YourLocation from "./src/screens/accountSetup/YourLocation";
+import YourProgram from "./src/screens/accountSetup/YourProgram";
+import GetStarted from "./src/screens/accountSetup/GetStarted";
+import YourPaymentPlan from "./src/screens/accountSetup/YourPaymentPlan";
+import DailyWorkout from "./src/screens/home/dailyWorkout/DailyWorkout";
+import AboutYourself from "./src/screens/accountSetup/AboutYourself";
+import YourAge from "./src/screens/accountSetup/YourAge";
+import YourWeight from "./src/screens/accountSetup/YourWeight";
+import YourHeight from "./src/screens/accountSetup/YourHeight";
+import YourExperience from "./src/screens/accountSetup/YourExperience";
+import ActivityLevel from "./src/screens/accountSetup/ActivityLevel";
 
 export default function App() {
   const [isSplashScreenVisible, setIsSplashScreenVisible] = useState(true);
@@ -65,15 +65,15 @@ export default function App() {
   useEffect(() => {
     setTimeout(() => {
       if (fontsLoaded) {
-        console.log('loaded');
+        console.log("loaded");
         setIsSplashScreenVisible(false);
       } else {
-        console.log('loaded failed');
+        console.log("loaded failed");
         setIsSplashScreenVisible(true);
       }
     }, 2000);
   }, [fontsLoaded]);
-  // return <YourExperience />;
+
   if (isSplashScreenVisible) {
     return <SplashScreen />;
   } else {

@@ -1,30 +1,31 @@
-import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useNavigation } from '@react-navigation/native';
+import React from "react";
+import { Text, TouchableOpacity } from "react-native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useNavigation } from "@react-navigation/native";
 
-import WelcomeScreen from './src/screens/onboarding/WelcomeScreen';
+import { BackIcon } from "./src/components/Icons";
+
+import WelcomeScreen from "./src/screens/onboarding/WelcomeScreen";
 // import IntroScreen from "./src/screens/onboarding/IntroScreen";
 
-import AboutYourself from './src/screens/accountSetup/AboutYourself';
-import YourAge from './src/screens/accountSetup/YourAge';
-import YourHeight from './src/screens/accountSetup/YourHeight';
-import YourWeight from './src/screens/accountSetup/YourWeight';
-import YourGoal from './src/screens/accountSetup/YourGoal';
-import ActivityLevel from './src/screens/accountSetup/ActivityLevel';
-import YourProfile from './src/screens/accountSetup/YourProfile';
-import YourExperience from './src/screens/accountSetup/YourExperience';
-import YourWeightTraining from './src/screens/accountSetup/YourWeightTraining';
-import EntryScreen from './src/screens/Entry/EntryScreen';
-import SignUpScreen from './src/screens/Entry/signUp/SignUpScreen_v1';
-import SignInScreen from './src/screens/Entry/signIn/SignInScreen';
-import SignUp from './src/screens/Entry/signUp/SignUp';
-import { Text, TouchableOpacity } from 'react-native';
-import { BackIcon } from './src/components/Icons';
-import YourLocation from './src/screens/accountSetup/YourLocation';
-import YourProgram from './src/screens/accountSetup/YourProgram';
-import GetStarted from './src/screens/accountSetup/GetStarted';
-import YourPaymentPlan from './src/screens/accountSetup/YourPaymentPlan';
-import DailyWorkout from './src/screens/home/dailyWorkout/DailyWorkout';
+import AboutYourself from "./src/screens/accountSetup/AboutYourself";
+import YourAge from "./src/screens/accountSetup/YourAge";
+import YourHeight from "./src/screens/accountSetup/YourHeight";
+import YourWeight from "./src/screens/accountSetup/YourWeight";
+import YourGoal from "./src/screens/accountSetup/YourGoal";
+import ActivityLevel from "./src/screens/accountSetup/ActivityLevel";
+import YourProfile from "./src/screens/accountSetup/YourProfile";
+import YourExperience from "./src/screens/accountSetup/YourExperience";
+import YourWeightTraining from "./src/screens/accountSetup/YourWeightTraining";
+import EntryScreen from "./src/screens/Entry/EntryScreen";
+import SignUpScreen from "./src/screens/Entry/signUp/SignUpScreen_v1";
+import SignInScreen from "./src/screens/Entry/signIn/SignInScreen";
+import SignUp from "./src/screens/Entry/signUp/SignUp";
+import YourLocation from "./src/screens/accountSetup/YourLocation";
+import YourProgram from "./src/screens/accountSetup/YourProgram";
+import GetStarted from "./src/screens/accountSetup/GetStarted";
+import YourPaymentPlan from "./src/screens/accountSetup/YourPaymentPlan";
+import DailyWorkout from "./src/screens/home/dailyWorkout/DailyWorkout";
 
 const Page = createNativeStackNavigator();
 
@@ -87,7 +88,7 @@ const Auth = () => {
             return (
               <TouchableOpacity
                 onPress={() =>
-                  navigation?.navigate('Auth', { screen: 'Entry' })
+                  navigation?.navigate("Auth", { screen: "Entry" })
                 }
                 style={{ marginLeft: 2 }}
               >

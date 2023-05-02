@@ -124,7 +124,7 @@ const SignUp = ({ navigation }) => {
               )}
             </View>
 
-            <Divider label="or" color="#E0E0E0" />
+            <Divider label="or continue with" color="#E0E0E0" />
             <View style={styles.icons}>
               <IconBox icon={<FacebookIcon />} />
               <IconBox icon={<GoogleIcon />} />

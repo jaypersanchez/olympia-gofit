@@ -1,8 +1,8 @@
-import React from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
-import WeightLifting from '../../../../../assets/WeightLifting.svg';
-import WhiteBookmark from '../../../../../assets/WhiteBookmark.svg';
-import { TouchableOpacity } from 'react-native';
+import React from "react";
+import { FlatList, StyleSheet, Text, View } from "react-native";
+import WeightLifting from "../../../../../assets/WeightLifting.svg";
+import WhiteBookmark from "../../../../../assets/WhiteBookmark.svg";
+import { TouchableOpacity } from "react-native";
 const ExerciseList = ({ days }) => {
   const renderItem = ({ item }) => {
     return (
@@ -47,27 +47,29 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
   imageContainer: {
-    position: 'relative',
-    width: '100%',
+    position: "relative",
+    width: "100%",
   },
   textContainer: {
-    position: 'absolute',
-    alignItems: 'flex-start',
-    width: '100%',
+    position: "absolute",
+    alignItems: "flex-start",
+    width: "100%",
     bottom: 0,
+    left: 6,
   },
   day: {
     fontSize: 24,
-    fontWeight: '700',
-    color: '#fff',
+    fontWeight: "700",
+    color: "#fff",
     marginLeft: 10,
-    marginBottom: 60,
+    marginBottom: 55,
+    marginTop: 12,
   },
   exerciseName: {
     fontSize: 16,
-    color: '#fff',
-    fontWeight: '500',
-    textAlign: 'center',
+    color: "#fff",
+    fontWeight: "500",
+    textAlign: "center",
     marginLeft: 10,
     marginBottom: 20,
   },
@@ -75,7 +77,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   WhiteBookmarkContainer: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
     right: 0,
     marginBottom: 15,

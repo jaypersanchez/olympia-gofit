@@ -1,68 +1,68 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
-import HomeNavIcon from '../../../../../assets/HomeNavIcon.svg';
-import ChartNavIcon from '../../../../../assets/ChartNavIcon.svg';
-import WalkNavIcon from '../../../../../assets/WalkNavIcon.svg';
-import DumbellNavIcon from '../../../../../assets/DumbellNavIcon.svg';
+import React, { useState } from "react";
+import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
+import HomeNavIcon from "../../../../../assets/HomeNavIcon.svg";
+import ChartNavIcon from "../../../../../assets/ChartNavIcon.svg";
+import WalkNavIcon from "../../../../../assets/WalkNavIcon.svg";
+import DumbellNavIcon from "../../../../../assets/DumbellNavIcon.svg";
 
 const BottomNav = () => {
-  const [activeTab, setActiveTab] = useState('home');
+  const [activeTab, setActiveTab] = useState("home");
 
   const handleTabPress = (tab) => {
     setActiveTab(tab);
   };
 
   const getButtonTextColor = (tab) => {
-    return activeTab === tab ? '#6842FF' : '#A8A8A8';
+    return activeTab === tab ? "#6842FF" : "#A8A8A8";
   };
 
   return (
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => handleTabPress('home')}
+        onPress={() => handleTabPress("home")}
       >
         <HomeNavIcon
           width={24}
           height={24}
-          fill={activeTab === 'home' ? '#6842FF' : '#A8A8A8'}
+          fill={activeTab === "home" ? "#6842FF" : "#A8A8A8"}
         />
-        <Text style={{ color: getButtonTextColor('home') }}>Home</Text>
+        <Text style={{ color: getButtonTextColor("home") }}>Home</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => handleTabPress('workout')}
+        onPress={() => handleTabPress("workout")}
       >
         <DumbellNavIcon
           width={24}
           height={24}
-          fill={activeTab === 'workout' ? '#6842FF' : '#A8A8A8'}
+          fill={activeTab === "workout" ? "#6842FF" : "#A8A8A8"}
         />
-        <Text style={{ color: getButtonTextColor('workout') }}>Workout</Text>
+        <Text style={{ color: getButtonTextColor("workout") }}>Workout</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => handleTabPress('stepCounter')}
+        onPress={() => handleTabPress("stepCounter")}
       >
         <WalkNavIcon
           width={24}
           height={24}
-          fill={activeTab === 'stepCounter' ? '#6842FF' : '#A8A8A8'}
+          fill={activeTab === "stepCounter" ? "#6842FF" : "#A8A8A8"}
         />
-        <Text style={{ color: getButtonTextColor('stepCounter') }}>
+        <Text style={{ color: getButtonTextColor("stepCounter") }}>
           Step Counter
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => handleTabPress('stats')}
+        onPress={() => handleTabPress("stats")}
       >
         <ChartNavIcon
           width={24}
           height={24}
-          fill={activeTab === 'stats' ? '#6842FF' : '#A8A8A8'}
+          fill={activeTab === "stats" ? "#6842FF" : "#A8A8A8"}
         />
-        <Text style={{ color: getButtonTextColor('stats') }}>Stats</Text>
+        <Text style={{ color: getButtonTextColor("stats") }}>Stats</Text>
       </TouchableOpacity>
     </View>
   );
@@ -70,20 +70,21 @@ const BottomNav = () => {
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
     left: 0,
     right: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    height: 50,
-    backgroundColor: '#fff',
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    height: 65,
+    backgroundColor: "#fff",
     borderTopWidth: 1,
-    borderColor: '#ffff',
+    borderColor: "#fff",
+    paddingHorizontal: 12,
   },
   button: {
-    alignItems: 'center',
+    alignItems: "center",
   },
 });
 export default BottomNav;
