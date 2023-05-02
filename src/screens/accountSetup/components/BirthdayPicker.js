@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 
-import { Button, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
+import { TouchableOpacity } from 'react-native';
 
 export default function BirthdayPicker() {
   const [datePicker, setDatePicker] = useState(false);
@@ -23,7 +24,7 @@ export default function BirthdayPicker() {
     day: 'numeric',
   };
   return (
-    <View style={styles.MainContainer}>
+    <View style={styles.container}>
       <Text style={styles.text}>
         {date.toLocaleDateString(undefined, dateOptions)}
       </Text>
@@ -40,20 +41,16 @@ export default function BirthdayPicker() {
         />
       )}
       {!datePicker && (
-        <View style={{ margin: 10 }}>
-          <Button
-            title="Select Date"
-            color="#6842FF"
-            onPress={showDatePicker}
-          />
-        </View>
+        <TouchableOpacity style={styles.button} onPress={showDatePicker}>
+          <Text style={styles.buttonText}>Select Date</Text>
+        </TouchableOpacity>
       )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  MainContainer: {
+  container: {
     padding: 6,
     alignItems: 'center',
     backgroundColor: 'white',
@@ -64,6 +61,19 @@ const styles = StyleSheet.create({
     color: '#6842FF',
     padding: 3,
     marginBottom: 10,
+    textAlign: 'center',
+  },
+  button: {
+    backgroundColor: '#6842FF',
+    borderRadius: 16,
+    paddingVertical: 16,
+    paddingHorizontal: 32,
+    marginTop: 12,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: '400',
     textAlign: 'center',
   },
 });

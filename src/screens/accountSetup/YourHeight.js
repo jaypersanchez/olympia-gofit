@@ -34,7 +34,12 @@ const YourHeight = ({ navigation }) => {
         </TextItem>
         <TextItem
           type="body_xl"
-          style={{ textAlign: 'center', fontSize: 21, lineHeight: 25.2 }}
+          style={{
+            textAlign: 'center',
+            fontSize: 21,
+            lineHeight: 25.2,
+            paddingHorizontal: 24,
+          }}
         >
           Height in cm. Don't worry, you can always change it later.
         </TextItem>

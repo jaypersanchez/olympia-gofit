@@ -29,11 +29,17 @@ const YourProgram = ({ navigation, route }) => {
           type="body_xl"
           style={{ textAlign: 'center', fontSize: 21, lineHeight: 25.2 }}
         >
-          Select how frequently you can commit to the program. This will help us
-          tailor a plan that fits your schedule.
+          Select how frequently you can commit to the program.
         </TextItem>
       </View>
-      <View style={{ display: 'flex', gap: 16, width: '100%' }}>
+      <View
+        style={{
+          display: 'flex',
+          gap: 16,
+          width: '100%',
+          paddingHorizontal: 24,
+        }}
+      >
         <ActiveInactiveButton
           labels={['Five Days a Week', 'Four Days a Week', 'Three Days a Week']}
           onLabelSelect={(label) => console.log(`Selected label: ${label}`)}

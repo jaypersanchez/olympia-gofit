@@ -40,14 +40,15 @@ const GetStarted = ({ navigation }) => {
           <Text style={styles.title}>Let's Workout!</Text>
         </View>
         <View style={styles.checkboxContainer}>
-          <LeftCheckBox
-            label="I agree to the terms and conditions"
-            isChecked={isChecked}
-            onPress={handleCheckboxPress}
-          />
+          <LeftCheckBox isChecked={isChecked} onPress={handleCheckboxPress} />
+          <Text style={styles.label}>I agree to the </Text>
+          <Text style={styles.termsText}>terms and conditions</Text>
         </View>
         <TouchableOpacity
-          style={styles.buttonContainer}
+          style={[
+            styles.buttonContainer,
+            !isChecked && styles.buttonContainerDisabled,
+          ]}
           disabled={!isChecked}
           onPress={handleButtonPress}
         >
@@ -86,13 +87,28 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   checkboxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: 24,
+  },
+  label: {
+    fontSize: 16,
+    lineHeight: 22.4,
+    color: '#000',
+  },
+  termsText: {
+    color: '#6842FF',
+    fontSize: 16,
+    textDecorationLine: 'underline',
   },
   buttonContainer: {
     backgroundColor: '#6842FF',
     paddingVertical: 16,
     paddingHorizontal: 32,
     borderRadius: 100,
+  },
+  buttonContainerDisabled: {
+    backgroundColor: '#F0ECFF',
   },
   buttonText: {
     fontSize: 16,
@@ -101,6 +117,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   buttonTextDisabled: {
+    color: '#6842FF',
     opacity: 0.5,
   },
 });
