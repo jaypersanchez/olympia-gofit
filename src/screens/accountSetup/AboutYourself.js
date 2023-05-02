@@ -15,6 +15,7 @@ const AboutYourself = ({ navigation, route }) => {
       <View
         style={{
           width: '100%',
+          paddingHorizontal: 24,
         }}
       >
         <ProgressBarStepper

@@ -4,15 +4,23 @@ import CheckIcon from '../../../../assets/CheckIcon.svg';
 import BoxIcon from '../../../../assets/BoxIcon.svg';
 import FilledBoxIcon from '../../../../assets/FilledBoxIcon.svg';
 
-const LeftCheckBox = ({ label, isChecked, onPress }) => {
+const LeftCheckBox = ({ isChecked, onPress }) => {
   const handlePress = () => {
     onPress && onPress(!isChecked);
+  };
+
+  const handleCheckboxPress = (event) => {
+    event.stopPropagation();
+    handlePress();
   };
 
   return (
     <TouchableOpacity onPress={handlePress}>
       <View style={styles.container}>
-        <View style={styles.checkboxContainer}>
+        <TouchableOpacity
+          onPress={handlePress}
+          style={styles.checkboxContainer}
+        >
           {isChecked && (
             <View style={styles.filledBoxIconContainer}>
               <FilledBoxIcon style={styles.filledBoxIcon} />
@@ -20,8 +28,7 @@ const LeftCheckBox = ({ label, isChecked, onPress }) => {
             </View>
           )}
           {!isChecked && <BoxIcon style={styles.boxIcon} />}
-        </View>
-        <Text style={styles.label}>{label}</Text>
+        </TouchableOpacity>
       </View>
     </TouchableOpacity>
   );

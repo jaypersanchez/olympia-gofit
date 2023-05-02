@@ -26,14 +26,27 @@ const YourExperience = ({ navigation, route }) => {
         </TextItem>
         <TextItem
           type="body_xl"
-          style={{ textAlign: 'center', fontSize: 21, lineHeight: 25.2 }}
+          style={{
+            textAlign: 'center',
+            fontSize: 21,
+            lineHeight: 25.2,
+            paddingHorizontal: 24,
+          }}
         >
           How experienced are you with weight training?
         </TextItem>
       </View>
-      <View style={{ display: 'flex', gap: 16, width: '100%' }}>
+      <View
+        style={{
+          display: 'flex',
+          gap: 16,
+          width: '100%',
+          paddingHorizontal: 24,
+          marginBottom: 22,
+        }}
+      >
         <ActiveInactiveButton
-          labels={['Advanced', 'Intermediate', 'Beginner']}
+          labels={['Advanced', 'Beginner']}
           onLabelSelect={(label) => console.log(`Selected label: ${label}`)}
         />
       </View>

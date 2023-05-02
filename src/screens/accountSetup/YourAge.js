@@ -24,7 +24,12 @@ const YourAge = ({ navigation }) => {
         </TextItem>
         <TextItem
           type="body_xl"
-          style={{ textAlign: 'center', fontSize: 21, lineHeight: 25.2 }}
+          style={{
+            textAlign: 'center',
+            fontSize: 21,
+            lineHeight: 25.2,
+            paddingHorizontal: 24,
+          }}
         >
           Age in years. This will help us to personalize an exercise program
           plan that suits you.

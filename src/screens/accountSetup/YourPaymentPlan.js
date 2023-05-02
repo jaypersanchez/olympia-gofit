@@ -33,6 +33,7 @@ const YourPaymentPlan = ({ navigation }) => {
           flexDirection: 'column',
           alignItems: 'center',
           marginTop: 184,
+          gap: 19,
         }}
       >
         <TextItem type="h3" style={{ textAlign: 'center' }}>
@@ -40,7 +41,12 @@ const YourPaymentPlan = ({ navigation }) => {
         </TextItem>
         <TextItem
           type="body_xl"
-          style={{ textAlign: 'center', fontSize: 21, lineHeight: 25.2 }}
+          style={{
+            textAlign: 'center',
+            fontSize: 21,
+            lineHeight: 25.2,
+            paddingHorizontal: 24,
+          }}
         >
           Enjoy workout access without ads and restrictions.
         </TextItem>
@@ -52,7 +58,7 @@ const YourPaymentPlan = ({ navigation }) => {
         />
       </View>
       <View
-        style={{ flexDirection: 'row', columnGap: 12, paddingHorizontal: 2 }}
+        style={{ flexDirection: 'row', columnGap: 12, paddingHorizontal: 24 }}
       >
         <Button
           label="Continue and Pay"

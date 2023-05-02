@@ -33,7 +33,10 @@ const YourWeight = ({ navigation }) => {
         <TextItem type="h3" style={{ textAlign: 'center' }}>
           What is Your Weight?
         </TextItem>
-        <TextItem type="body_xl" style={{ textAlign: 'center', fontSize: 21 }}>
+        <TextItem
+          type="body_xl"
+          style={{ textAlign: 'center', fontSize: 21, paddingHorizontal: 24 }}
+        >
           Weight in kg. Don't worry, you can always change it later.
         </TextItem>
         <View style={{ alignItems: 'center', marginTop: 32 }}>

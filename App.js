@@ -37,6 +37,7 @@ import YourAge from './src/screens/accountSetup/YourAge';
 import YourWeight from './src/screens/accountSetup/YourWeight';
 import YourHeight from './src/screens/accountSetup/YourHeight';
 import YourExperience from './src/screens/accountSetup/YourExperience';
+import ActivityLevel from './src/screens/accountSetup/ActivityLevel';
 
 export default function App() {
   const [isSplashScreenVisible, setIsSplashScreenVisible] = useState(true);
@@ -72,7 +73,7 @@ export default function App() {
       }
     }, 2000);
   }, [fontsLoaded]);
-  // return <DailyWorkout />;
+  // return <YourExperience />;
   if (isSplashScreenVisible) {
     return <SplashScreen />;
   } else {
