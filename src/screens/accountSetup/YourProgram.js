@@ -1,13 +1,20 @@
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import React, { useState } from 'react';
+import React from 'react';
 import TextItem from '../../components/customs/TextItem';
 import Button from '../../components/customs/Button';
 import ActiveInactiveButton from './components/ActiveInactiveButton';
 import ProgressBarStepper from '../../components/customs/ProgressBarStepper';
-const YourProgram = ({ navigation, route }) => {
-  // const { activeStep } = route.params;
-  console.log('route', route);
+import { useDispatch } from 'react-redux';
+import { selectProgramFrequency } from '../../store/actions';
+
+const YourProgram = ({ navigation }) => {
+  const dispatch = useDispatch();
+
+  const handleSelectFrequency = (frequency) => {
+    dispatch(selectProgramFrequency(frequency));
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View
@@ -42,7 +49,7 @@ const YourProgram = ({ navigation, route }) => {
       >
         <ActiveInactiveButton
           labels={['Five Days a Week', 'Four Days a Week', 'Three Days a Week']}
-          onLabelSelect={(label) => console.log(`Selected label: ${label}`)}
+          onLabelSelect={handleSelectFrequency}
         />
       </View>
       <View
@@ -74,5 +81,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  homeicon: {},
 });

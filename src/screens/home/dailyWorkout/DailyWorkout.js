@@ -1,122 +1,104 @@
+import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { useSelector } from 'react-redux';
 import TopNav from './components/TopNav';
 import Welcome from './components/Welcome';
-import Banner from './components/Banner';
-import ExerciseList from './components/ExerciseList';
+import NextWorkout from './components/NextWorkout';
+import WorkoutList from './components/WorkoutList';
 import BottomNav from './components/BottomNav';
+import ExerciseList from './components/ExerciseList';
 
-const weeks = {
-  week: 1,
-  days: [
+const DailyWorkout = ({ navigation }) => {
+  const [selectedWorkout, setSelectedWorkout] = useState(null);
+  const name = 'King';
+  const programFrequency = useSelector((state) => state.programFrequency);
+  const workouts = [
     {
-      day: 1,
+      id: 1,
+      day: 'Monday',
       exercises: [
         {
           id: 1,
-          name: 'Bench Press',
-          sets: 3,
-          reps: 8,
-          rest: 60,
+          name: 'Push-ups',
+          target: 20,
+          reps: 0,
         },
-        // add more exercises here
-      ],
-    },
-    {
-      day: 2,
-      exercises: [
         {
           id: 2,
-          name: 'Dead Lift',
-          sets: 3,
-          reps: 8,
-          rest: 60,
+          name: 'Squats',
+          target: 15,
+          reps: 0,
         },
-        // add more exercises here
       ],
     },
     {
-      day: 3,
+      id: 2,
+      day: 'Tuesday',
       exercises: [
         {
           id: 3,
-          name: 'Overhead Press',
-          sets: 3,
-          reps: 8,
-          rest: 60,
+          name: 'Lunges',
+          target: 10,
+          reps: 0,
         },
-        // add more exercises here
-      ],
-    },
-    {
-      day: 4,
-      exercises: [
         {
           id: 4,
-          name: 'Bent-over Row',
-          sets: 3,
-          reps: 8,
-          rest: 60,
+          name: 'Plank',
+          target: 30,
+          reps: 0,
         },
-        // add more exercises here
       ],
     },
-    {
-      day: 5,
-      exercises: [
-        {
-          id: 5,
-          name: 'Back Squat',
-          sets: 3,
-          reps: 8,
-          rest: 60,
-        },
-        // add more exercises here
-      ],
-    },
-    {
-      day: 6,
-      exercises: [
-        {
-          id: 6,
-          name: 'Pull-Up',
-          sets: 3,
-          reps: 8,
-          rest: 60,
-        },
-        // add more exercises here
-      ],
-    },
-    // add more days here
-  ],
-};
+  ];
+  // const workouts = [
+  //   {
+  //     id: 1,
+  //     exercise: { id: 1, name: 'Running' },
+  //     target: 'Run 3 miles in 30 min',
+  //     date: '2023-05-03',
+  //   },
+  //   {
+  //     id: 2,
+  //     exercise: { id: 2, name: 'Push-ups' },
+  //     target: '3 sets of 15 reps',
+  //     date: '2023-05-05',
+  //   },
+  //   {
+  //     id: 3,
+  //     exercise: { id: 3, name: 'Yoga' },
+  //     target: 'Hold tree pose for 30s',
+  //     date: '2023-05-08',
+  //   },
+  // ];
+  const onPressWorkout = (workout) => {
+    setSelectedWorkout(workout);
+  };
+  const handleBackPress = () => {
+    setSelectedWorkout(null);
+  };
 
-const getCurrentDay = (weeks) => {
-  const currentDate = new Date();
-  const currentWeek = weeks.week;
-  const currentDay = currentDate.getDay();
-  const exercises = weeks.days[currentDay - 1].exercises;
-  return { currentWeek, currentDay, exercises };
-};
-
-const { currentWeek, currentDay, exercises } = getCurrentDay(weeks);
-
-const DailyWorkout = ({ navigation }) => {
-  const name = 'King';
   return (
     <SafeAreaProvider style={styles.container}>
       <TopNav></TopNav>
       <View style={styles.bottomContainer}>
         <Welcome name={name} />
-        <Banner
-          currentWeek={currentWeek}
-          currentDay={currentDay}
-          exercises={exercises}
+        <NextWorkout
           style={styles.banner}
+          programFrequency={programFrequency}
+          workouts={workouts}
         />
-        <ExerciseList days={weeks.days} />
-        {/* Add other components that you want to align at the bottom here */}
+        <WorkoutList
+          workouts={workouts}
+          onPressWorkout={onPressWorkout}
+          selectedWorkout={selectedWorkout}
+        />
+        {selectedWorkout && (
+          <ExerciseList
+            exercises={selectedWorkout.exercises}
+            handleBackPress={handleBackPress}
+          />
+        )}
       </View>
       <BottomNav />
     </SafeAreaProvider>
