@@ -8,34 +8,44 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import WeightLifting from '../../../../../assets/WeightLifting.svg';
+
 import WhiteBookmark from '../../../../../assets/WhiteBookmark.svg';
 import ExerciseList from './ExerciseList';
 const WorkoutList = ({ workouts, onPressWorkout, selectedWorkout }) => {
-  return (
-    <>
-      {workouts.map((item, index) => (
-        <TouchableOpacity
-          activeOpacity={0.75}
-          style={styles.itemContainer}
-          key={index}
-          onPress={() => onPressWorkout(item)}
-        >
-          <View style={styles.imageContainer}>
-            <WeightLifting width={374} />
-            <View style={styles.textContainer}>
-              <Text style={styles.day}>Day {item.id}</Text>
-              <Text style={styles.target}> {item.target} </Text>
-            </View>
-            <View style={styles.WhiteBookmarkContainer}>
-              <WhiteBookmark width={24} height={24} />
-            </View>
+  const renderItem = (item) => {
+    const isSelected = selectedWorkout && selectedWorkout.id === item.id;
+    return (
+      <TouchableOpacity
+        activeOpacity={0.75}
+        style={styles.itemContainer}
+        onPress={() => onPressWorkout(isSelected ? null : item)}
+      >
+        <View style={styles.imageContainer}>
+          <WeightLifting width={374} />
+          <View style={styles.textContainer}>
+            <Text style={styles.day}>Day {item.id}</Text>
+            <Text style={styles.target}> {item.target} </Text>
           </View>
-          {/* {selectedWorkout && selectedWorkout.id === item.id && (
-            <ExerciseList exercises={selectedWorkout.exercises} />
-          )} */}
-        </TouchableOpacity>
-      ))}
-    </>
+          <View style={styles.WhiteBookmarkContainer}>
+            <WhiteBookmark width={24} height={24} />
+          </View>
+        </View>
+        {isSelected && (
+          <ExerciseList
+            exercises={item.exercises}
+            handleBackPress={() => onPressWorkout(null)}
+          />
+        )}
+      </TouchableOpacity>
+    );
+  };
+
+  return (
+    <FlatList
+      data={workouts}
+      renderItem={({ item }) => renderItem(item)}
+      keyExtractor={(item) => item.id.toString()}
+    />
   );
 };
 

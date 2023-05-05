@@ -1,24 +1,36 @@
 import React from 'react';
+import { useCallback } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { StyleSheet } from 'react-native';
-import { View } from 'react-native';
 import { FlatList, Text } from 'react-native';
-
+import Warior1 from '../../../../../assets/Warior1.svg';
+import { View } from 'react-native';
 const ExerciseList = ({ exercises }) => {
-  console.log(exercises);
+  const handlePress = useCallback((exercise) => {
+    console.log('Exercise tapped:', exercise.name);
+  }, []);
+
+  const renderItem = ({ item }) => (
+    <TouchableOpacity
+      key={item.id}
+      style={styles.exerciseContainer}
+      onPress={() => handlePress(item)}
+    >
+      <Warior1 width={100} height={100} />
+      <View style={styles.textContainer}>
+        <Text style={styles.exerciseName}>{item.name}</Text>
+        <Text style={styles.exerciseTarget}>{item.target}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+
   return (
-    <View style={styles.container}>
-      {exercises.map((exercise) => (
-        <TouchableOpacity
-          key={exercise.id}
-          style={styles.exerciseContainer}
-          onPress={() => console.log('Exercise tapped:', exercise.name)}
-        >
-          <Text style={styles.exerciseName}>{exercise.name}</Text>
-          <Text style={styles.exerciseTarget}>{exercise.target}</Text>
-        </TouchableOpacity>
-      ))}
-    </View>
+    <FlatList
+      data={exercises}
+      renderItem={renderItem}
+      keyExtractor={(item) => item.id.toString()}
+      contentContainerStyle={styles.container}
+    />
   );
 };
 const styles = StyleSheet.create({
@@ -28,20 +40,26 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   exerciseContainer: {
+    backgroundColor: '#F0ECFF',
+
+    borderRadius: 16,
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#E0E0E0',
+    marginTop: 10,
+    marginBottom: 2,
+  },
+  textContainer: {
+    flex: 1,
+    marginLeft: 20,
   },
   exerciseName: {
     fontSize: 18,
+    color: '#6842FF',
     fontWeight: 'bold',
+    marginBottom: 5,
   },
   exerciseTarget: {
     fontSize: 16,
-    color: '#999999',
   },
 });
 export default ExerciseList;

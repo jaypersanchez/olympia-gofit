@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
@@ -7,77 +7,120 @@ import Welcome from './components/Welcome';
 import NextWorkout from './components/NextWorkout';
 import WorkoutList from './components/WorkoutList';
 import BottomNav from './components/BottomNav';
-import ExerciseList from './components/ExerciseList';
+import { useCallback } from 'react';
 
 const DailyWorkout = ({ navigation }) => {
   const [selectedWorkout, setSelectedWorkout] = useState(null);
+  const [selectedProgramFrequency, setSelectedProgramFrequency] = useState(5); // default to 5 days
   const name = 'King';
-  const programFrequency = useSelector((state) => state.programFrequency);
-  const workouts = [
+
+  const baseWorkouts = [
     {
       id: 1,
       day: 'Monday',
+      target: 'Core',
       exercises: [
         {
           id: 1,
           name: 'Push-ups',
-          target: 20,
-          reps: 0,
+          target: 'Chest',
+          reps: 4,
         },
         {
           id: 2,
-          name: 'Squats',
-          target: 15,
-          reps: 0,
+          name: 'Burpees',
+          target: 'Full Body',
+          reps: 4,
         },
       ],
     },
     {
       id: 2,
       day: 'Tuesday',
+      target: 'Lower Body',
       exercises: [
         {
           id: 3,
           name: 'Lunges',
-          target: 10,
-          reps: 0,
+          target: 'Legs',
+          reps: 4,
         },
         {
           id: 4,
-          name: 'Plank',
-          target: 30,
-          reps: 0,
+          name: 'Squats',
+          target: 'Legs',
+          reps: 4,
+        },
+      ],
+    },
+    {
+      id: 3,
+      day: 'Wednesday',
+      target: 'Lower Body',
+      exercises: [
+        {
+          id: 3,
+          name: 'Lunges',
+          target: 'Legs',
+          reps: 4,
+        },
+        {
+          id: 4,
+          name: 'Squats',
+          target: 'Legs',
+          reps: 4,
+        },
+      ],
+    },
+    {
+      id: 4,
+      day: 'Thursday',
+      target: 'Lower Body',
+      exercises: [
+        {
+          id: 3,
+          name: 'Lunges',
+          target: 'Legs',
+          reps: 4,
+        },
+        {
+          id: 4,
+          name: 'Squats',
+          target: 'Legs',
+          reps: 4,
+        },
+      ],
+    },
+    {
+      id: 5,
+      day: 'Friday',
+      target: 'Lower Body',
+      exercises: [
+        {
+          id: 3,
+          name: 'Lunges',
+          target: 'Legs',
+          reps: 4,
+        },
+        {
+          id: 4,
+          name: 'Squats',
+          target: 'Legs',
+          reps: 4,
         },
       ],
     },
   ];
-  // const workouts = [
-  //   {
-  //     id: 1,
-  //     exercise: { id: 1, name: 'Running' },
-  //     target: 'Run 3 miles in 30 min',
-  //     date: '2023-05-03',
-  //   },
-  //   {
-  //     id: 2,
-  //     exercise: { id: 2, name: 'Push-ups' },
-  //     target: '3 sets of 15 reps',
-  //     date: '2023-05-05',
-  //   },
-  //   {
-  //     id: 3,
-  //     exercise: { id: 3, name: 'Yoga' },
-  //     target: 'Hold tree pose for 30s',
-  //     date: '2023-05-08',
-  //   },
-  // ];
-  const onPressWorkout = (workout) => {
-    setSelectedWorkout(workout);
-  };
-  const handleBackPress = () => {
-    setSelectedWorkout(null);
-  };
+  const [workouts, setWorkouts] = useState([]);
 
+  useEffect(() => {
+    const updatedWorkouts = baseWorkouts.slice(0, selectedProgramFrequency);
+    setWorkouts(updatedWorkouts);
+  }, [selectedProgramFrequency]);
+
+  const onPressWorkout = useCallback((workout) => {
+    setSelectedWorkout(workout);
+  }, []);
   return (
     <SafeAreaProvider style={styles.container}>
       <TopNav></TopNav>
@@ -87,18 +130,14 @@ const DailyWorkout = ({ navigation }) => {
           style={styles.banner}
           programFrequency={programFrequency}
           workouts={workouts}
+          selectedWorkout={selectedWorkout}
         />
+
         <WorkoutList
           workouts={workouts}
           onPressWorkout={onPressWorkout}
           selectedWorkout={selectedWorkout}
         />
-        {selectedWorkout && (
-          <ExerciseList
-            exercises={selectedWorkout.exercises}
-            handleBackPress={handleBackPress}
-          />
-        )}
       </View>
       <BottomNav />
     </SafeAreaProvider>

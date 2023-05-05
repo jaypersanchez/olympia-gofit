@@ -75,12 +75,12 @@ export default function App() {
       }
     }, 2000);
   }, [fontsLoaded]);
-  return (
-    <Provider store={store}>
-      {/* <YourProgram /> */}
-      <DailyWorkout />
-    </Provider>
-  );
+  // return (
+  //   <Provider store={store}>
+  //     {/* <YourProgram /> */}
+  //     <DailyWorkout />
+  //   </Provider>
+  // );
   if (isSplashScreenVisible) {
     return <SplashScreen />;
   } else {

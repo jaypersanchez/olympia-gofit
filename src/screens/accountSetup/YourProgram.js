@@ -7,12 +7,20 @@ import ActiveInactiveButton from './components/ActiveInactiveButton';
 import ProgressBarStepper from '../../components/customs/ProgressBarStepper';
 import { useDispatch } from 'react-redux';
 import { selectProgramFrequency } from '../../store/actions';
+import { useState } from 'react';
 
 const YourProgram = ({ navigation }) => {
+  const [programFrequency, setProgramFrequency] = useState(5);
   const dispatch = useDispatch();
 
-  const handleSelectFrequency = (frequency) => {
-    dispatch(selectProgramFrequency(frequency));
+  // const handleSelectFrequency = (frequency) => {
+  //   dispatch(selectProgramFrequency(frequency));
+  // };
+  const handleSelectFrequency = (value) => {
+    setProgramFrequency(value);
+    setSelectedProgram(value);
+    setSelected(false);
+    setSelectedProgramFrequency(value); // update selectedProgramFrequency
   };
 
   return (
