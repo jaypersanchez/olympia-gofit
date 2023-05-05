@@ -1,7 +1,7 @@
 import React from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import WeightLifting from "../../../../../assets/WeightLifting.svg";
-import WhiteBookmark from "../../../../../assets/WhiteBookmark.svg";
+import WeightLifting from "../../../../../assets/icons/WeightLifting.svg";
+import WhiteBookmark from "../../../../../assets/icons/WhiteBookmark.svg";
 import { TouchableOpacity } from "react-native";
 const ExerciseList = ({ days }) => {
   const renderItem = ({ item }) => {

@@ -12,7 +12,7 @@ const TextItem = ({ type, font, style, children }) => {
   }, [type, font]);
 
   return (
-    <Text style={{ ...style, ...typeStyle, ...fontStyle }}>{children}</Text>
+    <Text style={[style, { ...typeStyle, ...fontStyle }]}>{children}</Text>
   );
 };
 

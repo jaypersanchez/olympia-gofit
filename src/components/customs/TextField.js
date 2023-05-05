@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
 
-import EyeCloseIcon from "../../../assets/EyeCloseIcon.svg";
+import EyeCloseIcon from "../../../assets/icons/EyeCloseIcon.svg";
 
 const TextField = ({ style, icon, placeholder, type }) => {
   const [isFocused, setIsFocused] = useState();
@@ -24,6 +24,8 @@ const TextField = ({ style, icon, placeholder, type }) => {
           {
             borderColor: isFocused ? "#6842FF" : "#EEEEEE",
             backgroundColor: isFocused ? "rgba(104, 66, 255, 0.08)" : "#EEEEEE",
+            paddingLeft: icon ? 45 : 26,
+            paddingRight: icon ? 0 : 26,
           },
         ]}
         placeholder={placeholder}
@@ -43,7 +45,6 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 12,
     backgroundColor: "#FAFAFA",
-    paddingLeft: 45,
     borderColor: "#FAFAFA",
     borderWidth: 2,
   },

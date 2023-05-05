@@ -1,15 +1,15 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
-import { TouchableOpacity } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { TouchableOpacity } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Button = ({ onPress, label, style, btnColor, btnTextColor }) => {
   const buttonColor = {
-    backgroundColor: btnColor ? btnColor : 'yellow',
+    backgroundColor: btnColor ? btnColor : "#ffffff",
   };
 
   const buttonTextColor = {
-    color: btnTextColor ? btnTextColor : '#ffffff',
+    color: btnTextColor ? btnTextColor : "#ffffff",
   };
 
   return (
@@ -20,8 +20,8 @@ const Button = ({ onPress, label, style, btnColor, btnTextColor }) => {
     >
       <LinearGradient
         colors={[
-          btnColor ? btnColor : '#6842FF',
-          btnColor ? btnColor : '#896BFF',
+          btnColor ? btnColor : "#6842FF",
+          btnColor ? btnColor : "#896BFF",
         ]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
@@ -39,15 +39,15 @@ export default Button;
 
 const styles = StyleSheet.create({
   button: {
-    alignItems: 'center',
+    alignItems: "center",
     padding: 10,
     borderRadius: 100,
     paddingVertical: 20,
     paddingHorizontal: 20,
-    boxShadow: '4px 8px 24px rgba(104, 66, 255, 0.25)',
+    boxShadow: "4px 8px 24px rgba(104, 66, 255, 0.25)",
   },
   textButton: {
-    fontFamily: 'Urbanist_700Bold',
+    fontFamily: "Urbanist_700Bold",
     fontSize: 16,
     lineHeight: 22.4,
   },

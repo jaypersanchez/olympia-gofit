@@ -79,3 +79,19 @@ export const UserIcon = ({ size, color }) => {
     </Svg>
   );
 };
+
+export const BoxIcon = ({ size, color }) => {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 20 21" fill="none">
+      <Rect
+        x="1.5"
+        y="2"
+        width="17"
+        height="17"
+        rx="6.5"
+        stroke={color}
+        strokeWidth="2"
+      />
+    </Svg>
+  );
+};

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
-import HomeNavIcon from "../../../../../assets/HomeNavIcon.svg";
-import ChartNavIcon from "../../../../../assets/ChartNavIcon.svg";
-import WalkNavIcon from "../../../../../assets/WalkNavIcon.svg";
-import DumbellNavIcon from "../../../../../assets/DumbellNavIcon.svg";
+import HomeNavIcon from "../../../../../assets/icons/HomeNavIcon.svg";
+import ChartNavIcon from "../../../../../assets/icons/ChartNavIcon.svg";
+import WalkNavIcon from "../../../../../assets/icons/WalkNavIcon.svg";
+import DumbellNavIcon from "../../../../../assets/icons/DumbellNavIcon.svg";
 
 const BottomNav = () => {
   const [activeTab, setActiveTab] = useState("home");

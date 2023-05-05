@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import Avatar from "../../../../../assets/Avatar.svg";
+import Avatar from "../../../../../assets/icons/Avatar.svg";
 const Welcome = ({ name }) => {
   return (
     <View style={styles.container}>
