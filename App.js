@@ -38,6 +38,8 @@ import YourWeight from './src/screens/accountSetup/YourWeight';
 import YourHeight from './src/screens/accountSetup/YourHeight';
 import YourExperience from './src/screens/accountSetup/YourExperience';
 import ActivityLevel from './src/screens/accountSetup/ActivityLevel';
+import { Provider } from 'react-redux';
+import store from './src/store/store';
 
 export default function App() {
   const [isSplashScreenVisible, setIsSplashScreenVisible] = useState(true);
@@ -73,14 +75,21 @@ export default function App() {
       }
     }, 2000);
   }, [fontsLoaded]);
-  // return <YourExperience />;
+  return (
+    <Provider store={store}>
+      {/* <YourProgram /> */}
+      <DailyWorkout />
+    </Provider>
+  );
   if (isSplashScreenVisible) {
     return <SplashScreen />;
   } else {
     return (
-      <NavigationContainer>
-        <Routes />
-      </NavigationContainer>
+      <Provider store={store}>
+        <NavigationContainer>
+          <Routes />
+        </NavigationContainer>
+      </Provider>
     );
   }
 }
