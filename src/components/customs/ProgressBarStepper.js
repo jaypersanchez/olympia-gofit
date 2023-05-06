@@ -1,7 +1,7 @@
 import { StyleSheet, View } from "react-native";
 import React from "react";
 
-const ProgressBarStepper = ({ steps, activeSteps }) => {
+const ProgressBarStepper = ({ steps, activeSteps, height }) => {
   const totalSteps = 100 / steps;
   const progressWidth = Math.min(activeSteps * totalSteps, 100);
 
@@ -18,7 +18,10 @@ const ProgressBarStepper = ({ steps, activeSteps }) => {
         style={[
           styles.progressActive,
           {
+            height: height,
             width: progressWidth + "%",
+            borderTopRightRadius: steps === activeSteps ? 0 : 100,
+            borderBottomRightRadius: steps === activeSteps ? 0 : 100,
           },
         ]}
       />
@@ -36,8 +39,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#E0E0E0",
   },
   progressActive: {
-    height: 4,
     backgroundColor: "#6842FF",
-    borderRadius: 100,
   },
 });

@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
-import WeightLifting from '../../../../../assets/WeightLifting.svg';
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import WeightLifting from "../../../../../assets/icons/WeightLifting.svg";
 const Banner = ({ currentWeek, currentDay, exercises }) => {
   return (
     <View style={styles.container}>
@@ -23,21 +23,21 @@ export default Banner;
 const styles = StyleSheet.create({
   container: {},
   textContainer: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
-    width: '100%',
-    alignItems: 'center',
+    width: "100%",
+    alignItems: "center",
     marginBottom: 10,
   },
   nextWorkoutText: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 24,
-    color: '#fff',
+    color: "#fff",
     marginBottom: 5,
   },
   exerciseText: {
     fontSize: 16,
-    color: '#fff',
+    color: "#fff",
     marginBottom: 2,
   },
 });
