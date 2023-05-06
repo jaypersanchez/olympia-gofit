@@ -17,7 +17,9 @@ $ npm start
 $ a
 ```
 
-Notes: Before running the prebuild command `npx expo run:android` make sure you are connected to a pyhsical device if you want to run it there, otherwise emulator will be used
+Notes: 
+1. Before running the prebuild command `npx expo run:android` make sure you are connected to a pyhsical device if you want to run it there, otherwise emulator will be used.
+2. Make sure that the application is closed or uninstalled
 
 ## What to do if Prebuild does not work!?
 
