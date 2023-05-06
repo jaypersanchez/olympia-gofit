@@ -11,6 +11,7 @@ import GymGoal from "../screens/onboarding/GymGoal/GymGoal";
 import WorkoutPlace from "../screens/onboarding/WorkoutPlace/WorkoutPlace";
 import DailyProgram from "../screens/onboarding/DailyProgram/DailyProgram";
 import WorkoutPlan from "../screens/onboarding/WorkoutPlan/WorkoutPlan";
+import PaymentPlan from "../screens/onboarding/PaymentPlan/PaymentPlan";
 
 const Page = createNativeStackNavigator();
 
@@ -42,10 +43,7 @@ const Onboarding = () => {
           headerShadowVisible: false,
         }}
       />
-      {/* <Page.Screen name="PaymentPlan" component={YourPaymentPlan} /> */}
-      {/* <Page.Screen name="DailyWorkout" component={DailyWorkout} /> */}
-      {/* <Page.Screen name="ActvityLevel" component={ActivityLevel} /> */}
-      {/* <Page.Screen name="Profile" component={YourProfile} /> */}
+      <Page.Screen name="PaymentPlan" component={PaymentPlan} />
     </Page.Navigator>
   );
 };

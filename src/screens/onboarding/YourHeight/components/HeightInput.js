@@ -6,7 +6,7 @@ import { TextInput } from "react-native";
 
 const HeightInput = ({ setHeight }) => {
   const [isFocused, setIsFocused] = useState();
-  const [heightType, setHeightType] = useState("");
+  const [heightType, setHeightType] = useState("inch");
 
   const handleInputChange = (value) => {
     if (heightType) {
@@ -34,6 +34,8 @@ const HeightInput = ({ setHeight }) => {
         ]}
       >
         <TextInput
+          placeholder="00"
+          placeholderTextColor="#E0E0E0"
           style={styles.input}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
@@ -110,34 +112,6 @@ const styles = StyleSheet.create({
   },
   btnText: {
     textAlign: "center",
-  },
-  inactiveBtn: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    width: "50%",
-    borderBottomLeftRadius: 10,
-    height: "100%",
-    justifyContent: "center",
-    borderColor: "#F0ECFF",
-    borderBottomWidth: 2,
-  },
-  inactiveBtnText: {
-    textAlign: "center",
-    color: "#9E9E9E",
-  },
-  activeBtn: {
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderBottomWidth: 2,
-    borderColor: "#6842FF",
-    width: "50%",
-    borderBottomRightRadius: 10,
-    height: "100%",
-    justifyContent: "center",
-  },
-  activeBtnText: {
-    textAlign: "center",
-    color: "#6842FF",
   },
   switchBtn: {
     flexDirection: "row",

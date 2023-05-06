@@ -5,7 +5,7 @@ import Button from "../../../components/customs/Button";
 import Stepper from "../components/Stepper";
 import Checkbox from "../components/Checkbox";
 
-const WorkoutPlan = ({ navigation, route }) => {
+const WorkoutPlan = ({ navigation: { navigate }, route }) => {
   const { activeStep, stepsLength } = route.params;
   const [isChecked, setIsChecked] = useState(false);
 
@@ -14,7 +14,7 @@ const WorkoutPlan = ({ navigation, route }) => {
   };
 
   const handleGeneratePlan = () => {
-    // navigation.navigate('PaymentPlan');
+    navigate("PaymentPlan");
     console.log("Generate workout plan button pressed");
   };
 
@@ -22,34 +22,39 @@ const WorkoutPlan = ({ navigation, route }) => {
     <View style={styles.container}>
       <Stepper steps={stepsLength} activeSteps={activeStep} height={4} />
       <View style={styles.contents}>
-        <View style={{ gap: 48 }}>
-          <View>
-            <TextItem style={styles.headerTitle}>Great!</TextItem>
-            <TextItem style={styles.headerTitle}>Let's Workout</TextItem>
-          </View>
-          <View style={{ width: "100%" }}>
-            <View
-              style={{ flexDirection: "row", alignItems: "center", gap: 2 }}
-            >
-              <Checkbox isChecked={isChecked} onPress={handleCheckboxPress} />
+        <View style={{ flex: 1 }}>
+          <View style={{ flex: 1, justifyContent: "center", gap: 18 }}>
+            <View>
+              <TextItem style={styles.headerTitle}>Great!</TextItem>
+              <TextItem style={styles.headerTitle}>Let's Workout</TextItem>
+            </View>
+
+            <View style={{ width: "100%" }}>
               <View
-                style={{ flexDirection: "row", alignItems: "center", gap: 5 }}
+                style={{ flexDirection: "row", alignItems: "center", gap: 2 }}
               >
-                <TextItem type="body_xl" font="semibold" style={styles.text}>
-                  I agree to the
-                </TextItem>
-                <TouchableOpacity
-                  activeOpacity={0.55}
-                  onPress={() => console.log("terms and condition was clicked")}
+                <Checkbox isChecked={isChecked} onPress={handleCheckboxPress} />
+                <View
+                  style={{ flexDirection: "row", alignItems: "center", gap: 5 }}
                 >
-                  <TextItem
-                    type="body_xl"
-                    font="semibold"
-                    style={[styles.text, { color: "#6842FF" }]}
-                  >
-                    terms and conditions
+                  <TextItem type="body_xl" font="semibold" style={styles.text}>
+                    I agree to the
                   </TextItem>
-                </TouchableOpacity>
+                  <TouchableOpacity
+                    activeOpacity={0.55}
+                    onPress={() =>
+                      console.log("terms and condition was clicked")
+                    }
+                  >
+                    <TextItem
+                      type="body_xl"
+                      font="semibold"
+                      style={[styles.text, { color: "#6842FF" }]}
+                    >
+                      terms and conditions
+                    </TextItem>
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
           </View>

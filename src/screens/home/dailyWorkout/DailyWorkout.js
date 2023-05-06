@@ -120,7 +120,7 @@ const DailyWorkout = ({ navigation }) => {
         <ExerciseList days={weeks.days} />
         {/* Add other components that you want to align at the bottom here */}
       </View>
-      <BottomNav />
+      {/* <BottomNav /> */}
     </SafeAreaProvider>
   );
 };

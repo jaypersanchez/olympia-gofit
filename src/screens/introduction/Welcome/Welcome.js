@@ -29,26 +29,32 @@ const Welcome = ({ navigation: { navigate } }) => {
   );
 
   return (
-    <TouchableHighlight style={styles.container} onPress={handleScreenTouch}>
-      <ImageBackground style={styles.image} source={BackgroundImage}>
-        <View style={styles.textContianer}>
-          <Text style={styles.headerTitle}>Welcome to 👋</Text>
-          <View style={styles.logoContainer}>
-            <Image source={Logo} style={styles.logo} />
-          </View>
+    <View style={{ flex: 1 }}>
+      <TouchableHighlight
+        activeOpacity={0.85}
+        style={styles.container}
+        onPress={handleScreenTouch}
+      >
+        <ImageBackground style={styles.image} source={BackgroundImage}>
+          <View style={styles.textContianer}>
+            <Text style={styles.headerTitle}>Welcome to 👋</Text>
+            <View style={styles.logoContainer}>
+              <Image source={Logo} style={styles.logo} />
+            </View>
 
-          <Text style={styles.subtitle}>
-            The best fitness app in this century to accompany your sports.
-          </Text>
-        </View>
-        <LinearGradient
-          colors={["transparent", "#2C2C2C"]}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 0, y: 0.8 }}
-          style={styles.mask}
-        />
-      </ImageBackground>
-    </TouchableHighlight>
+            <Text style={styles.subtitle}>
+              The best fitness app in this century to accompany your sports.
+            </Text>
+          </View>
+          <LinearGradient
+            colors={["transparent", "#2C2C2C"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0, y: 0.8 }}
+            style={styles.mask}
+          />
+        </ImageBackground>
+      </TouchableHighlight>
+    </View>
   );
 };
 

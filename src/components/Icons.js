@@ -1,4 +1,4 @@
-import { Svg, Path, Rect, G, Defs, ClipPath } from "react-native-svg";
+import { Svg, Path, Rect, G, Defs, ClipPath, Circle } from "react-native-svg";
 
 export const MaleIcons = ({ size }) => {
   return (
@@ -92,6 +92,83 @@ export const BoxIcon = ({ size, color }) => {
         stroke={color}
         strokeWidth="2"
       />
+    </Svg>
+  );
+};
+
+export const RadioIcon = ({ size, color }) => {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 20 20" fill="none">
+      <Circle cx="10" cy="10" r="8.5" stroke={color} strokeWidth="2" />
+    </Svg>
+  );
+};
+
+export const HomeIcon = ({ size, color }) => {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 20 20" fill="none">
+      <Path
+        d="M7.51 18.773v-3.057c0-.78.637-1.414 1.423-1.414h2.875c.377 0 .74.15 1.006.414.267.265.417.625.417 1v3.057c-.002.325.126.637.356.867.23.23.544.36.87.36h1.962a3.46 3.46 0 0 0 2.443-1 3.41 3.41 0 0 0 1.013-2.422V7.867c0-.735-.328-1.431-.895-1.902L12.309.675A3.097 3.097 0 0 0 8.36.748L1.842 5.965a2.474 2.474 0 0 0-.967 1.902v8.702C.875 18.464 2.422 20 4.331 20h1.916c.68 0 1.231-.544 1.236-1.218l.027-.009Z"
+        fill={color}
+      />
+    </Svg>
+  );
+};
+
+export const ChartIcon = ({ size, color }) => {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 25 24" fill="none">
+      <Path
+        d="M8.246 10.202v6.86m4.667-10.143v10.143m4.59-3.235v3.235"
+        stroke={color}
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        clipRule="evenodd"
+        d="M17.56 2H8.19C4.922 2 2.874 4.312 2.874 7.585v8.83C2.875 19.688 4.913 22 8.189 22h9.372c3.276 0 5.314-2.312 5.314-5.585v-8.83C22.875 4.312 20.837 2 17.561 2Z"
+        stroke={color}
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
+
+export const WalkIcon = ({ size, color }) => {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24" fill={color}>
+      <G id="SVGRepo_bgCarrier" strokeWidth={0} />
+      <G
+        id="SVGRepo_tracerCarrier"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <G id="SVGRepo_iconCarrier">
+        <Path d="M10.1 3A1.9 1.9 0 1 1 12 4.9 1.899 1.899 0 0 1 10.1 3zm6.257 13.26l-2.425-3.377-.293-5.403c-.067-1.287-1.823-1.449-3.401-1.579-.945 1.6-2.48 4.575-3.125 5.838a.721.721 0 0 0 .265.942.74.74 0 0 0 1.033-.264l2.104-3.72.258 4.338 3.47 4.144 1.724 4.858a1.088 1.088 0 0 0 2.081-.496.953.953 0 0 0-.03-.202c-.03-.113-1.66-5.078-1.66-5.078zm-6.014-2.18l1.581 1.887-.335 1.588-3.227 4.285a1.087 1.087 0 1 1-1.808-1.2l3.065-4.285zM18 10.936a.881.881 0 0 1-.824 1.51c-.611-.37-2.35-1.536-2.35-1.536l-.104-1.926z" />
+        <Path fill="none" d="M0 0h24v24H0z" />
+      </G>
+    </Svg>
+  );
+};
+
+export const WorkoutIcon = ({ size, color }) => {
+  return (
+    <Svg
+      viewBox="0 0 32 32"
+      xmlSpace="preserve"
+      width={size}
+      height={size}
+      fill={color}
+    >
+      <G strokeWidth={0} />
+      <G strokeLinecap="round" strokeLinejoin="round" />
+      <G>
+        <Path d="M7 25c-1.7 0-3-1.3-3-3V10c0-1.7 1.3-3 3-3s3 1.3 3 3v12c0 1.7-1.3 3-3 3zm18 0c-1.7 0-3-1.3-3-3V10c0-1.7 1.3-3 3-3s3 1.3 3 3v12c0 1.7-1.3 3-3 3z" />
+        <Path d="M23 17H9c-.6 0-1-.4-1-1s.4-1 1-1h14c.6 0 1 .4 1 1s-.4 1-1 1zM2 10.2c-1.2.4-2 1.5-2 2.8v6c0 1.3.8 2.4 2 2.8V10.2zm28 0v11.6c1.2-.4 2-1.5 2-2.8v-6c0-1.3-.8-2.4-2-2.8z" />
+      </G>
     </Svg>
   );
 };

@@ -66,10 +66,17 @@ export default function App() {
     return <Splash />;
   } else {
     return (
-      <NavigationContainer>
-        <StatusBar hidden={true} />
-        <Routes />
-      </NavigationContainer>
+      <SafeAreaProvider style={{ flex: 1 }}>
+        <StatusBar
+          hidden={true}
+          translucent={true}
+          barStyle="light-content"
+          backgroundColor="#fff"
+        />
+        <NavigationContainer>
+          <Routes />
+        </NavigationContainer>
+      </SafeAreaProvider>
     );
   }
 }
