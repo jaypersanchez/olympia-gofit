@@ -62,7 +62,7 @@ const Login = ({ navigation: { navigate } }) => {
                     Remember me
                   </TextItem>
                 </View>
-                <Button label="Login" onPress={() => console.log("Login")} />
+                <Button label="Login" onPress={() => navigate("BottomNav")} />
               </View>
             </View>
 

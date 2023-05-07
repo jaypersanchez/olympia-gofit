@@ -1,54 +1,46 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, ScrollView, View } from "react-native";
 import React from "react";
-import Button from "../../components/customs/Button";
+
 import TextItem from "../../components/customs/TextItem";
+import { dailyexercise } from "./components/dailyexercise";
+
+import Banner from "./components/Banner";
+import ExcerciseCard from "./components/ExcerciseCard";
+import Streak from "./components/Streak";
 
 const Home = ({ navigation, route }) => {
+  const { data } = dailyexercise || [];
+
+  console.log("dailyexcercise", dailyexercise);
   return (
     <View style={styles.container}>
-      <View style={styles.contents}>
-        <View style={{ display: "flex", gap: 19 }}>
-          <TextItem type="h3" style={{ textAlign: "center", marginTop: 10 }}>
-            How Old Are You?
-          </TextItem>
-          <TextItem
-            type="body_xl"
-            style={{
-              textAlign: "center",
-              fontSize: 21,
-              lineHeight: 25.2,
-            }}
-          >
-            Age in years. This will help us to personalize an exercise program
-            plan that suits you.
-          </TextItem>
-        </View>
-
-        <View style={{ gap: 24, width: "100%" }}>
-          <TextItem type="h3" style={{ textAlign: "center", marginTop: 10 }}>
-            Content
-          </TextItem>
-        </View>
-
-        <View
-          style={{
-            flexDirection: "row",
-            columnGap: 12,
+      <View style={{ gap: 24, width: "100%" }}>
+        <TextItem type="h3">Welcome, Christina!</TextItem>
+        <ScrollView
+          contentContainerStyle={{
+            flexGrow: 1,
+            gap: 24,
+            justifyContent: "center",
+            paddingBottom: 30,
           }}
+          decelerationRate="normal"
+          showsVerticalScrollIndicator={false}
         >
-          <Button
-            label="Back"
-            style={{ width: "50%" }}
-            btnColor="#F0ECFF"
-            btnTextColor="#6842FF"
-            onPress={() => navigation.goBack()}
-          />
-          <Button
-            label="Continue"
-            style={{ width: "50%" }}
-            onPress={() => navigation.navigate("ActivityLevel")}
-          />
-        </View>
+          <Banner week={1} day={12} excercise={"Dead Lift 3 sets of 8 reps"} />
+          <TextItem type="h5">Daily Excercise</TextItem>
+          <View style={{ gap: 16 }}>
+            {data.map((item) => (
+              <ExcerciseCard
+                key={item.id}
+                day={item.day}
+                excercise={item.name}
+                img={item.image}
+              />
+            ))}
+          </View>
+
+          <Streak />
+        </ScrollView>
       </View>
     </View>
   );
@@ -61,13 +53,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     backgroundColor: "#fff",
-  },
-  contents: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "space-between",
-    width: "100%",
-    paddingVertical: 48,
+    paddingBottom: 48,
     paddingHorizontal: 24,
+    paddingTop: 24,
   },
 });

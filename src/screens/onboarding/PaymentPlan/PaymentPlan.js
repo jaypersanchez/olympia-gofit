@@ -68,7 +68,7 @@ const PaymentPlan = ({ navigation, route }) => {
         <Button
           label="Continue and Pay"
           style={{ width: "100%" }}
-          onPress={() => navigation.navigate("BottomNav", { screen: "Home" })}
+          onPress={() => navigate("BottomNav", { screen: "Home" })}
         />
       </View>
     </View>

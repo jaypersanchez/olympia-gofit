@@ -47,7 +47,7 @@ const Welcome = ({ navigation: { navigate } }) => {
             </Text>
           </View>
           <LinearGradient
-            colors={["transparent", "#2C2C2C"]}
+            colors={["transparent", "#202020"]}
             start={{ x: 0, y: 0 }}
             end={{ x: 0, y: 0.8 }}
             style={styles.mask}

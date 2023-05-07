@@ -34,9 +34,7 @@ const Auth = () => {
           headerLeft: () => {
             return (
               <TouchableOpacity
-                onPress={() =>
-                  navigation?.navigate("Auth", { screen: "WelcomeAuth" })
-                }
+                onPress={() => navigation?.navigate("WelcomeAuth")}
                 style={{ marginLeft: 2 }}
               >
                 <BackIcon color="#212121" size={28} />
@@ -55,9 +53,7 @@ const Auth = () => {
           headerLeft: () => {
             return (
               <TouchableOpacity
-                onPress={() =>
-                  navigation?.navigate("Auth", { screen: "WelcomeAuth" })
-                }
+                onPress={() => navigation?.navigate("WelcomeAuth")}
                 style={{ marginLeft: 2 }}
               >
                 <BackIcon color="#212121" size={28} />

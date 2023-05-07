@@ -15,32 +15,9 @@ import AppleIcon from "../../../../assets/icons/appleIcon.svg";
 import FacebookIcon from "../../../../assets/icons/facebookIcon.svg";
 import Divider from "../../../components/customs/Divider";
 import Logo from "../../../../assets/image/FitSpace-black.png";
+import SiginButton from "./components/SiginButton";
 
 const WelcomeAuth = ({ navigation: { navigate } }) => {
-  const SignInButton = ({ title, onPress, color, icon }) => {
-    return (
-      <View>
-        <TouchableOpacity
-          style={[
-            styles.buttonContainer,
-            {
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: 10,
-            },
-          ]}
-          onPress={onPress}
-        >
-          {icon}
-          <TextItem style={styles.buttonText} type="h6" font="semibold">
-            {title}
-          </TextItem>
-        </TouchableOpacity>
-      </View>
-    );
-  };
-
   const handleGoogleSignIn = () => {
     // Handle Google sign-in logic
   };
@@ -76,12 +53,12 @@ const WelcomeAuth = ({ navigation: { navigate } }) => {
           }}
         >
           <View style={{ gap: 16 }}>
-            <SignInButton
+            <SiginButton
               icon={<FacebookIcon />}
               title="Continue with Facebook"
             />
-            <SignInButton icon={<GoogleIcon />} title="Continue with Google" />
-            <SignInButton icon={<AppleIcon />} title="Continue with Apple" />
+            <SiginButton icon={<GoogleIcon />} title="Continue with Google" />
+            <SiginButton icon={<AppleIcon />} title="Continue with Apple" />
           </View>
 
           <Divider label="or" color="#E0E0E0" />
@@ -120,20 +97,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#ffffff",
-  },
-  buttonContainer: {
-    borderRadius: 16,
-    padding: 16,
-    marginBottom: 10,
-    width: 350,
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#E0E0E0",
-  },
-  buttonText: {
-    fontSize: 16,
-    color: "black",
-    fontWeight: 600,
   },
   logoContainer: {
     width: "100%",
