@@ -4,7 +4,7 @@ import TextItem from "../../../components/customs/TextItem";
 import Button from "../../../components/customs/Button";
 import RadioboxButton from "../components/RadioboxButton";
 
-const PaymentPlan = ({ navigation, route }) => {
+const PaymentPlan = ({ navigation: { navigate }, route }) => {
   const data = [
     {
       label: "7 Days Trial",
