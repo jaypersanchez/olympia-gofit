@@ -7,6 +7,7 @@ import Stepper from "../components/Stepper";
 
 const YourAge = ({ navigation, route }) => {
   const { activeStep, stepsLength } = route.params;
+  console.log(`SignUpData ${activeStep}::${stepsLength}`)
 
   return (
     <View style={styles.container}>
