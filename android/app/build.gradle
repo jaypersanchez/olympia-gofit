@@ -113,9 +113,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace 'com.qbii.oylmpiagofit'
+    namespace 'com.qbii.fitspace'
     defaultConfig {
-        applicationId 'com.qbii.oylmpiagofit'
+        applicationId 'com.qbii.fitspace'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

@@ -1,23 +1,20 @@
 {
   "expo": {
-    "name": "Olympia Gofit",
-    "slug": "Olympia Gofit",
+    "name": "FitSpace",
+    "slug": "FitSpace",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/image/Gofit-icon.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.qbii.oylmpiagofit"
+      "package": "com.qbii.fitspace"
     },
     "web": {
       "favicon": "./assets/favicon.png"

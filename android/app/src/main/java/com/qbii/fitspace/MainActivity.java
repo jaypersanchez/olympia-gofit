@@ -1,4 +1,4 @@
-package com.qbii.oylmpiagofit;
+package com.qbii.fitspace;
 
 import android.os.Build;
 import android.os.Bundle;

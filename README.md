@@ -1,9 +1,9 @@
 ## How To Use
 
 Before Starting few thing to check
+
 - Before running the prebuild command `npx expo run:android` make sure you are connected to a pyhsical device if you want to run it there, otherwise emulator will be used.
 - Make sure that the application is closed or already uninstalled
-
 
 ```bash
 # Clone this repository
@@ -36,12 +36,17 @@ $ a
 ```
 
 ## Troubleshooting
+
 ### Sometimes you will encounter this error
+
 ```ruby
-CommandError: No development build (com.qbii.oylmpiagofit) for this project is installed. Please make and install a development build on the device first.
+CommandError: No development build (com.fitspace.app) for this project is installed. Please make and install a development build on the device first.
 ```
+
 ### Solution
+
 - Make sure that the application is closed or already uninstalled
+
 ```bash
 # stop the execution then prebuild the app again (repeat steps again till it work)
 $ npx expo run:android
