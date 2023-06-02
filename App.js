@@ -2,6 +2,7 @@ import { Routes } from "./Routes";
 import { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Provider } from "react-redux";
 import { StatusBar } from "expo-status-bar";
 import {
   useFonts,
@@ -26,6 +27,7 @@ import {
 } from "@expo-google-fonts/urbanist";
 
 import Splash from "./src/screens/introduction/Splash/Splash";
+import store from "./src/components/redux/store";
 
 export default function App() {
   const [isSplashScreenVisible, setIsSplashScreenVisible] = useState(true);
@@ -73,9 +75,11 @@ export default function App() {
           barStyle="light-content"
           backgroundColor="#fff"
         />
-        <NavigationContainer>
-          <Routes />
-        </NavigationContainer>
+        <Provider store={store}>
+          <NavigationContainer>
+            <Routes />
+          </NavigationContainer>
+        </Provider>
       </SafeAreaProvider>
     );
   }

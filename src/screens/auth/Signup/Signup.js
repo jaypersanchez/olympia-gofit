@@ -1,10 +1,12 @@
 import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import Button from "../../../components/customs/Button";
 import TextItem from "../../../components/customs/TextItem";
 import TextField from "../../../components/customs/TextField";
 import IconBox from "../components/IconBox";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 import FacebookIcon from "../../../../assets/icons/facebookIcon.svg";
 import GoogleIcon from "../../../../assets/icons/googleIcon.svg";
@@ -21,6 +23,58 @@ const Signup = ({ navigation: { navigate } }) => {
   const SignUpFormLength = 3;
   const [step, setSteps] = useFormStepper(SignUpFormLength);
 
+  const validationSchema = Yup.object({
+    name: Yup.string("Enter your first name").required(
+      "First name is required"
+    ),
+    surname: Yup.string("Enter your last name").required(
+      "Last name is required"
+    ),
+    email: Yup.string()
+      .email("Enter a valid email")
+      .required("Email is required"),
+    reEmail: Yup.string()
+      .email("Enter a valid email")
+      .oneOf([Yup.ref("email"), null], "Emails do not match")
+      .required("Email confirmation is required"),
+    password: Yup.string().required("Password is required"),
+    rePassword: Yup.string()
+      .oneOf([Yup.ref("password"), null], "Passwords do not match")
+      .required("Password confirmation is required"),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      surname: "",
+      email: "",
+      reEmail: "",
+      password: "",
+      rePassword: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values, { setErrors, setStatus, setSubmitting }) => {
+      try {
+        console.log("values", values);
+        navigate("Onboarding");
+      } catch (error) {
+        const message =
+          error?.response?.data?.message || "Something went wrong";
+        console.log(error);
+      }
+    },
+  });
+
+  const handleNext = (fields) => {
+    const { errors } = formik;
+
+    const fieldsWithErrors = fields.filter((field) => errors[field]);
+    console.log("Fields with errors:", fieldsWithErrors.length);
+
+    if (!fieldsWithErrors.length > 0) {
+      setSteps({ active: 1 });
+    }
+  };
   return (
     <View style={{ backgroundColor: "#ffffff", flex: 1, paddingTop: 24 }}>
       <ProgressBarStepper
@@ -44,17 +98,43 @@ const Signup = ({ navigation: { navigate } }) => {
               {step?.active === 1 && (
                 <>
                   <TextField
-                    icon={<UserIcon size={18} color="#9E9E9E" />}
+                    icon={<UserIcon size={18} color="#212121" />}
                     placeholder="First Name"
+                    value={formik.values.name}
+                    onChangeText={formik.handleChange("name")}
+                    onFieldBlur={() => formik.setFieldTouched("name", true)}
+                    error={
+                      Boolean(formik.errors.name) && formik.touched.name
+                        ? formik.errors.name
+                        : null
+                    }
+                    onFieldFocus={() => formik.setFieldTouched("name", false)}
                   />
                   <TextField
-                    icon={<UserIcon size={18} color="#9E9E9E" />}
+                    icon={<UserIcon size={18} color="#212121" />}
                     placeholder="Last Name"
+                    value={formik.values.surname}
+                    onChangeText={formik.handleChange("surname")}
+                    error={
+                      Boolean(formik.errors.surname) && formik.touched.surname
+                        ? formik.errors.surname
+                        : null
+                    }
+                    onFieldBlur={() => formik.setFieldTouched("surname", true)}
+                    onFieldFocus={() =>
+                      formik.setFieldTouched("surname", false)
+                    }
                   />
                   <View style={{ marginTop: 24 }}>
                     <Button
                       label="Continue"
-                      onPress={() => setSteps({ active: 1 })}
+                      onPress={() => handleNext(["name", "surname"])}
+                      disabled={
+                        !Boolean(formik.values.surname) ||
+                        !Boolean(formik.values.name) ||
+                        Boolean(formik.errors.surname) ||
+                        Boolean(formik.errors.name)
+                      }
                     />
                   </View>
                 </>
@@ -62,10 +142,33 @@ const Signup = ({ navigation: { navigate } }) => {
 
               {step.active === 2 && (
                 <>
-                  <TextField icon={<MessageIcon />} placeholder="Email" />
                   <TextField
-                    icon={<MessageIcon />}
+                    icon={<MessageIcon color="#212121" />}
+                    placeholder="Email"
+                    value={formik.values.email}
+                    onChangeText={formik.handleChange("email")}
+                    error={
+                      Boolean(formik.errors.email) && formik.touched.email
+                        ? formik.errors.email
+                        : null
+                    }
+                    onFieldBlur={() => formik.setFieldTouched("email", true)}
+                    onFieldFocus={() => formik.setFieldTouched("email", false)}
+                  />
+                  <TextField
+                    icon={<MessageIcon color="#212121" />}
                     placeholder="Retype Email"
+                    value={formik.values.reEmail}
+                    onChangeText={formik.handleChange("reEmail")}
+                    error={
+                      Boolean(formik.errors.reEmail) && formik.touched.reEmail
+                        ? formik.errors.reEmail
+                        : null
+                    }
+                    onFieldBlur={() => formik.setFieldTouched("reEmail", true)}
+                    onFieldFocus={() =>
+                      formik.setFieldTouched("reEmail", false)
+                    }
                   />
                   <View
                     style={{
@@ -86,7 +189,13 @@ const Signup = ({ navigation: { navigate } }) => {
                     <Button
                       label="Continue"
                       style={{ width: "47%" }}
-                      onPress={() => setSteps({ active: 1 })}
+                      onPress={() => handleNext(["email", "reEmail"])}
+                      disabled={
+                        !Boolean(formik.values.email) ||
+                        !Boolean(formik.values.reEmail) ||
+                        Boolean(formik.errors.email) ||
+                        Boolean(formik.errors.reEmail)
+                      }
                     />
                   </View>
                 </>
@@ -95,21 +204,50 @@ const Signup = ({ navigation: { navigate } }) => {
               {step?.active === 3 && (
                 <>
                   <TextField
-                    icon={<LockIcon />}
+                    icon={<LockIcon color="#212121" />}
                     placeholder="Password"
                     type="password"
-                    onFocus="#6842FF"
+                    value={formik.values.password}
+                    onChangeText={formik.handleChange("password")}
+                    error={
+                      Boolean(formik.errors.password) && formik.touched.password
+                        ? formik.errors.password
+                        : null
+                    }
+                    onFieldBlur={() => formik.setFieldTouched("password", true)}
+                    onFieldFocus={() =>
+                      formik.setFieldTouched("password", false)
+                    }
                   />
                   <TextField
-                    icon={<LockIcon />}
+                    icon={<LockIcon color="#212121" />}
                     placeholder="Retype Password"
                     type="password"
-                    onFocus="#6842FF"
+                    value={formik.values.rePassword}
+                    onChangeText={formik.handleChange("rePassword")}
+                    error={
+                      Boolean(formik.errors.rePassword) &&
+                      formik.touched.rePassword
+                        ? formik.errors.rePassword
+                        : null
+                    }
+                    onFieldBlur={() =>
+                      formik.setFieldTouched("rePassword", true)
+                    }
+                    onFieldFocus={() =>
+                      formik.setFieldTouched("rePassword", false)
+                    }
                   />
                   <View style={{ marginTop: 24 }}>
                     <Button
                       label="Sign up"
-                      onPress={() => navigate("Onboarding")}
+                      onPress={formik.handleSubmit}
+                      disabled={
+                        !Boolean(formik.values.password) ||
+                        !Boolean(formik.values.rePassword) ||
+                        Boolean(formik.errors.password) ||
+                        Boolean(formik.errors.rePassword)
+                      }
                     />
                   </View>
                 </>

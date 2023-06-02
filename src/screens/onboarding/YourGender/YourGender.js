@@ -1,14 +1,39 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { BackHandler } from "react-native";
 import GenderButton from "./components/GenderButton";
 import TextItem from "../../../components/customs/TextItem";
 import Button from "../../../components/customs/Button";
 import Stepper from "../components/Stepper";
+import { useDispatch } from "react-redux";
+import { addField } from "../../../components/redux/slices/signupForm";
 
-const YourGender = ({ navigation: { navigate } }) => {
+const YourGender = ({ navigation }) => {
   const stepsLength = 10;
   const activeStep = 1;
   const [gender, setGender] = useState(null);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const backAction = () => {
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, []);
+
+  const handleNext = () => {
+    dispatch(addField({ field: "gender", value: gender }));
+    navigation.navigate("Age", {
+      stepsLength,
+      activeStep: activeStep + 1,
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -29,21 +54,19 @@ const YourGender = ({ navigation: { navigate } }) => {
         <View style={{ gap: 24, width: "100%" }}>
           <GenderButton
             label="Male"
-            active={gender === "Male"}
-            onPress={() => setGender("Male")}
+            active={gender === "male"}
+            onPress={() => setGender("male")}
           />
           <GenderButton
             label="Female"
-            active={gender === "Female"}
-            onPress={() => setGender("Female")}
+            active={gender === "female"}
+            onPress={() => setGender("female")}
           />
         </View>
         <Button
           label="Continue"
           style={{ width: "100%" }}
-          onPress={() =>
-            navigate("Age", { stepsLength, activeStep: activeStep + 1 })
-          }
+          onPress={handleNext}
         />
       </View>
     </View>

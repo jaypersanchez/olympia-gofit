@@ -1,14 +1,24 @@
 import { StyleSheet, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import TextItem from "../../../components/customs/TextItem";
 import Button from "../../../components/customs/Button";
 import BirthdayPicker from "./components/BirthdayPicker";
 import Stepper from "../components/Stepper";
+import { useDispatch } from "react-redux";
+import { addField } from "../../../components/redux/slices/signupForm";
 
 const YourAge = ({ navigation, route }) => {
   const { activeStep, stepsLength } = route.params;
-  console.log(`SignUpData ${activeStep}::${stepsLength}`)
+  const dispatch = useDispatch();
+  const [age, setAge] = useState(null);
 
+  const handleNext = () => {
+    dispatch(addField({ field: "age", value: age }));
+    navigation.navigate("Weight", {
+      stepsLength,
+      activeStep: activeStep + 1,
+    });
+  };
   return (
     <View style={styles.container}>
       <Stepper steps={stepsLength} activeSteps={activeStep} />
@@ -31,7 +41,7 @@ const YourAge = ({ navigation, route }) => {
         </View>
 
         <View style={{ gap: 24, width: "100%" }}>
-          <BirthdayPicker />
+          <BirthdayPicker setAge={setAge} />
         </View>
 
         <View
@@ -50,12 +60,7 @@ const YourAge = ({ navigation, route }) => {
           <Button
             label="Continue"
             style={{ width: "50%" }}
-            onPress={() =>
-              navigation.navigate("Weight", {
-                stepsLength,
-                activeStep: activeStep + 1,
-              })
-            }
+            onPress={handleNext}
           />
         </View>
       </View>

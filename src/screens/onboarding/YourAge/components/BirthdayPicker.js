@@ -7,27 +7,25 @@ import RNDateTimePicker from "@react-native-community/datetimepicker";
 
 import { TouchableOpacity } from "react-native";
 import DatePicker from "react-native-date-picker";
+import { useEffect } from "react";
 
-export default function BirthdayPicker() {
+export default function BirthdayPicker({ setAge }) {
   const [datePicker, setDatePicker] = useState(false);
   const [date, setDate] = useState(new Date());
 
-  function showDatePicker() {
+  const showDatePicker = () => {
     setDatePicker(true);
-  }
+  };
 
-  function onDateSelected(value) {
-    console.log("va", value);
-    // setDate(value);
-    setDatePicker(false);
-  }
   const dateOptions = {
     day: "2-digit",
     month: "short",
     year: "numeric",
   };
 
-  console.log("dat", date?.toLocaleDateString("en-GB", dateOptions));
+  useEffect(() => {
+    setAge(JSON.stringify(date));
+  }, [date]);
 
   return (
     <View style={styles.container}>

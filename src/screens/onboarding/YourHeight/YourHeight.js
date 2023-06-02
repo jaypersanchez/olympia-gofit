@@ -4,12 +4,14 @@ import TextItem from "../../../components/customs/TextItem";
 import Button from "../../../components/customs/Button";
 import Stepper from "../components/Stepper";
 import HeightInput from "./components/HeightInput";
+import { useSelector } from "react-redux";
 
 const YourHeight = ({ navigation, route }) => {
+  const value = useSelector((state) => state.onboarding);
   const { activeStep, stepsLength } = route.params;
   const [height, setHeight] = useState({});
 
-  console.log({ height });
+  console.log({ value });
   return (
     <View style={styles.container}>
       <Stepper steps={stepsLength} activeSteps={activeStep} />

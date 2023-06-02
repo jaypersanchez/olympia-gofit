@@ -15,8 +15,8 @@ const GenderButton = ({ label, onPress, active }) => {
           style={styles.linearContainer}
         >
           <View style={styles.box}>
-            {label === "Male" && <MaleIcons size={32} />}
-            {label === "Female" && <FemaleIcons size={32} />}
+            {label === "male" && <MaleIcons size={32} />}
+            {label === "female" && <FemaleIcons size={32} />}
             <TextItem type="h4" style={styles.label}>
               {label}
             </TextItem>
@@ -25,8 +25,8 @@ const GenderButton = ({ label, onPress, active }) => {
       ) : (
         <View style={styles.container}>
           <View style={styles.box}>
-            {label === "Male" && <MaleIcons size={32} />}
-            {label === "Female" && <FemaleIcons size={32} />}
+            {label === "male" && <MaleIcons size={32} />}
+            {label === "female" && <FemaleIcons size={32} />}
             <TextItem type="h4" style={styles.label}>
               {label}
             </TextItem>

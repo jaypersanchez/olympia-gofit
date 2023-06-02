@@ -3,7 +3,14 @@ import React from "react";
 import { TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
-const Button = ({ onPress, label, style, btnColor, btnTextColor }) => {
+const Button = ({
+  onPress,
+  label,
+  style,
+  btnColor,
+  btnTextColor,
+  ...props
+}) => {
   const buttonColor = {
     backgroundColor: btnColor ? btnColor : "#ffffff",
   };
@@ -16,16 +23,17 @@ const Button = ({ onPress, label, style, btnColor, btnTextColor }) => {
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={0.75}
-      style={{ ...style }}
+      style={[style]}
+      {...props}
     >
       <LinearGradient
         colors={[
-          btnColor ? btnColor : "#6842FF",
-          btnColor ? btnColor : "#896BFF",
+          props?.disabled ? "#BDBDBD" : btnColor ? btnColor : "#6842FF",
+          props?.disabled ? "#E0E0E0" : btnColor ? btnColor : "#896BFF",
         ]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        style={{ ...styles.button, ...buttonColor }}
+        style={[styles.button, buttonColor]}
       >
         <Text style={{ ...styles.textButton, ...buttonTextColor }}>
           {label}
