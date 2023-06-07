@@ -4,12 +4,22 @@ import TextItem from "../../../components/customs/TextItem";
 import Button from "../../../components/customs/Button";
 import Stepper from "../components/Stepper";
 import WeightInput from "./components/WeightInput";
+import { useDispatch } from "react-redux";
+import { addField } from "../../../components/redux/slices/signupForm";
 
 const YourWeight = ({ navigation, route }) => {
+  const dispatch = useDispatch();
   const { activeStep, stepsLength } = route.params;
   const [weight, setWeight] = useState({});
 
-  console.log({ weight });
+  const handleNext = () => {
+    dispatch(addField({ field: "weight", value: weight.value + weight.type }));
+    navigation.navigate("Height", {
+      stepsLength,
+      activeStep: activeStep + 1,
+    });
+  };
+
   return (
     <View style={styles.container}>
       <Stepper steps={stepsLength} activeSteps={activeStep} />
@@ -50,12 +60,8 @@ const YourWeight = ({ navigation, route }) => {
           <Button
             label="Continue"
             style={{ width: "50%" }}
-            onPress={() =>
-              navigation.navigate("Height", {
-                stepsLength,
-                activeStep: activeStep + 1,
-              })
-            }
+            onPress={handleNext}
+            disabled={weight?.value === undefined}
           />
         </View>
       </View>

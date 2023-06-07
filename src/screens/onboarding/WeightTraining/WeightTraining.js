@@ -1,12 +1,43 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import TextItem from "../../../components/customs/TextItem";
 import Button from "../../../components/customs/Button";
 import Stepper from "../components/Stepper";
 import SelectorButton from "../components/SelectorButton";
+import { useDispatch } from "react-redux";
+import { addField } from "../../../components/redux/slices/signupForm";
 
 const WeightTraining = ({ navigation, route }) => {
+  const dispatch = useDispatch();
   const { activeStep, stepsLength } = route.params;
+  const [workoutRegularity, setWorkoutRegularity] = useState(null);
+
+  const handleChange = (label) => {
+    switch (label) {
+      case "I Currently Train":
+        setWorkoutRegularity("currently");
+        break;
+      case "Months Ago":
+        setWorkoutRegularity("months");
+        break;
+      case "Years Ago":
+        setWorkoutRegularity("years");
+        break;
+      default:
+        setWorkoutRegularity("currently");
+        break;
+    }
+  };
+
+  const handleNext = () => {
+    dispatch(
+      addField({ field: "workoutRegularity", value: workoutRegularity })
+    );
+    navigation.navigate("GymGoal", {
+      stepsLength,
+      activeStep: activeStep + 1,
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -31,7 +62,7 @@ const WeightTraining = ({ navigation, route }) => {
         <View style={{ gap: 24, width: "100%" }}>
           <SelectorButton
             labels={["I Currently Train", "Months Ago", "Years Ago"]}
-            onLabelSelect={(label) => console.log(`Selected label: ${label}`)}
+            onLabelSelect={handleChange}
           />
         </View>
 
@@ -51,12 +82,8 @@ const WeightTraining = ({ navigation, route }) => {
           <Button
             label="Continue"
             style={{ width: "50%" }}
-            onPress={() =>
-              navigation.navigate("GymGoal", {
-                stepsLength,
-                activeStep: activeStep + 1,
-              })
-            }
+            onPress={handleNext}
+            disabled={workoutRegularity === null}
           />
         </View>
       </View>

@@ -64,6 +64,7 @@ const WorkoutPlan = ({ navigation: { navigate }, route }) => {
           label="Generate Workout Plan"
           style={{ width: "100%" }}
           onPress={handleGeneratePlan}
+          disabled={!isChecked}
         />
       </View>
     </View>

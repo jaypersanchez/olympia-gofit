@@ -1,12 +1,24 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import TextItem from "../../../components/customs/TextItem";
 import Button from "../../../components/customs/Button";
 import Stepper from "../components/Stepper";
 import SelectorButton from "../components/SelectorButton";
+import { useDispatch } from "react-redux";
+import { addField } from "../../../components/redux/slices/signupForm";
 
 const ActivityLevel = ({ navigation, route }) => {
+  const dispatch = useDispatch();
   const { activeStep, stepsLength } = route.params;
+  const [level, setLevel] = useState(null);
+
+  const handleNext = () => {
+    dispatch(addField({ field: "level", value: level }));
+    navigation.navigate("WeightTraining", {
+      stepsLength,
+      activeStep: activeStep + 1,
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -32,7 +44,7 @@ const ActivityLevel = ({ navigation, route }) => {
         <View style={{ gap: 24, width: "100%" }}>
           <SelectorButton
             labels={["Advanced", "Beginner"]}
-            onLabelSelect={(label) => console.log(`Selected label: ${label}`)}
+            onLabelSelect={(label) => setLevel(label.toLowerCase())}
           />
         </View>
 
@@ -52,12 +64,8 @@ const ActivityLevel = ({ navigation, route }) => {
           <Button
             label="Continue"
             style={{ width: "50%" }}
-            onPress={() =>
-              navigation.navigate("WeightTraining", {
-                stepsLength,
-                activeStep: activeStep + 1,
-              })
-            }
+            onPress={handleNext}
+            disabled={level === null}
           />
         </View>
       </View>

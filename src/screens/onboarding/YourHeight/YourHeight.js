@@ -4,14 +4,22 @@ import TextItem from "../../../components/customs/TextItem";
 import Button from "../../../components/customs/Button";
 import Stepper from "../components/Stepper";
 import HeightInput from "./components/HeightInput";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { addField } from "../../../components/redux/slices/signupForm";
 
 const YourHeight = ({ navigation, route }) => {
-  const value = useSelector((state) => state.onboarding);
+  const dispatch = useDispatch();
   const { activeStep, stepsLength } = route.params;
   const [height, setHeight] = useState({});
 
-  console.log({ value });
+  const handleNext = () => {
+    dispatch(addField({ field: "height", value: height.value + height.type }));
+    navigation.navigate("ActivityLevel", {
+      stepsLength,
+      activeStep: activeStep + 1,
+    });
+  };
+
   return (
     <View style={styles.container}>
       <Stepper steps={stepsLength} activeSteps={activeStep} />
@@ -52,12 +60,8 @@ const YourHeight = ({ navigation, route }) => {
           <Button
             label="Continue"
             style={{ width: "50%" }}
-            onPress={() =>
-              navigation.navigate("ActivityLevel", {
-                stepsLength,
-                activeStep: activeStep + 1,
-              })
-            }
+            onPress={handleNext}
+            disabled={height?.value === undefined}
           />
         </View>
       </View>

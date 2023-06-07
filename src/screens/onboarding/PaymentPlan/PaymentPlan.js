@@ -1,30 +1,45 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import TextItem from "../../../components/customs/TextItem";
 import Button from "../../../components/customs/Button";
 import RadioboxButton from "../components/RadioboxButton";
+import { addField } from "../../../components/redux/slices/signupForm";
+import { useDispatch } from "react-redux";
 
 const PaymentPlan = ({ navigation: { navigate }, route }) => {
+  const dispatch = useDispatch();
+  const [paymentSchedule, setPaymentSchedule] = useState(null);
+
   const data = [
     {
       label: "7 Days Trial",
       description: "Pay once, cancel any time",
       amount: "Free",
+      paysched: "trial",
     },
     {
       label: "Monthly",
       description: "Pay once, cancel any time",
       amount: "$19.99/m",
+      paysched: "month",
     },
     {
       label: "Yearly",
       description: "Pay once, cancel any time",
       amount: "$99.99/m",
+      paysched: "year",
     },
   ];
 
-  const handleSelectionChange = (selectedItems) => {
-    console.log("Selected items:", selectedItems);
+  const handleChange = (val) => {
+    setPaymentSchedule(data[val].paysched);
+  };
+
+  const handleNext = () => {
+    dispatch(addField({ field: "paymentSchedule", value: paymentSchedule }));
+    navigate("BottomNav", { screen: "Home" });
+
+    //call api to save data
   };
   return (
     <View style={styles.container}>
@@ -57,10 +72,7 @@ const PaymentPlan = ({ navigation: { navigate }, route }) => {
             </View>
 
             <View style={{ gap: 24, width: "100%" }}>
-              <RadioboxButton
-                data={data}
-                onSelectionChange={handleSelectionChange}
-              />
+              <RadioboxButton data={data} onSelectionChange={handleChange} />
             </View>
           </View>
         </View>
@@ -68,7 +80,8 @@ const PaymentPlan = ({ navigation: { navigate }, route }) => {
         <Button
           label="Continue and Pay"
           style={{ width: "100%" }}
-          onPress={() => navigate("BottomNav", { screen: "Home" })}
+          onPress={handleNext}
+          disabled={paymentSchedule === null}
         />
       </View>
     </View>

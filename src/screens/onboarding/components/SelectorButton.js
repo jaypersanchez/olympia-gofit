@@ -17,7 +17,7 @@ const SelectorButton = ({
   const buttonTextColor = {
     color: btnTextColor ? btnTextColor : "#ffffff",
   };
-  const [activeLabel, setActiveLabel] = useState(labels[0]);
+  const [activeLabel, setActiveLabel] = useState(null);
 
   const onPressLabel = (label) => {
     setActiveLabel(label);
@@ -28,7 +28,7 @@ const SelectorButton = ({
     const isActive = activeLabel === label;
     const buttonStyle = {
       backgroundColor: isActive ? "#6842FF" : "#FFF",
-      borderColor: "#6842FF",
+      borderColor: isActive ? "#6842FF" : "#9E9E9E",
       borderWidth: 1.5,
       borderRadius: 16,
     };
@@ -36,7 +36,7 @@ const SelectorButton = ({
       fontFamily: "Urbanist_700Bold",
       fontSize: 16,
       lineHeight: 22.4,
-      color: isActive ? "#FFFFFF" : "#6842FF",
+      color: isActive ? "#FFFFFF" : "#9E9E9E",
     };
 
     return (

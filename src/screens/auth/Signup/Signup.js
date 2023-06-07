@@ -18,9 +18,12 @@ import UserIcon from "../../../../assets/icons/UserIcon.svg";
 import useFormStepper from "../../../components/hooks/useFormStepper";
 import Divider from "../../../components/customs/Divider";
 import ProgressBarStepper from "../../../components/customs/ProgressBarStepper";
+import { useDispatch } from "react-redux";
+import { resetForm } from "../../../components/redux/slices/signupForm";
 
 const Signup = ({ navigation: { navigate } }) => {
   const SignUpFormLength = 3;
+  const dispatch = useDispatch();
   const [step, setSteps] = useFormStepper(SignUpFormLength);
 
   const validationSchema = Yup.object({
@@ -57,6 +60,7 @@ const Signup = ({ navigation: { navigate } }) => {
       try {
         console.log("values", values);
         navigate("Onboarding");
+        dispatch(resetForm());
       } catch (error) {
         const message =
           error?.response?.data?.message || "Something went wrong";

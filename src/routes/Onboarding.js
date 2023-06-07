@@ -12,10 +12,14 @@ import WorkoutPlace from "../screens/onboarding/WorkoutPlace/WorkoutPlace";
 import DailyProgram from "../screens/onboarding/DailyProgram/DailyProgram";
 import WorkoutPlan from "../screens/onboarding/WorkoutPlan/WorkoutPlan";
 import PaymentPlan from "../screens/onboarding/PaymentPlan/PaymentPlan";
+import { useSelector } from "react-redux";
 
 const Page = createNativeStackNavigator();
 
 const Onboarding = () => {
+  const reduxdata = useSelector((state) => state.onboarding);
+
+  console.log({ reduxdata });
   return (
     <Page.Navigator
       screenOptions={{

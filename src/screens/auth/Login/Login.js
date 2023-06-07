@@ -12,9 +12,17 @@ import Divider from "../../../components/customs/Divider";
 import FacebookIcon from "../../../../assets/icons/facebookIcon.svg";
 import GoogleIcon from "../../../../assets/icons/googleIcon.svg";
 import AppleIcon from "../../../../assets/icons/appleIcon.svg";
+import { useDispatch } from "react-redux";
+import { resetForm } from "../../../components/redux/slices/signupForm";
 
 const Login = ({ navigation: { navigate } }) => {
+  const dispatch = useDispatch();
   const [isChecked, setChecked] = useState(false);
+
+  const handleSignup = () => {
+    navigate("Signup");
+    dispatch(resetForm());
+  };
 
   return (
     <View style={{ backgroundColor: "#ffffff", flex: 1 }}>
@@ -81,7 +89,7 @@ const Login = ({ navigation: { navigate } }) => {
             >
               {"Already have an account? "}
             </TextItem>
-            <TouchableOpacity onPress={() => navigate("Signup")}>
+            <TouchableOpacity onPress={handleSignup}>
               <TextItem
                 type="body_m"
                 font="semibold"

@@ -1,12 +1,41 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import TextItem from "../../../components/customs/TextItem";
 import Button from "../../../components/customs/Button";
 import Stepper from "../components/Stepper";
 import SelectorButton from "../components/SelectorButton";
+import { useDispatch } from "react-redux";
+import { addField } from "../../../components/redux/slices/signupForm";
 
 const DailyProgram = ({ navigation, route }) => {
+  const dispatch = useDispatch();
   const { activeStep, stepsLength } = route.params;
+  const [frequency, setFrequency] = useState(null);
+
+  const handleChange = (label) => {
+    switch (label) {
+      case "Five Days a Week":
+        setFrequency(5);
+        break;
+      case "Four Days a Week":
+        setFrequency(4);
+        break;
+      case "Three Days a Week":
+        setFrequency(3);
+        break;
+      default:
+        setFrequency(null);
+        break;
+    }
+  };
+
+  const handleNext = () => {
+    dispatch(addField({ field: "frequency", value: frequency }));
+    navigation.navigate("WorkoutPlan", {
+      stepsLength,
+      activeStep: activeStep + 1,
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -35,7 +64,7 @@ const DailyProgram = ({ navigation, route }) => {
               "Four Days a Week",
               "Three Days a Week",
             ]}
-            onLabelSelect={(label) => console.log(`Selected label: ${label}`)}
+            onLabelSelect={handleChange}
           />
         </View>
 
@@ -55,12 +84,8 @@ const DailyProgram = ({ navigation, route }) => {
           <Button
             label="Continue"
             style={{ width: "50%" }}
-            onPress={() =>
-              navigation.navigate("WorkoutPlan", {
-                stepsLength,
-                activeStep: activeStep + 1,
-              })
-            }
+            onPress={handleNext}
+            disabled={frequency === null}
           />
         </View>
       </View>

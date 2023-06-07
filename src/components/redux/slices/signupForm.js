@@ -1,17 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {};
+
 export const signupFormSlice = createSlice({
   name: "signupForm",
-  initialState: {},
+  initialState: initialState,
   reducers: {
     addField: (state, action) => {
       const { field, value } = action.payload;
       state[field] = value;
     },
+    resetForm: () => {
+      return initialState;
+    },
   },
 });
 
-// Action creators are generated for each case reducer function
-export const { addField } = signupFormSlice.actions;
+export const { addField, resetForm } = signupFormSlice.actions;
 
 export default signupFormSlice.reducer;

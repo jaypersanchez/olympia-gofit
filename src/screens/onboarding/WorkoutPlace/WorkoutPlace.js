@@ -1,12 +1,28 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import TextItem from "../../../components/customs/TextItem";
 import Button from "../../../components/customs/Button";
 import Stepper from "../components/Stepper";
 import SelectorButton from "../components/SelectorButton";
+import { useDispatch } from "react-redux";
+import { addField } from "../../../components/redux/slices/signupForm";
 
 const WorkoutPlace = ({ navigation, route }) => {
+  const dispatch = useDispatch();
   const { activeStep, stepsLength } = route.params;
+  const [gymType, setGymType] = useState(null);
+
+  const handleChange = (label) => {
+    setGymType(label.toLowerCase());
+  };
+
+  const handleNext = () => {
+    dispatch(addField({ field: "gymType", value: gymType }));
+    navigation.navigate("DailyProgram", {
+      stepsLength,
+      activeStep: activeStep + 1,
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -32,12 +48,12 @@ const WorkoutPlace = ({ navigation, route }) => {
         <View style={{ gap: 24, width: "100%" }}>
           <SelectorButton
             labels={[
-              "Small  Gym",
+              "Small Gym",
               "Home Gym",
               "Commercial Gym",
               "Crossfit Style Gym",
             ]}
-            onLabelSelect={(label) => console.log(`Selected label: ${label}`)}
+            onLabelSelect={handleChange}
           />
         </View>
 
@@ -57,12 +73,8 @@ const WorkoutPlace = ({ navigation, route }) => {
           <Button
             label="Continue"
             style={{ width: "50%" }}
-            onPress={() =>
-              navigation.navigate("DailyProgram", {
-                stepsLength,
-                activeStep: activeStep + 1,
-              })
-            }
+            onPress={handleNext}
+            disabled={gymType === null}
           />
         </View>
       </View>

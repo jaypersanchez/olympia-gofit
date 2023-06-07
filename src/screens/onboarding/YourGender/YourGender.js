@@ -67,6 +67,7 @@ const YourGender = ({ navigation }) => {
           label="Continue"
           style={{ width: "100%" }}
           onPress={handleNext}
+          disabled={gender === null}
         />
       </View>
     </View>

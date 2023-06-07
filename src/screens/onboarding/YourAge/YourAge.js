@@ -19,6 +19,17 @@ const YourAge = ({ navigation, route }) => {
       activeStep: activeStep + 1,
     });
   };
+
+  const handleDate = () => {
+    const ageFormat = new Date(JSON.parse(age)).toLocaleDateString();
+    const dateToday = new Date().toLocaleDateString();
+
+    return {
+      age: ageFormat,
+      date: dateToday,
+    };
+  };
+
   return (
     <View style={styles.container}>
       <Stepper steps={stepsLength} activeSteps={activeStep} />
@@ -61,6 +72,7 @@ const YourAge = ({ navigation, route }) => {
             label="Continue"
             style={{ width: "50%" }}
             onPress={handleNext}
+            disabled={handleDate().age === handleDate().date}
           />
         </View>
       </View>

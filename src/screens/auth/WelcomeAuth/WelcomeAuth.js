@@ -16,8 +16,11 @@ import FacebookIcon from "../../../../assets/icons/facebookIcon.svg";
 import Divider from "../../../components/customs/Divider";
 import Logo from "../../../../assets/image/FitSpace-black.png";
 import SiginButton from "./components/SiginButton";
+import { useDispatch } from "react-redux";
+import { resetForm } from "../../../components/redux/slices/signupForm";
 
 const WelcomeAuth = ({ navigation: { navigate } }) => {
+  const dispatch = useDispatch();
   const handleGoogleSignIn = () => {
     // Handle Google sign-in logic
   };
@@ -28,6 +31,11 @@ const WelcomeAuth = ({ navigation: { navigate } }) => {
 
   const handleFacebookSignIn = () => {
     // Handle Facebook sign-in logic
+  };
+
+  const handleSignup = () => {
+    navigate("Signup");
+    dispatch(resetForm());
   };
 
   return (
@@ -74,7 +82,7 @@ const WelcomeAuth = ({ navigation: { navigate } }) => {
           <TextItem type="body_m" font="semibold" style={{ color: "#9E9E9E" }}>
             {"Don't have an account? "}
           </TextItem>
-          <TouchableOpacity onPress={() => navigate("Signup")}>
+          <TouchableOpacity onPress={handleSignup}>
             <TextItem
               type="body_m"
               font="semibold"
