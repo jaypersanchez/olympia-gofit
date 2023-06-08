@@ -24,7 +24,7 @@ const GymGoal = ({ navigation, route }) => {
   };
 
   const handleNext = () => {
-    dispatch(addField({ field: "gymGoal", value: gymGoal }));
+    dispatch(addField({ field: "gymGoal", value: JSON.stringify(gymGoal) }));
     navigation.navigate("WorkoutPlace", {
       stepsLength,
       activeStep: activeStep + 1,

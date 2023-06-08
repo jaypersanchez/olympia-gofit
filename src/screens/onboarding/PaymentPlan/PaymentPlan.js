@@ -4,13 +4,18 @@ import TextItem from "../../../components/customs/TextItem";
 import Button from "../../../components/customs/Button";
 import RadioboxButton from "../components/RadioboxButton";
 import { addField } from "../../../components/redux/slices/signupForm";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import useSignup from "../../../components/api/useSignup";
+import Config from "react-native-config";
+import axios from "axios";
 
 const PaymentPlan = ({ navigation: { navigate }, route }) => {
   const dispatch = useDispatch();
+  const signupForm = useSelector((state) => state.onboarding);
+  const { data, error, loading, postUser } = useSignup();
   const [paymentSchedule, setPaymentSchedule] = useState(null);
 
-  const data = [
+  const payment = [
     {
       label: "7 Days Trial",
       description: "Pay once, cancel any time",
@@ -32,15 +37,23 @@ const PaymentPlan = ({ navigation: { navigate }, route }) => {
   ];
 
   const handleChange = (val) => {
-    setPaymentSchedule(data[val].paysched);
+    setPaymentSchedule(payment[val].paysched);
   };
 
-  const handleNext = () => {
-    dispatch(addField({ field: "paymentSchedule", value: paymentSchedule }));
-    navigate("BottomNav", { screen: "Home" });
+  const handleNext = async () => {
+    const form = {
+      ...signupForm,
+      age: new Date(JSON.parse(signupForm.age)),
+      paymentSchedule,
+    };
 
-    //call api to save data
+    await postUser(form);
+
+    if (!error) {
+      navigate("BottomNav", { screen: "Home" });
+    }
   };
+
   return (
     <View style={styles.container}>
       <View style={styles.contents}>
@@ -72,7 +85,7 @@ const PaymentPlan = ({ navigation: { navigate }, route }) => {
             </View>
 
             <View style={{ gap: 24, width: "100%" }}>
-              <RadioboxButton data={data} onSelectionChange={handleChange} />
+              <RadioboxButton data={payment} onSelectionChange={handleChange} />
             </View>
           </View>
         </View>

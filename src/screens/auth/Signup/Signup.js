@@ -19,7 +19,7 @@ import useFormStepper from "../../../components/hooks/useFormStepper";
 import Divider from "../../../components/customs/Divider";
 import ProgressBarStepper from "../../../components/customs/ProgressBarStepper";
 import { useDispatch } from "react-redux";
-import { resetForm } from "../../../components/redux/slices/signupForm";
+import { addField } from "../../../components/redux/slices/signupForm";
 
 const Signup = ({ navigation: { navigate } }) => {
   const SignUpFormLength = 3;
@@ -27,12 +27,12 @@ const Signup = ({ navigation: { navigate } }) => {
   const [step, setSteps] = useFormStepper(SignUpFormLength);
 
   const validationSchema = Yup.object({
-    name: Yup.string("Enter your first name").required(
-      "First name is required"
-    ),
-    surname: Yup.string("Enter your last name").required(
-      "Last name is required"
-    ),
+    name: Yup.string()
+      .min(6, "First name must be at least 3 characters long")
+      .required("First name is required"),
+    surname: Yup.string()
+      .min(6, "Last name must be at least 3 characters long")
+      .required("Last name is required"),
     email: Yup.string()
       .email("Enter a valid email")
       .required("Email is required"),
@@ -40,9 +40,12 @@ const Signup = ({ navigation: { navigate } }) => {
       .email("Enter a valid email")
       .oneOf([Yup.ref("email"), null], "Emails do not match")
       .required("Email confirmation is required"),
-    password: Yup.string().required("Password is required"),
+    password: Yup.string()
+      .min(6, "Password must be at least 6 characters long")
+      .required("Password is required"),
     rePassword: Yup.string()
       .oneOf([Yup.ref("password"), null], "Passwords do not match")
+      .min(6, "Password must be at least 6 characters long")
       .required("Password confirmation is required"),
   });
 
@@ -58,12 +61,13 @@ const Signup = ({ navigation: { navigate } }) => {
     validationSchema: validationSchema,
     onSubmit: async (values, { setErrors, setStatus, setSubmitting }) => {
       try {
-        console.log("values", values);
+        const { reEmail, rePassword, ...userData } = values;
+        console.log("values", userData);
         navigate("Onboarding");
-        dispatch(resetForm());
+        Object.keys(userData).forEach((key) => {
+          dispatch(addField({ field: [key], value: userData[key] }));
+        });
       } catch (error) {
-        const message =
-          error?.response?.data?.message || "Something went wrong";
         console.log(error);
       }
     },

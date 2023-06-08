@@ -13,7 +13,23 @@ const WorkoutPlace = ({ navigation, route }) => {
   const [gymType, setGymType] = useState(null);
 
   const handleChange = (label) => {
-    setGymType(label.toLowerCase());
+    switch (label) {
+      case "Small Gym":
+        setGymType("home");
+        break;
+      case "Home Gym":
+        setGymType("commercial");
+        break;
+      case "Commercial Gym":
+        setGymType("small");
+        break;
+      case "Crossfit Style Gym":
+        setGymType("crossfit");
+        break;
+      default:
+        setGymType("home");
+        break;
+    }
   };
 
   const handleNext = () => {
