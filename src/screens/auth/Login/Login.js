@@ -19,6 +19,39 @@ const Login = ({ navigation: { navigate } }) => {
   const dispatch = useDispatch();
   const [isChecked, setChecked] = useState(false);
 
+<<<<<<< HEAD
+=======
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .email("Enter a valid email")
+      .required("Email is required"),
+    password: Yup.string().required("Password is required"),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values, { setErrors, setStatus, setSubmitting }) => {
+      try {
+        const res = await postUser(values);
+
+        if (res) {
+          Object.keys(res?.user).forEach((key) => {
+            dispatch(addField({ field: [key], value: res?.user[key] }));
+          });
+
+          navigate("BottomNav", { screen: "Home" });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  });
+
+>>>>>>> 7601bc1 (update homescreen name and login)
   const handleSignup = () => {
     navigate("Signup");
     dispatch(resetForm());
@@ -70,7 +103,15 @@ const Login = ({ navigation: { navigate } }) => {
                     Remember me
                   </TextItem>
                 </View>
+<<<<<<< HEAD
                 <Button label="Login" onPress={() => navigate("BottomNav")} />
+=======
+                <Button
+                  label="Login"
+                  onPress={formik.handleSubmit}
+                  disabled={loading}
+                />
+>>>>>>> 7601bc1 (update homescreen name and login)
               </View>
             </View>
 
