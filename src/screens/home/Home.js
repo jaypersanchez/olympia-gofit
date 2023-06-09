@@ -13,7 +13,7 @@ const Home = ({ navigation, route }) => {
   const frequency = useSelector((state) => state.onboarding.frequency);
   const { data } = dailyexercise || [];
 
-  console.log("dailyexcercise", data.slice());
+  console.log("dailyexcercise", frequency);
   return (
     <View style={styles.container}>
       <View style={{ gap: 24, width: "100%" }}>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Config from "react-native-config";
 
-const useSignup = () => {
+const useLogin = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -11,12 +11,10 @@ const useSignup = () => {
     setError(false);
     try {
       const response = await axios.post(
-        `${Config.API_URL}/users/new`,
+        `${Config.API_URL}/users/login`,
         postData
       );
       setLoading(false);
-      setError(true);
-
       return response.data;
     } catch (error) {
       console.error(error);
@@ -28,4 +26,4 @@ const useSignup = () => {
   return { loading, error, postUser };
 };
 
-export default useSignup;
+export default useLogin;

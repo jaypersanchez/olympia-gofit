@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextItem from "../../../components/customs/TextItem";
 import Button from "../../../components/customs/Button";
 import RadioboxButton from "../components/RadioboxButton";
@@ -12,8 +12,9 @@ import axios from "axios";
 const PaymentPlan = ({ navigation: { navigate }, route }) => {
   const dispatch = useDispatch();
   const signupForm = useSelector((state) => state.onboarding);
-  const { data, error, loading, postUser } = useSignup();
+  const { error, loading, postUser } = useSignup();
   const [paymentSchedule, setPaymentSchedule] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
 
   const payment = [
     {
@@ -40,16 +41,18 @@ const PaymentPlan = ({ navigation: { navigate }, route }) => {
     setPaymentSchedule(payment[val].paysched);
   };
 
+  const form = {
+    ...signupForm,
+    age: new Date(JSON.parse(signupForm.age)),
+    paymentSchedule,
+  };
+
   const handleNext = async () => {
-    const form = {
-      ...signupForm,
-      age: new Date(JSON.parse(signupForm.age)),
-      paymentSchedule,
-    };
+    setSubmitting(true);
+    const res = await postUser(form);
+    setSubmitting(false);
 
-    await postUser(form);
-
-    if (!error) {
+    if (res && !error && !submitting) {
       navigate("BottomNav", { screen: "Home" });
     }
   };
@@ -94,7 +97,7 @@ const PaymentPlan = ({ navigation: { navigate }, route }) => {
           label="Continue and Pay"
           style={{ width: "100%" }}
           onPress={handleNext}
-          disabled={paymentSchedule === null}
+          disabled={paymentSchedule === null || submitting}
         />
       </View>
     </View>

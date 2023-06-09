@@ -1,5 +1,15 @@
 import React, { useState } from "react";
 import { View, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { useDispatch } from "react-redux";
+import {
+  addField,
+  resetForm,
+} from "../../../components/redux/slices/signupForm";
+
+import useLogin from "../../../components/api/useLogin";
+
 import Checkbox from "expo-checkbox";
 import IconBox from "../components/IconBox";
 import Button from "../../../components/customs/Button";
@@ -12,12 +22,39 @@ import Divider from "../../../components/customs/Divider";
 import FacebookIcon from "../../../../assets/icons/facebookIcon.svg";
 import GoogleIcon from "../../../../assets/icons/googleIcon.svg";
 import AppleIcon from "../../../../assets/icons/appleIcon.svg";
-import { useDispatch } from "react-redux";
-import { resetForm } from "../../../components/redux/slices/signupForm";
 
 const Login = ({ navigation: { navigate } }) => {
   const dispatch = useDispatch();
+  const { data, error, loading, postUser } = useLogin();
   const [isChecked, setChecked] = useState(false);
+
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .email("Enter a valid email")
+      .required("Email is required"),
+    password: Yup.string().required("Password is required"),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values, { setErrors, setStatus, setSubmitting }) => {
+      try {
+        const res = await postUser(values);
+
+        if (res && !error) {
+          console.log("values", res.user.frequency);
+          dispatch(addField({ field: "frequency", value: res.user.frequency }));
+          navigate("BottomNav", { screen: "Home" });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  });
 
   const handleSignup = () => {
     navigate("Signup");
@@ -39,12 +76,32 @@ const Login = ({ navigation: { navigate } }) => {
               </TextItem>
             </View>
             <View style={{ gap: 18, width: "100%" }}>
-              <TextField icon={<MessageIcon />} placeholder="Email" />
               <TextField
-                icon={<LockIcon />}
+                icon={<MessageIcon color="#212121" />}
+                placeholder="Email"
+                value={formik.values.email}
+                onChangeText={formik.handleChange("email")}
+                error={
+                  Boolean(formik.errors.email) && formik.touched.email
+                    ? formik.errors.email
+                    : null
+                }
+                onFieldBlur={() => formik.setFieldTouched("email", true)}
+                onFieldFocus={() => formik.setFieldTouched("email", false)}
+              />
+              <TextField
+                icon={<LockIcon color="#212121" />}
                 placeholder="Password"
                 type="password"
-                onFocus="#6842FF"
+                value={formik.values.password}
+                onChangeText={formik.handleChange("password")}
+                error={
+                  Boolean(formik.errors.password) && formik.touched.password
+                    ? formik.errors.password
+                    : null
+                }
+                onFieldBlur={() => formik.setFieldTouched("password", true)}
+                onFieldFocus={() => formik.setFieldTouched("password", false)}
               />
               <View style={{ gap: 24, marginTop: 12 }}>
                 <View
@@ -70,7 +127,7 @@ const Login = ({ navigation: { navigate } }) => {
                     Remember me
                   </TextItem>
                 </View>
-                <Button label="Login" onPress={() => navigate("BottomNav")} />
+                <Button label="Login" onPress={formik.handleSubmit} />
               </View>
             </View>
 
