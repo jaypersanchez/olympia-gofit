@@ -45,9 +45,11 @@ const Login = ({ navigation: { navigate } }) => {
       try {
         const res = await postUser(values);
 
-        if (res && !error) {
-          console.log("values", res.user.frequency);
-          dispatch(addField({ field: "frequency", value: res.user.frequency }));
+        if (res) {
+          Object.keys(res?.user).forEach((key) => {
+            dispatch(addField({ field: [key], value: res?.user[key] }));
+          });
+
           navigate("BottomNav", { screen: "Home" });
         }
       } catch (error) {
@@ -127,7 +129,11 @@ const Login = ({ navigation: { navigate } }) => {
                     Remember me
                   </TextItem>
                 </View>
-                <Button label="Login" onPress={formik.handleSubmit} />
+                <Button
+                  label="Login"
+                  onPress={formik.handleSubmit}
+                  disabled={loading}
+                />
               </View>
             </View>
 

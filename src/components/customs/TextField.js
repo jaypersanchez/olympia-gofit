@@ -36,7 +36,7 @@ const TextField = ({
         {icon}
       </View>
       {type === "password" ? (
-        <View style={{ position: "absolute", top: 23, right: 23, zIndex: 1 }}>
+        <View style={{ position: "absolute", top: 23, right: 15, zIndex: 1 }}>
           <EyeCloseIcon style={{ color: "#B0B2B3" }} />
         </View>
       ) : (
