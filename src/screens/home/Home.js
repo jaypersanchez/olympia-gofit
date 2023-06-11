@@ -12,14 +12,6 @@ import { useEffect } from "react";
 import { BackHandler } from "react-native";
 
 const Home = ({ navigation, route }) => {
-<<<<<<< HEAD
-  const frequency = useSelector((state) => state.onboarding.frequency);
-  const tmpState = useSelector((state) => state);
-  const { data } = dailyexercise || [];
-  console.log(`Home State Data ${JSON.stringify(tmpState)}`)
-  console.log(`Home ${JSON.stringify(data)}`)
-  console.log("dailyexcercise", frequency);
-=======
   const user_data = useSelector((state) => state.onboarding);
   const { data } = dailyexercise || [];
 
@@ -41,7 +33,6 @@ const Home = ({ navigation, route }) => {
   }, []);
 
   console.log("dailyexcercise", user_data);
->>>>>>> 7601bc1ff2095ac4a668d497d73a53afcb885a8c
   return (
     <View style={styles.container}>
       <View style={{ gap: 24, width: "100%" }}>
