@@ -11,8 +11,10 @@ import { useSelector } from "react-redux";
 
 const Home = ({ navigation, route }) => {
   const frequency = useSelector((state) => state.onboarding.frequency);
+  const tmpState = useSelector((state) => state);
   const { data } = dailyexercise || [];
-
+  console.log(`Home State Data ${JSON.stringify(tmpState)}`)
+  console.log(`Home ${JSON.stringify(data)}`)
   console.log("dailyexcercise", frequency);
   return (
     <View style={styles.container}>

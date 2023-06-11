@@ -9,6 +9,8 @@ const useLogin = () => {
   const postUser = async (postData) => {
     setLoading(true);
     setError(false);
+    console.log(`Login ${Config.API_URL}/users/login`)
+    console.log(`PostData ${JSON.stringify(postData)}`)
     try {
       const response = await axios.post(
         `${Config.API_URL}/users/login`,
