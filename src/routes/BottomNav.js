@@ -13,6 +13,7 @@ import {
 import Logo from "../../assets/image/FitSpace-black.png";
 
 import Home from "../screens/home/Home";
+import ShowExcercise from "./ShowExercise";
 
 const Nav = createBottomTabNavigator();
 
@@ -90,7 +91,7 @@ const BottomNav = () => {
           },
         }}
       />
-      <Nav.Screen name="Workout" component={Home} />
+      <Nav.Screen name="Workout" component={ShowExcercise} />
       <Nav.Screen name="Steps" component={Home} />
       <Nav.Screen name="Stats" component={Home} />
     </Nav.Navigator>

@@ -8,11 +8,13 @@ import { useDispatch, useSelector } from "react-redux";
 import useSignup from "../../../components/api/useSignup";
 import Config from "react-native-config";
 import axios from "axios";
+import useWorkoutPlan from "../../../components/api/useWorkoutPlan";
 
 const PaymentPlan = ({ navigation: { navigate }, route }) => {
   const dispatch = useDispatch();
   const signupForm = useSelector((state) => state.onboarding);
   const { error, loading, postUser } = useSignup();
+  const { postPlan } = useWorkoutPlan();
   const [paymentSchedule, setPaymentSchedule] = useState(null);
   const [submitting, setSubmitting] = useState(false);
 
@@ -50,6 +52,7 @@ const PaymentPlan = ({ navigation: { navigate }, route }) => {
   const handleNext = async () => {
     setSubmitting(true);
     const res = await postUser(form);
+    //const plan_res = await postPlan(form)
     setSubmitting(false);
 
     if (res && !error && !submitting) {

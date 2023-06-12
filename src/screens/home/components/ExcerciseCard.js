@@ -9,8 +9,10 @@ import {
   BookmarkOutlineIcon,
 } from "../../../components/Icons";
 
+
 const ExcerciseCard = ({ day, excercise, img }) => {
   const [bookmarkActive, setBookmarkActive] = useState(false);
+  const [showExcercise, setShowExcercise] = useState(false);
 
   return (
     <View style={styles.imgContainer}>
@@ -30,7 +32,11 @@ const ExcerciseCard = ({ day, excercise, img }) => {
             <TouchableOpacity
               activeOpacity={0.85}
               style={{ margin: 2 }}
-              onPress={() => setBookmarkActive(!bookmarkActive)}
+              onPress={() => {
+                //setBookmarkActive(!bookmarkActive);
+                setShowExcercise(true);
+                console.log(`Show ExcerciseCard ${showExcercise}`)
+              }}
             >
               {bookmarkActive ? (
                 <BookmarkFilledIcon color="#fff" size={24} />
@@ -40,22 +46,26 @@ const ExcerciseCard = ({ day, excercise, img }) => {
             </TouchableOpacity>
           </View>
         </View>
-        <LinearGradient
-          colors={[
-            "rgba(75, 75, 75, 0)",
-            "rgba(68, 68, 68, 0.114356)",
-            "rgba(64, 64, 64, 0.16)",
-            "rgba(58, 58, 58, 0.2)",
-            "rgba(54, 54, 54, 0.3)",
-            "rgba(47, 47, 47, 0.5)",
-            "rgba(40, 40, 40, 0.6)",
-            "rgba(32, 32, 32, 0.7)",
-          ]}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 0, y: 1 }}
-          locations={[0, 0.1719, 0.2708, 0.4167, 0.526, 0.6615, 0.8021, 1]}
-          style={styles.mask}
-        />
+        {showExcercise ? (
+          navigate("BottomNav", { screen: "ShowExcercise" })
+        ) : (
+          <LinearGradient
+            colors={[
+              "rgba(75, 75, 75, 0)",
+              "rgba(68, 68, 68, 0.114356)",
+              "rgba(64, 64, 64, 0.16)",
+              "rgba(58, 58, 58, 0.2)",
+              "rgba(54, 54, 54, 0.3)",
+              "rgba(47, 47, 47, 0.5)",
+              "rgba(40, 40, 40, 0.6)",
+              "rgba(32, 32, 32, 0.7)",
+            ]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0, y: 1 }}
+            locations={[0, 0.1719, 0.2708, 0.4167, 0.526, 0.6615, 0.8021, 1]}
+            style={styles.mask}
+          />
+        )}
       </ImageBackground>
     </View>
   );

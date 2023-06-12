@@ -5,6 +5,7 @@ import Introduction from "./src/routes/Introduction";
 import Onboarding from "./src/routes/Onboarding";
 import Auth from "./src/routes/Auth";
 import BottomNav from "./src/routes/BottomNav";
+import ShowExcercise from "./src/routes/ShowExercise";
 
 const Page = createNativeStackNavigator();
 
@@ -21,6 +22,7 @@ export const Routes = () => {
       <Page.Screen name="Introduction" component={Introduction} />
       <Page.Screen name="Auth" component={Auth} />
       <Page.Screen name="Onboarding" component={Onboarding} />
+      <Page.Screen name="ShowExcercise" component={ShowExcercise} />
       <Page.Screen name="BottomNav" component={BottomNav} />
     </Page.Navigator>
   );

@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import axios from "axios";
 import Config from "react-native-config";
 
-const useSignup = () => {
+const useWorkoutPlan = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const API_URL = "http://localhost:3002"
 
-  const postUser = async (postData) => {
+  const postPlan = async (postData) => {
     setLoading(true);
     setError(false);
     console.log(`API URL ${Config.API_URL}`)
     try {
-      const response = await axios.post(
-        `${Config.API_URL}/users/new`,
+      const response = await axios.put(
+        `${Config.API_URL}/exercise/plan`,
         postData
       )
       
@@ -28,7 +28,7 @@ const useSignup = () => {
     }
   };
 
-  return { loading, error, postUser };
+  return { loading, error, postPlan };
 };
 
-export default useSignup;
+export default useWorkoutPlan;
