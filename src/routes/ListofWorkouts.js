@@ -14,7 +14,9 @@ import {
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useSelector } from "react-redux";
 import { Text } from "react-native";
+import useWorkoutPlan from "../components/api/useWorkoutPlan";
 
+//get exercises api
 const Page = createNativeStackNavigator();
 
 const ListOfWorkouts = ({ excercise }) => {
@@ -22,10 +24,7 @@ const ListOfWorkouts = ({ excercise }) => {
     return (
       <View>
         <Text>Excercise Info:</Text>
-        <Text>Name: {excercise.name}</Text> 
-        <Text>Duration: {excercise.duration}</Text>
-        <Text>Difficulty Level: {excercise.difficultyLevel}</Text>
-        <Text>Muscles: {excercise.muscles}</Text>
+        
       </View>
     )
 }

@@ -14,18 +14,25 @@ import {
 } from "../components/Icons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useSelector } from "react-redux";
-import ListOfWorkouts from "./ListofWorkouts";
+//import ListOfWorkouts from "./ListofWorkouts";
+import useWorkoutPlan from "../components/api/useWorkoutPlan";
 import { Text } from "react-native";
 
 const Page = createNativeStackNavigator();
 
-const ShowExcercise = ({ excercise }) => {
-    console.log(`Show Exercise`)
-    if(!excercise || excercise.length === 0) {
+const ShowExcercise = async() => {
+    
+  const [excercises, setExcercises] = useState()
+  
+  let _x = await useWorkoutPlan.getExercises()
+  //setExcercises(_x)
+  console.log(`Exercises ${JSON.stringify(_x)}`)
+
+    if(!excercises || excercises.length === 0) {
       return(
         <>
            <Text>No Excercise in Your Workout Plan</Text>
-          <ListOfWorkouts exercise={excercise} />
+          
         </>
       );
     }
@@ -33,10 +40,7 @@ const ShowExcercise = ({ excercise }) => {
       return (
         <View>
           <TextField>Excercise Info:</TextField>
-          <TextField>Name: {JSON.stringify(excercise.name)}</TextField> 
-          <TextField>Duration: {JSON.stringify(excercise.duration)}</TextField>
-          <TextField>Difficulty Level: {JSON.stringify(excercise.difficultyLevel)}</TextField>
-          <TextField>Muscles: {JSON.stringify(excercise.muscles)}</TextField>
+          
         </View>
       )
     }
