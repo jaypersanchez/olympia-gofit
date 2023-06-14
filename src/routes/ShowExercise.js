@@ -24,7 +24,7 @@ const ShowExcercise = async() => {
     
   const [excercises, setExcercises] = useState()
   
-  let _x = await useWorkoutPlan.getExercises()
+  //let _x = await useWorkoutPlan.getExercises()
   //setExcercises(_x)
   console.log(`Exercises ${JSON.stringify(_x)}`)
 

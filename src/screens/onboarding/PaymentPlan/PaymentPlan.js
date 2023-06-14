@@ -9,6 +9,7 @@ import useSignup from "../../../components/api/useSignup";
 import Config from "react-native-config";
 import axios from "axios";
 import useWorkoutPlan from "../../../components/api/useWorkoutPlan";
+import { GooglePay } from 'react-native-google-pay'
 
 const PaymentPlan = ({ navigation: { navigate }, route }) => {
   const dispatch = useDispatch();
@@ -17,6 +18,12 @@ const PaymentPlan = ({ navigation: { navigate }, route }) => {
   const { postPlan } = useWorkoutPlan();
   const [paymentSchedule, setPaymentSchedule] = useState(null);
   const [submitting, setSubmitting] = useState(false);
+  const [isreadytopay, setIsReadyToPay] = useState();
+
+  useEffect(() => {
+    // Initialize Google Pay
+    //GooglePay.inialinitializeGooglePay();
+  }, []);
 
   const payment = [
     {
@@ -39,8 +46,48 @@ const PaymentPlan = ({ navigation: { navigate }, route }) => {
     },
   ];
 
-  const handleChange = (val) => {
+  const handleChange = async (val) => {
     setPaymentSchedule(payment[val].paysched);
+    let pay = await GooglePay.isReadyToPay({
+                                            allowedCardNetworks: ['VISA', 'MASTERCARD'],
+                                            allowedCardAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+                                            existingPaymentMethodRequired: false,
+                                            existingPaymentMethodAllowed: true,
+                                          })
+    setIsReadyToPay(pay)
+    if(isreadytopay) {
+        // Configure the payment request
+        const requestData = {
+          cardPaymentMethod: {
+            tokenizationSpecification: {
+              type: 'PAYMENT_GATEWAY',
+              parameters: {
+                gateway: 'your_gateway_name',
+                gatewayMerchantId: 'your_gateway_merchant_id',
+              },
+            },
+            allowedCardNetworks: ['VISA', 'MASTERCARD'],
+            allowedCardAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+          },
+          transaction: {
+            totalPrice: '10.00',
+            totalPriceStatus: 'FINAL',
+            currencyCode: 'USD',
+          },
+          merchantName: 'Your Merchant Name',
+        };
+          // Start the payment flow
+          const paymentData = await GooglePay.requestPayment(requestData);
+
+          // Handle the payment response
+          console.log(paymentData);
+          // Process the payment data, send to server, etc.
+          Alert.alert('Payment Success', 'Payment was successful');
+      }
+      else {
+        Alert.alert('Google Pay is not available');
+      }
+
   };
 
   const form = {
