@@ -48,47 +48,63 @@ const PaymentPlan = ({ navigation: { navigate }, route }) => {
 
   const handleChange = async (val) => {
     setPaymentSchedule(payment[val].paysched);
-    let pay = await GooglePay.isReadyToPay({
-                                            allowedCardNetworks: ['VISA', 'MASTERCARD'],
-                                            allowedCardAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
-                                            existingPaymentMethodRequired: false,
-                                            existingPaymentMethodAllowed: true,
-                                          })
-    setIsReadyToPay(pay)
-    if(isreadytopay) {
-        // Configure the payment request
-        const requestData = {
-          cardPaymentMethod: {
-            tokenizationSpecification: {
-              type: 'PAYMENT_GATEWAY',
-              parameters: {
-                gateway: 'your_gateway_name',
-                gatewayMerchantId: 'your_gateway_merchant_id',
-              },
-            },
-            allowedCardNetworks: ['VISA', 'MASTERCARD'],
-            allowedCardAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
-          },
-          transaction: {
-            totalPrice: '10.00',
-            totalPriceStatus: 'FINAL',
-            currencyCode: 'USD',
-          },
-          merchantName: 'Your Merchant Name',
-        };
-          // Start the payment flow
-          const paymentData = await GooglePay.requestPayment(requestData);
-
-          // Handle the payment response
-          console.log(paymentData);
-          // Process the payment data, send to server, etc.
-          Alert.alert('Payment Success', 'Payment was successful');
+    console.log(`Google Pay`)
+    const baseRequest = {
+      apiVersion: 2,
+      apiVersionMinor: 0
+    };
+    const tokenizationSpecification = {
+      type: 'PAYMENT_GATEWAY',
+      parameters: {
+        'gateway': 'appco',
+        'gatewayMerchantId': 'exampleGatewayMerchantId'
       }
-      else {
-        Alert.alert('Google Pay is not available');
+    };
+    const allowedCardAuthMethods = ["PAN_ONLY", "CRYPTOGRAM_3DS"];
+    const allowedCardNetworks = ["AMEX", "DISCOVER", "INTERAC", "JCB", "MASTERCARD", "VISA"];
+    const baseCardPaymentMethod = {
+      type: 'CARD',
+      parameters: {
+        allowedAuthMethods: allowedCardAuthMethods,
+        allowedCardNetworks: allowedCardNetworks
       }
+    };
+    const cardPaymentMethod = Object.assign(
+      {tokenizationSpecification: tokenizationSpecification},
+      baseCardPaymentMethod
+    );
+    const paymentsClient = new GooglePay.payment.api.PaymentsClient({environment: 'TEST'});
+    
+    const paymentDataRequest = Object.assign({}, baseRequest);
+    paymentDataRequest.allowedPaymentMethods = [cardPaymentMethod];
+    paymentDataRequest.transactionInfo = {
+      totalPriceStatus: 'FINAL',
+      totalPrice: '123.45',
+      currencyCode: 'USD',
+      countryCode: 'US'
+    };
+    paymentDataRequest.merchantInfo = {
+      merchantName: 'Example Merchant',
+      merchantId: '12345678901234567890'
+    };
+    
+    try {
+      const paymentData = await paymentsClient.loadPaymentData(paymentDataRequest);
+      // if using gateway tokenization, pass this token without modification
+      paymentToken = paymentData.paymentMethodData.tokenizationData.token;
+    } catch (err) {
+        // show error in developer console for debugging
+        console.error(err);
+    }   
+    ///paymentsClient.loadPaymentData(paymentDataRequest).then(function(paymentData){
+      // if using gateway tokenization, pass this token without modification
+      //paymentToken = paymentData.paymentMethodData.tokenizationData.token;
+    //}).catch(function(err){
+      // show error in developer console for debugging
+      //console.error(err);
+    //});*/
 
-  };
+  }
 
   const form = {
     ...signupForm,
@@ -98,6 +114,7 @@ const PaymentPlan = ({ navigation: { navigate }, route }) => {
 
   const handleNext = async () => {
     setSubmitting(true);
+    console.log(`Calling postUser`)
     const res = await postUser(form);
     //const plan_res = await postPlan(form)
     setSubmitting(false);
