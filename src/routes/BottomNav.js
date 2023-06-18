@@ -1,5 +1,13 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  BackHandler,
+} from "react-native";
+import React, { useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import {
@@ -13,11 +21,25 @@ import {
 import Logo from "../../assets/image/FitSpace-black.png";
 
 import Home from "../screens/home/Home";
-import ShowExcercise from "./ShowExercise";
+import HomeScreens from "./HomeScreens";
+import Workouts from "../screens/home/workouts/Workouts";
 
 const Nav = createBottomTabNavigator();
 
 const BottomNav = () => {
+  // useEffect(() => {
+  //   const backAction = () => {
+  //     return true;
+  //   };
+
+  //   const backHandler = BackHandler.addEventListener(
+  //     "hardwareBackPress",
+  //     backAction
+  //   );
+
+  //   return () => backHandler.remove();
+  // }, []);
+
   return (
     <Nav.Navigator
       screenOptions={({ route, navigation }) => ({
@@ -30,7 +52,7 @@ const BottomNav = () => {
           let IconName;
           let color;
           let lableName;
-          if (route.name === "Home") {
+          if (route.name === "HomeScreens") {
             IconName = focused ? HomeFilledIcon : HomeOutlineIcon;
             color = focused ? "#6842FF" : "#A8A8A8";
             lableName = "Home";
@@ -66,32 +88,50 @@ const BottomNav = () => {
       initialRouteName="Home"
     >
       <Nav.Screen
-        name="Home"
-        component={Home}
-        options={{
-          headerTitle: () => null,
-          headerShadowVisible: false,
-          headerLeft: () => {
-            return (
-              <View style={styles.logoContainer}>
-                <Image source={Logo} style={styles.logo} />
-              </View>
-            );
-          },
-          headerRight: () => {
-            return (
+        name="HomeScreens"
+        component={HomeScreens}
+        options={({ navigation, route }) => {
+          const showHomeNav =
+            route.params === undefined || route.params?.screen === "Home";
+          console.log({ showHomeNav, route: route.params });
+          return {
+            headerTitle: () => null,
+            headerShown: showHomeNav ? true : false,
+            headerShadowVisible: false,
+            ...(showHomeNav ? {} : { tabBarStyle: { display: "none" } }),
+            headerLeft: () => {
+              return (
+                <View style={styles.logoContainer}>
+                  <Image source={Logo} style={styles.logo} />
+                </View>
+              );
+            },
+            headerRight: () => {
+              return (
+                <TouchableOpacity
+                  activeOpacity={0.65}
+                  style={{ marginTop: 12, marginRight: 24 }}
+                  onPress={() => console.log("Search is Clicked")}
+                >
+                  <SearchIcon color="#212121" size={24} />
+                </TouchableOpacity>
+              );
+            },
+            tabBarButton: (props) => (
               <TouchableOpacity
-                activeOpacity={0.65}
-                style={{ marginTop: 12, marginRight: 24 }}
-                onPress={() => console.log("Search is Clicked")}
+                activeOpacity={0.95}
+                onPress={() =>
+                  navigation?.navigate("HomeScreens", { screen: "Home" })
+                }
+                style={[styles.btn]}
               >
-                <SearchIcon color="#212121" size={24} />
+                {props.children}
               </TouchableOpacity>
-            );
-          },
+            ),
+          };
         }}
       />
-      <Nav.Screen name="Workout" component={ShowExcercise} />
+      <Nav.Screen name="Workout" component={Workouts} />
       <Nav.Screen name="Steps" component={Home} />
       <Nav.Screen name="Stats" component={Home} />
     </Nav.Navigator>
@@ -125,5 +165,11 @@ const styles = StyleSheet.create({
     width: "65%",
     alignSelf: "flex-start",
     flex: 1,
+  },
+  btn: {
+    flex: 1,
+    backgroundColor: "#fff",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

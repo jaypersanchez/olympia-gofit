@@ -1,5 +1,5 @@
 import { StyleSheet, ScrollView, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 
 import TextItem from "../../components/customs/TextItem";
 import { dailyexercise } from "./components/dailyexercise";
@@ -7,11 +7,11 @@ import { dailyexercise } from "./components/dailyexercise";
 import Banner from "./components/Banner";
 import ExcerciseCard from "./components/ExcerciseCard";
 import Streak from "./components/Streak";
-import { useSelector } from "react-redux";
-import { useEffect } from "react";
-import { BackHandler } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchWorkoutList } from "../../components/redux/slices/useWorkoutList";
 
 const Home = ({ navigation, route }) => {
+  const dispatch = useDispatch();
   const user_data = useSelector((state) => state.onboarding);
   const { data } = dailyexercise || [];
 
@@ -19,27 +19,17 @@ const Home = ({ navigation, route }) => {
     return name.charAt(0).toUpperCase() + name.slice(1);
   };
 
-  useEffect(() => {
-    const backAction = () => {
-      return true;
-    };
+  const onCardsClick = (item) => {
+    console.log({ item });
+    dispatch(fetchWorkoutList(item.filter));
+    navigation.navigate("HomeScreens", { screen: "Workouts" });
+  };
 
-    const backHandler = BackHandler.addEventListener(
-      "hardwareBackPress",
-      backAction
-    );
+  // console.log("dailyexcercise", datad);
 
-    return () => backHandler.remove();
-  }, []);
-
-  console.log("dailyexcercise", user_data);
   return (
     <View style={styles.container}>
-      <View style={{ gap: 24, width: "100%" }}>
-        <TextItem type="h3">
-          {"Welcome, "}
-          {handleName(user_data.name)}!
-        </TextItem>
+      <View style={{ width: "100%" }}>
         <ScrollView
           contentContainerStyle={{
             flexGrow: 1,
@@ -49,7 +39,12 @@ const Home = ({ navigation, route }) => {
           }}
           decelerationRate="normal"
           showsVerticalScrollIndicator={false}
+          scrollEventThrottle={16}
         >
+          <TextItem type="h3">
+            {"Welcome, "}
+            {handleName(user_data.name)}!
+          </TextItem>
           <Banner week={1} day={12} excercise={"Dead Lift 3 sets of 8 reps"} />
           <TextItem type="h5">Daily Excercise</TextItem>
           <View style={{ gap: 16 }}>
@@ -59,6 +54,7 @@ const Home = ({ navigation, route }) => {
                 day={item.day}
                 excercise={item.name}
                 img={item.image}
+                onPress={() => onCardsClick(item)}
               />
             ))}
           </View>
@@ -77,8 +73,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     backgroundColor: "#fff",
-    paddingBottom: 48,
+    paddingVertical: 6,
     paddingHorizontal: 24,
-    paddingTop: 24,
   },
 });

@@ -5,18 +5,22 @@ import TextItem from "../../../components/customs/TextItem";
 import { LinearGradient } from "expo-linear-gradient";
 import { TouchableOpacity } from "react-native";
 import {
-  BookmarkFilledIcon,
-  BookmarkOutlineIcon,
+  CheckboxFilledIcon,
+  CheckboxOutlineIcon,
 } from "../../../components/Icons";
 
-const ExcerciseCard = ({ day, excercise, img, onPress }) => {
+const WortkoutCard = ({ title, excercise, img, onPress }) => {
   const [bookmarkActive, setBookmarkActive] = useState(false);
 
+  const handleOnpress = () => {
+    onPress();
+    setBookmarkActive(!bookmarkActive);
+  };
   return (
     <TouchableOpacity
       activeOpacity={0.9}
       style={styles.imgContainer}
-      onPress={onPress}
+      onPress={handleOnpress}
     >
       <ImageBackground
         source={img}
@@ -24,26 +28,36 @@ const ExcerciseCard = ({ day, excercise, img, onPress }) => {
         imageStyle={styles.imageStyle}
       >
         <View style={styles.textContianer}>
-          <TextItem type="h4" font="bold" style={{ color: "#fff" }}>
-            Day {day}
-          </TextItem>
-          <TextItem type="body_m" font="medium" style={{ color: "#fff" }}>
-            {excercise}
-          </TextItem>
           <View style={{ position: "absolute", bottom: 16, right: 22 }}>
-            <TouchableOpacity
-              activeOpacity={0.85}
-              style={{ margin: 2 }}
-              onPress={() => {
-                setBookmarkActive(!bookmarkActive);
+            {bookmarkActive ? (
+              <CheckboxFilledIcon color="#fff" size={24} />
+            ) : (
+              <CheckboxOutlineIcon color="#fff" size={24} />
+            )}
+          </View>
+          <View style={{ paddingHorizontal: 12, gap: 4 }}>
+            <TextItem
+              type="h4"
+              font="bold"
+              numberOfLines={2}
+              style={{
+                color: "#fff",
+                width: 260,
               }}
             >
-              {bookmarkActive ? (
-                <BookmarkFilledIcon color="#fff" size={24} />
-              ) : (
-                <BookmarkOutlineIcon color="#fff" size={24} />
-              )}
-            </TouchableOpacity>
+              {title}
+            </TextItem>
+            <TextItem
+              type="body_m"
+              font="medium"
+              numberOfLines={1}
+              style={{
+                color: "#fff",
+                width: 260,
+              }}
+            >
+              {excercise}
+            </TextItem>
           </View>
         </View>
         <LinearGradient
@@ -66,7 +80,7 @@ const ExcerciseCard = ({ day, excercise, img, onPress }) => {
   );
 };
 
-export default ExcerciseCard;
+export default WortkoutCard;
 
 const styles = StyleSheet.create({
   imgContainer: {
@@ -84,8 +98,7 @@ const styles = StyleSheet.create({
     position: "relative",
     flex: 1,
     justifyContent: "flex-end",
-    padding: 24,
-    paddingBottom: 16,
+    padding: 12,
     zIndex: 25,
     gap: 4,
   },
