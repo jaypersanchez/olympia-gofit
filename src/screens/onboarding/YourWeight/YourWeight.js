@@ -5,7 +5,7 @@ import Button from "../../../components/customs/Button";
 import Stepper from "../components/Stepper";
 import WeightInput from "./components/WeightInput";
 import { useDispatch } from "react-redux";
-import { addField } from "../../../components/redux/slices/signupForm";
+import { addField } from "../../../components/redux/slices/onboardingForm";
 
 const YourWeight = ({ navigation, route }) => {
   const dispatch = useDispatch();

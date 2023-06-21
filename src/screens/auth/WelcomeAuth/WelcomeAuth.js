@@ -17,7 +17,7 @@ import Divider from "../../../components/customs/Divider";
 import Logo from "../../../../assets/image/FitSpace-black.png";
 import SiginButton from "./components/SiginButton";
 import { useDispatch } from "react-redux";
-import { resetForm } from "../../../components/redux/slices/signupForm";
+import { resetForm } from "../../../components/redux/slices/onboardingForm";
 
 const WelcomeAuth = ({ navigation: { navigate } }) => {
   const dispatch = useDispatch();

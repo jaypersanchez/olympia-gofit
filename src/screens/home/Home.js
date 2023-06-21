@@ -1,5 +1,5 @@
 import { StyleSheet, ScrollView, View } from "react-native";
-import React, { useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 
 import TextItem from "../../components/customs/TextItem";
 import { dailyexercise } from "./components/dailyexercise";
@@ -12,11 +12,11 @@ import { fetchWorkoutList } from "../../components/redux/slices/useWorkoutList";
 
 const Home = ({ navigation, route }) => {
   const dispatch = useDispatch();
-  const user_data = useSelector((state) => state.onboarding);
+  const user_data = useSelector((state) => state.onboardingForm);
   const { data } = dailyexercise || [];
 
   const handleName = (name) => {
-    return name.charAt(0).toUpperCase() + name.slice(1);
+    return name?.charAt(0).toUpperCase() + name?.slice(1);
   };
 
   const onCardsClick = (item) => {
@@ -25,7 +25,7 @@ const Home = ({ navigation, route }) => {
     navigation.navigate("HomeScreens", { screen: "Workouts" });
   };
 
-  // console.log("dailyexcercise", datad);
+  console.log("dailyexcercise", { user_data });
 
   return (
     <View style={styles.container}>

@@ -18,7 +18,7 @@ import HeaderExcercise from "../components/HeaderExcercise";
 import WortkoutCard from "../components/WortkoutCard";
 
 const Workouts = ({ navigation, route }) => {
-  const user_data = useSelector((state) => state.onboarding);
+  const user_data = useSelector((state) => state.onboardingForm);
   const { loading, error, workoutList } = useSelector(
     (state) => state.dailyWorkouts
   );

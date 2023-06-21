@@ -5,7 +5,7 @@ import Button from "../../../components/customs/Button";
 import BirthdayPicker from "./components/BirthdayPicker";
 import Stepper from "../components/Stepper";
 import { useDispatch } from "react-redux";
-import { addField } from "../../../components/redux/slices/signupForm";
+import { addField } from "../../../components/redux/slices/onboardingForm";
 
 const YourAge = ({ navigation, route }) => {
   const { activeStep, stepsLength } = route.params;

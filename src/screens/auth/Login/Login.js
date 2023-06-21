@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { View, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addField,
   resetForm,
-} from "../../../components/redux/slices/signupForm";
+  updateForm,
+} from "../../../components/redux/slices/onboardingForm";
 
 import useLogin from "../../../components/api/useLogin";
 
@@ -22,10 +23,13 @@ import Divider from "../../../components/customs/Divider";
 import FacebookIcon from "../../../../assets/icons/facebookIcon.svg";
 import GoogleIcon from "../../../../assets/icons/googleIcon.svg";
 import AppleIcon from "../../../../assets/icons/appleIcon.svg";
+import { postLoginUser } from "../../../components/redux/slices/useLogin";
 
 const Login = ({ navigation: { navigate } }) => {
   const dispatch = useDispatch();
-  const { data, error, loading, postUser } = useLogin();
+  const { loading, error, data } = useSelector((state) => state.login);
+
+  // const { data, error, loading, postUser } = useLogin();
   const [isChecked, setChecked] = useState(false);
 
   const validationSchema = Yup.object({
@@ -35,6 +39,22 @@ const Login = ({ navigation: { navigate } }) => {
     password: Yup.string().required("Password is required"),
   });
 
+  const handleLogin = async (data) => {
+    return new Promise((resolve, reject) => {
+      dispatch(postLoginUser(data))
+        .then((val) => {
+          console.log("Login successful", val.payload);
+          if (val.payload.loggedIn) {
+            console.log({ eutrgg: val.payload.user });
+            dispatch(updateForm(val.payload.user));
+            navigate("BottomNav", { screen: "Home" });
+          }
+          resolve();
+        })
+        .catch((error) => reject(error));
+    });
+  };
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -43,15 +63,9 @@ const Login = ({ navigation: { navigate } }) => {
     validationSchema: validationSchema,
     onSubmit: async (values, { setErrors, setStatus, setSubmitting }) => {
       try {
-        const res = await postUser(values);
+        // const res = await postUser(values);
 
-        if (res) {
-          Object.keys(res?.user).forEach((key) => {
-            dispatch(addField({ field: [key], value: res?.user[key] }));
-          });
-
-          navigate("BottomNav", { screen: "Home" });
-        }
+        await handleLogin(values);
       } catch (error) {
         console.log(error);
       }

@@ -19,7 +19,11 @@ import useFormStepper from "../../../components/hooks/useFormStepper";
 import Divider from "../../../components/customs/Divider";
 import ProgressBarStepper from "../../../components/customs/ProgressBarStepper";
 import { useDispatch } from "react-redux";
-import { addField } from "../../../components/redux/slices/signupForm";
+import { addField } from "../../../components/redux/slices/onboardingForm";
+import {
+  postNewUser,
+  postUserData,
+} from "../../../components/redux/slices/useSignup";
 
 const Signup = ({ navigation: { navigate } }) => {
   const SignUpFormLength = 3;
@@ -62,11 +66,10 @@ const Signup = ({ navigation: { navigate } }) => {
     onSubmit: async (values, { setErrors, setStatus, setSubmitting }) => {
       try {
         const { reEmail, rePassword, ...userData } = values;
+
+        dispatch(postNewUser(userData));
         console.log("values", userData);
         navigate("Onboarding");
-        Object.keys(userData).forEach((key) => {
-          dispatch(addField({ field: [key], value: userData[key] }));
-        });
       } catch (error) {
         console.log(error);
       }

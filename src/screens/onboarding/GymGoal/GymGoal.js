@@ -5,7 +5,7 @@ import Button from "../../../components/customs/Button";
 import Stepper from "../components/Stepper";
 import CheckboxButton from "../components/CheckboxButton";
 import { useDispatch } from "react-redux";
-import { addField } from "../../../components/redux/slices/signupForm";
+import { addField } from "../../../components/redux/slices/onboardingForm";
 
 const GymGoal = ({ navigation, route }) => {
   const dispatch = useDispatch();

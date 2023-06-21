@@ -1,10 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
-import signupForm from "./slices/signupForm";
+import onboardingForm from "./slices/onboardingForm";
+import useLogin from "./slices/useLogin";
+import useSignup from "./slices/useSignup";
+import useOnboardUser from "./slices/useOnboardUser";
+import useGeneratePlan from "./slices/useGeneratePlan";
+
 import workoutList from "./slices/useWorkoutList";
 
 const store = configureStore({
   reducer: {
-    onboarding: signupForm,
+    onboardingForm: onboardingForm,
+    login: useLogin,
+    signup: useSignup,
+    onboarding: useOnboardUser,
+    generatePlan: useGeneratePlan,
     dailyWorkouts: workoutList,
   },
 });

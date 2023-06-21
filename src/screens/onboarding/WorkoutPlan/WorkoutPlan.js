@@ -4,23 +4,36 @@ import TextItem from "../../../components/customs/TextItem";
 import Button from "../../../components/customs/Button";
 import Stepper from "../components/Stepper";
 import Checkbox from "../components/Checkbox";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { postWorkoutPlan } from "../../../components/redux/slices/useGeneratePlan";
+import { resetForm } from "../../../components/redux/slices/onboardingForm";
 
 const WorkoutPlan = ({ navigation: { navigate }, route }) => {
   const { activeStep, stepsLength } = route.params;
   const [isChecked, setIsChecked] = useState(false);
-  const data = useSelector(state => state.onboarding)
-  console.log(`Complete Onboarding Data ${JSON.stringify(data)}`)
+  const dispatch = useDispatch();
+  const { loading, error, data } = useSelector((state) => state.generatePlan);
+  const formData = useSelector((state) => state.onboardingForm);
+  console.log(`Complete Onboarding Data ${JSON.stringify(data)}`);
 
   const handleCheckboxPress = (value) => {
     setIsChecked(value);
   };
-  
+
   const handleGeneratePlan = () => {
     //this is where to call the generate plan endpoint.
-    
-    navigate("PaymentPlan");
-    console.log("Generate workout plan button pressed");
+    const userData = {
+      users: {
+        _id: formData._id,
+        frequency: formData.frequency,
+      },
+    };
+
+    dispatch(postWorkoutPlan(userData));
+
+    if (data) {
+      navigate("PaymentPlan");
+    }
   };
 
   return (

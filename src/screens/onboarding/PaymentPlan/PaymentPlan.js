@@ -3,18 +3,22 @@ import React, { useEffect, useState } from "react";
 import TextItem from "../../../components/customs/TextItem";
 import Button from "../../../components/customs/Button";
 import RadioboxButton from "../components/RadioboxButton";
-import { addField } from "../../../components/redux/slices/signupForm";
+import {
+  addField,
+  resetForm,
+  updateForm,
+} from "../../../components/redux/slices/onboardingForm";
 import { useDispatch, useSelector } from "react-redux";
 import useSignup from "../../../components/api/useSignup";
 import Config from "react-native-config";
 import axios from "axios";
 import useWorkoutPlan from "../../../components/api/useWorkoutPlan";
+import { onboardUser } from "../../../components/redux/slices/useOnboardUser";
 
 const PaymentPlan = ({ navigation: { navigate }, route }) => {
   const dispatch = useDispatch();
-  const signupForm = useSelector((state) => state.onboarding);
-  const { error, loading, postUser } = useSignup();
-  const { postPlan } = useWorkoutPlan();
+  const onboardingForm = useSelector((state) => state.onboardingForm);
+  const { loading, error, data } = useSelector((state) => state.onboarding);
   const [paymentSchedule, setPaymentSchedule] = useState(null);
   const [submitting, setSubmitting] = useState(false);
 
@@ -44,22 +48,37 @@ const PaymentPlan = ({ navigation: { navigate }, route }) => {
   };
 
   const form = {
-    ...signupForm,
-    age: new Date(JSON.parse(signupForm.age)),
+    ...onboardingForm,
     paymentSchedule,
   };
 
   const handleNext = async () => {
-    setSubmitting(true);
-    const res = await postUser(form);
-    //const plan_res = await postPlan(form)
-    setSubmitting(false);
+    try {
+      await new Promise((resolve, reject) => {
+        dispatch(onboardUser(form))
+          .then((val) => {
+            console.log("Login successful", val.payload);
+            if (val.payload.loggedIn) {
+              console.log({ eutrgg: val.payload.user });
+              // dispatch(postLoginUser(val.payload.user));
+              // navigate("BottomNav", { screen: "Home" });
+            }
+            resolve();
+          })
+          .catch((error) => reject(error));
+      });
 
-    if (res && !error && !submitting) {
-      navigate("BottomNav", { screen: "Home" });
+      // if (data && typeof data === "object" && !Array.isArray(data)) {
+      //   console.log("eutrgg", { data });
+      //   dispatch(updateForm(data));
+      //   navigate("BottomNav", { screen: "Home" });
+      // }
+    } catch (error) {
+      console.error(error);
     }
   };
 
+  console.log("payupout", { loading, error, data, form });
   return (
     <View style={styles.container}>
       <View style={styles.contents}>

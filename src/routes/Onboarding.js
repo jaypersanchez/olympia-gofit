@@ -17,7 +17,7 @@ import { useSelector } from "react-redux";
 const Page = createNativeStackNavigator();
 
 const Onboarding = () => {
-  const reduxdata = useSelector((state) => state.onboarding);
+  const reduxdata = useSelector((state) => state.onboardingForm);
 
   console.log({ reduxdata });
   return (

@@ -5,14 +5,15 @@ import GenderButton from "./components/GenderButton";
 import TextItem from "../../../components/customs/TextItem";
 import Button from "../../../components/customs/Button";
 import Stepper from "../components/Stepper";
-import { useDispatch } from "react-redux";
-import { addField } from "../../../components/redux/slices/signupForm";
+import { useDispatch, useSelector } from "react-redux";
+import { addField } from "../../../components/redux/slices/onboardingForm";
 
 const YourGender = ({ navigation }) => {
   const stepsLength = 10;
   const activeStep = 1;
   const [gender, setGender] = useState(null);
   const dispatch = useDispatch();
+  const { loading, error, data } = useSelector((state) => state.signup);
 
   useEffect(() => {
     const backAction = () => {
@@ -29,12 +30,14 @@ const YourGender = ({ navigation }) => {
 
   const handleNext = () => {
     dispatch(addField({ field: "gender", value: gender }));
+    dispatch(addField({ field: "_id", value: data.user._id }));
     navigation.navigate("Age", {
       stepsLength,
       activeStep: activeStep + 1,
     });
   };
 
+  console.log("YourGender: ", { loading, error, data });
   return (
     <View style={styles.container}>
       <Stepper steps={stepsLength} activeSteps={activeStep} />
