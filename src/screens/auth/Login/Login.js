@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { View, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -27,9 +27,8 @@ import { postLoginUser } from "../../../components/redux/slices/useLogin";
 
 const Login = ({ navigation: { navigate } }) => {
   const dispatch = useDispatch();
+  const user_data = useSelector((state) => state.onboardingForm);
   const { loading, error, data } = useSelector((state) => state.login);
-
-  // const { data, error, loading, postUser } = useLogin();
   const [isChecked, setChecked] = useState(false);
 
   const validationSchema = Yup.object({
@@ -77,6 +76,13 @@ const Login = ({ navigation: { navigate } }) => {
     dispatch(resetForm());
   };
 
+  useLayoutEffect(() => {
+    if (user_data.email) {
+      formik.setFieldValue("email", user_data.email);
+    }
+  }, [user_data]);
+
+  console.log(formik.values);
   return (
     <View style={{ backgroundColor: "#ffffff", flex: 1 }}>
       <ScrollView
