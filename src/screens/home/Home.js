@@ -25,6 +25,12 @@ const Home = ({ navigation, route }) => {
     navigation.navigate("HomeScreens", { screen: "Workouts" });
   };
 
+  useLayoutEffect(() => {
+    if (!user_data) {
+      navigation.navigate("Auth", { screen: "Login" });
+    }
+  }, [user_data]);
+
   console.log("dailyexcercise", { user_data });
 
   return (
