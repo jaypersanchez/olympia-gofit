@@ -3,16 +3,8 @@ import React, { useEffect, useState } from "react";
 import TextItem from "../../../components/customs/TextItem";
 import Button from "../../../components/customs/Button";
 import RadioboxButton from "../components/RadioboxButton";
-import {
-  addField,
-  resetForm,
-  updateForm,
-} from "../../../components/redux/slices/onboardingForm";
+import { addField } from "../../../components/redux/slices/onboardingForm";
 import { useDispatch, useSelector } from "react-redux";
-import useSignup from "../../../components/api/useSignup";
-import Config from "react-native-config";
-import axios from "axios";
-import useWorkoutPlan from "../../../components/api/useWorkoutPlan";
 import { onboardUser } from "../../../components/redux/slices/useOnboardUser";
 
 const PaymentPlan = ({ navigation: { navigate }, route }) => {
@@ -20,7 +12,6 @@ const PaymentPlan = ({ navigation: { navigate }, route }) => {
   const onboardingForm = useSelector((state) => state.onboardingForm);
   const { loading, error, data } = useSelector((state) => state.onboarding);
   const [paymentSchedule, setPaymentSchedule] = useState(null);
-  const [submitting, setSubmitting] = useState(false);
 
   const payment = [
     {
@@ -58,10 +49,12 @@ const PaymentPlan = ({ navigation: { navigate }, route }) => {
         dispatch(onboardUser(form))
           .then((val) => {
             console.log("Login successful", val.payload);
-            if (val.payload.loggedIn) {
-              console.log({ eutrgg: val.payload.user });
-              // dispatch(postLoginUser(val.payload.user));
-              // navigate("BottomNav", { screen: "Home" });
+            if (val.payload) {
+              console.log({ eutrgg: val.payload.email });
+              dispatch(addField({ field: "email", value: val.payload.email }));
+              navigate("Auth", {
+                screen: "Login",
+              });
             }
             resolve();
           })
@@ -119,7 +112,7 @@ const PaymentPlan = ({ navigation: { navigate }, route }) => {
           label="Continue and Pay"
           style={{ width: "100%" }}
           onPress={handleNext}
-          disabled={paymentSchedule === null || submitting}
+          disabled={paymentSchedule === null || loading}
         />
       </View>
     </View>

@@ -28,7 +28,7 @@ import {
 const Signup = ({ navigation: { navigate } }) => {
   const SignUpFormLength = 3;
   const dispatch = useDispatch();
-  const [step, setSteps] = useFormStepper(SignUpFormLength);
+  const [step, setSteps] = useFormStepper({ active: 0 });
 
   const validationSchema = Yup.object({
     name: Yup.string()
@@ -53,6 +53,21 @@ const Signup = ({ navigation: { navigate } }) => {
       .required("Password confirmation is required"),
   });
 
+  const handleSignup = async (data) => {
+    return new Promise((resolve, reject) => {
+      dispatch(postNewUser(data))
+        .then((val) => {
+          console.log("Login successful", val.payload);
+          if (val.payload) {
+            console.log({ eutrgg: val.payload });
+            navigate("Onboarding");
+          }
+          resolve();
+        })
+        .catch((error) => reject(error));
+    });
+  };
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -63,13 +78,17 @@ const Signup = ({ navigation: { navigate } }) => {
       rePassword: "",
     },
     validationSchema: validationSchema,
-    onSubmit: async (values, { setErrors, setStatus, setSubmitting }) => {
+    onSubmit: async (
+      values,
+      { setErrors, setStatus, setSubmitting, resetForm }
+    ) => {
       try {
         const { reEmail, rePassword, ...userData } = values;
 
-        dispatch(postNewUser(userData));
+        await handleSignup(userData);
         console.log("values", userData);
-        navigate("Onboarding");
+        resetForm();
+        setSteps({ active: 0 });
       } catch (error) {
         console.log(error);
       }
@@ -86,6 +105,7 @@ const Signup = ({ navigation: { navigate } }) => {
       setSteps({ active: 1 });
     }
   };
+
   return (
     <View style={{ backgroundColor: "#ffffff", flex: 1, paddingTop: 24 }}>
       <ProgressBarStepper
