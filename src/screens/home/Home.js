@@ -2,18 +2,17 @@ import { StyleSheet, ScrollView, View } from "react-native";
 import React, { useLayoutEffect, useState } from "react";
 
 import TextItem from "../../components/customs/TextItem";
-import { dailyexercise } from "./components/dailyexercise";
+import images from "./components/images";
 
 import Banner from "./components/Banner";
 import ExcerciseCard from "./components/ExcerciseCard";
 import Streak from "./components/Streak";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchWorkoutList } from "../../components/redux/slices/useWorkoutList";
+import { updateWorkoutList } from "../../components/redux/slices/useWorkoutList";
 
 const Home = ({ navigation, route }) => {
   const dispatch = useDispatch();
   const user_data = useSelector((state) => state.onboardingForm);
-  const { data } = dailyexercise || [];
 
   const handleName = (name) => {
     return name?.charAt(0).toUpperCase() + name?.slice(1);
@@ -21,8 +20,8 @@ const Home = ({ navigation, route }) => {
 
   const onCardsClick = (item) => {
     console.log({ item });
-    dispatch(fetchWorkoutList(item.filter));
-    navigation.navigate("HomeScreens", { screen: "Workouts" });
+    dispatch(updateWorkoutList(item));
+    navigation.navigate("HomeScreens", { screen: "Workouts", data: item });
   };
 
   useLayoutEffect(() => {
@@ -31,7 +30,7 @@ const Home = ({ navigation, route }) => {
     }
   }, [user_data]);
 
-  console.log("dailyexcercise", { user_data });
+  console.log("dailyexcercise", { data: user_data.workoutPlans.workouts });
 
   return (
     <View style={styles.container}>
@@ -54,13 +53,13 @@ const Home = ({ navigation, route }) => {
           <Banner week={1} day={12} excercise={"Dead Lift 3 sets of 8 reps"} />
           <TextItem type="h5">Daily Excercise</TextItem>
           <View style={{ gap: 16 }}>
-            {data.slice(0, user_data.frequency).map((item) => (
+            {user_data.workoutPlans?.workouts?.map((item, i) => (
               <ExcerciseCard
-                key={item.id}
+                key={item._id}
                 day={item.day}
-                excercise={item.name}
-                img={item.image}
-                onPress={() => onCardsClick(item)}
+                image={images.data[i].image}
+                excercise={item.workoutType}
+                onPress={() => onCardsClick(item.exercises)}
               />
             ))}
           </View>

@@ -5,7 +5,7 @@ import TextItem from "../../../components/customs/TextItem";
 import BannerImg from "../../../../assets/image/banner/banner.jpg";
 import { LinearGradient } from "expo-linear-gradient";
 
-const HeaderExcercise = ({ title, subtitle, selected }) => {
+const HeaderExcercise = ({ title, subtitle }) => {
   return (
     <View style={styles.imgContainer}>
       <ImageBackground source={BannerImg} style={styles.image}>
@@ -26,13 +26,6 @@ const HeaderExcercise = ({ title, subtitle, selected }) => {
               {subtitle}
             </TextItem>
           </View>
-          <TextItem
-            type="body_m"
-            font="medium"
-            style={{ textAlign: "center", color: "#fff" }}
-          >
-            {selected ? selected : ""}
-          </TextItem>
         </View>
         <LinearGradient
           colors={[
@@ -58,7 +51,7 @@ export default HeaderExcercise;
 
 const styles = StyleSheet.create({
   imgContainer: {
-    height: 300,
+    height: 215,
   },
   image: {
     flex: 1,

@@ -9,8 +9,12 @@ import {
   BookmarkOutlineIcon,
 } from "../../../components/Icons";
 
-const ExcerciseCard = ({ day, excercise, img, onPress }) => {
+const ExcerciseCard = ({ day, excercise, image, onPress }) => {
   const [bookmarkActive, setBookmarkActive] = useState(false);
+
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+  };
 
   return (
     <TouchableOpacity
@@ -19,16 +23,16 @@ const ExcerciseCard = ({ day, excercise, img, onPress }) => {
       onPress={onPress}
     >
       <ImageBackground
-        source={img}
+        source={image}
         style={styles.image}
         imageStyle={styles.imageStyle}
       >
         <View style={styles.textContianer}>
           <TextItem type="h4" font="bold" style={{ color: "#fff" }}>
-            Day {day}
+            Day {day + 1}
           </TextItem>
           <TextItem type="body_m" font="medium" style={{ color: "#fff" }}>
-            {excercise}
+            {capitalizeFirstLetter(excercise)} Excercise
           </TextItem>
           <View style={{ position: "absolute", bottom: 16, right: 22 }}>
             <TouchableOpacity

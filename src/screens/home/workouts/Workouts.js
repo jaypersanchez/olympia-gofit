@@ -7,26 +7,32 @@ import {
   Image,
 } from "react-native";
 import React, { useState, useLayoutEffect, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CheckBox from "../../onboarding/components/Checkbox";
 import Button from "../../../components/customs/Button";
 import TextItem from "../../../components/customs/TextItem";
-import { dailyexercise } from "../components/dailyexercise";
 import ExcerciseCard from "../components/ExcerciseCard";
+import images from "../components/images";
 import img4a from "../../../../assets/image/excercise/001.jpg";
 import HeaderExcercise from "../components/HeaderExcercise";
 import WortkoutCard from "../components/WortkoutCard";
+import { resetWorkoutList } from "../../../components/redux/slices/useWorkoutList";
 
 const Workouts = ({ navigation, route }) => {
+  const dispatch = useDispatch();
   const user_data = useSelector((state) => state.onboardingForm);
-  const { loading, error, workoutList } = useSelector(
-    (state) => state.dailyWorkouts
-  );
+  const dailyWorkouts = useSelector((state) => state.dailyWorkouts);
   const [dailyExercise, setDailyExcercise] = useState([]);
+
+  const getRandomImage = (images) => {
+    const randomIndex = Math.floor(Math.random() * images.length);
+    return images[randomIndex];
+  };
 
   useLayoutEffect(() => {
     return () => {
       navigation.navigate("HomeScreens", { screen: "Home" });
+      dispatch(resetWorkoutList());
     };
   }, []);
 
@@ -44,7 +50,7 @@ const Workouts = ({ navigation, route }) => {
     }
   };
 
-  console.log({ dailyExercise, user_data });
+  console.log({ user_data, dailyWorkouts });
 
   // const handleScrollBegin = () => {
   //   console.log("Scrolling started");
@@ -62,15 +68,7 @@ const Workouts = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
-      <HeaderExcercise
-        title="Day 1 Workouts"
-        subtitle="Beginner"
-        selected={
-          dailyExercise.length !== 0
-            ? `Selected ${dailyExercise.length} workouts`
-            : ""
-        }
-      />
+      <HeaderExcercise title="Day 1 Workouts" subtitle="Beginner" />
       <View style={styles.header}>
         <TextItem type="h4">Workout Activity</TextItem>
       </View>
@@ -88,25 +86,19 @@ const Workouts = ({ navigation, route }) => {
       >
         <View style={styles.box}>
           <View style={{ gap: 16 }}>
-            {workoutList.data.map((item) => (
+            {dailyWorkouts.map((item, i) => (
               <WortkoutCard
-                key={item._id}
-                title={item.name.toUpperCase()}
-                excercise={item.category.toUpperCase()}
-                img={img4a}
+                key={item?._id}
+                title={item?.name.toUpperCase()}
+                reps={item?.reps}
+                sets={item?.sets}
+                img={images.data[i].image}
                 onPress={() => handleSelectedExercise(item)}
               />
             ))}
           </View>
         </View>
       </ScrollView>
-      <View style={styles.btn}>
-        <Button
-          label="Set Workouts"
-          style={{ width: "100%" }}
-          disabled={dailyExercise.length === 0}
-        />
-      </View>
     </View>
   );
 };
@@ -114,11 +106,7 @@ const Workouts = ({ navigation, route }) => {
 export default Workouts;
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
-  imgContainer: {
-    height: 300,
-    borderRadius: 24,
-  },
+  container: { flex: 1, paddingBottom: 24 },
   header: {
     paddingHorizontal: 24,
     paddingTop: 24,
@@ -126,12 +114,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-  },
-  image: {
-    width: "100%",
-    height: 300,
-    justifyContent: "center",
-    alignItems: "center",
   },
   box: {
     paddingHorizontal: 24,
@@ -141,11 +123,5 @@ const styles = StyleSheet.create({
     gap: 12,
     width: "100%",
     flexDirection: "column",
-  },
-  btn: {
-    width: "100%",
-    paddingHorizontal: 24,
-    paddingVertical: 12,
-    flexGrow: 1,
   },
 });

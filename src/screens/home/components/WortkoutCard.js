@@ -9,13 +9,14 @@ import {
   CheckboxOutlineIcon,
 } from "../../../components/Icons";
 
-const WortkoutCard = ({ title, excercise, img, onPress }) => {
+const WortkoutCard = ({ title, reps, sets, img, onPress }) => {
   const [bookmarkActive, setBookmarkActive] = useState(false);
 
   const handleOnpress = () => {
     onPress();
-    setBookmarkActive(!bookmarkActive);
+    // setBookmarkActive(!bookmarkActive);
   };
+
   return (
     <TouchableOpacity
       activeOpacity={0.9}
@@ -28,13 +29,6 @@ const WortkoutCard = ({ title, excercise, img, onPress }) => {
         imageStyle={styles.imageStyle}
       >
         <View style={styles.textContianer}>
-          <View style={{ position: "absolute", bottom: 16, right: 22 }}>
-            {bookmarkActive ? (
-              <CheckboxFilledIcon color="#fff" size={24} />
-            ) : (
-              <CheckboxOutlineIcon color="#fff" size={24} />
-            )}
-          </View>
           <View style={{ paddingHorizontal: 12, gap: 4 }}>
             <TextItem
               type="h4"
@@ -56,7 +50,7 @@ const WortkoutCard = ({ title, excercise, img, onPress }) => {
                 width: 260,
               }}
             >
-              {excercise}
+              {sets} sets of {reps} reps
             </TextItem>
           </View>
         </View>
