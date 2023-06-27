@@ -30,7 +30,7 @@ const Home = ({ navigation, route }) => {
     }
   }, [user_data]);
 
-  console.log("dailyexcercise", { data: user_data.workoutPlans.workouts });
+  console.log("dailyexcercise", { datda: user_data.data.name });
 
   return (
     <View style={styles.container}>
@@ -48,7 +48,7 @@ const Home = ({ navigation, route }) => {
         >
           <TextItem type="h3">
             {"Welcome, "}
-            {handleName(user_data.name)}!
+            {handleName(user_data?.data?.name)}!
           </TextItem>
           <Banner week={1} day={12} excercise={"Dead Lift 3 sets of 8 reps"} />
           <TextItem type="h5">Daily Excercise</TextItem>
