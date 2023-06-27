@@ -27,18 +27,18 @@ import Workouts from "../screens/home/workouts/Workouts";
 const Nav = createBottomTabNavigator();
 
 const BottomNav = () => {
-  // useEffect(() => {
-  //   const backAction = () => {
-  //     return true;
-  //   };
+  useEffect(() => {
+    const backAction = () => {
+      return true;
+    };
 
-  //   const backHandler = BackHandler.addEventListener(
-  //     "hardwareBackPress",
-  //     backAction
-  //   );
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
 
-  //   return () => backHandler.remove();
-  // }, []);
+    return () => backHandler.remove();
+  }, []);
 
   return (
     <Nav.Navigator
