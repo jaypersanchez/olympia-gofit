@@ -13,7 +13,7 @@ const YourAge = ({ navigation, route }) => {
   const [age, setAge] = useState(null);
 
   const handleNext = () => {
-    dispatch(addField({ field: "age", value: age }));
+    dispatch(addField({ field: "age", value: JSON.parse(age) }));
     navigation.navigate("Weight", {
       stepsLength,
       activeStep: activeStep + 1,
